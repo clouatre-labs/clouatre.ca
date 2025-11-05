@@ -8,9 +8,22 @@
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
-    "format:check": "prettier --check .",
-    "format": "prettier --write .",
-    "lint": "eslint ."
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "test:local": "bun run check && bun run build",
+    "test:dev": "astro dev --open",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bunx lint-staged",
+    "pre-push": "bun run check && bun run build"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,astro,json,css,md}": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+    ]
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
@@ -28,6 +41,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@biomejs/biome": "^2.3.4",
     "@pagefind/default-ui": "^1.3.0",
     "@shikijs/transformers": "^3.7.0",
     "@tailwindcss/typography": "^0.5.16",
@@ -36,10 +50,12 @@
     "eslint": "^9.30.1",
     "eslint-plugin-astro": "^1.3.1",
     "globals": "^16.3.0",
+    "lint-staged": "^16.2.6",
     "pagefind": "^1.3.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.13",
+    "simple-git-hooks": "^2.13.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.36.0"
   }
