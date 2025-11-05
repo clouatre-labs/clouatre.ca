@@ -14,7 +14,6 @@ import { transformerFileName } from "./src/utils/transformers/fileName";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  base: "/clouatre.ca",
   integrations: [
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
