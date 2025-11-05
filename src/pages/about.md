@@ -5,111 +5,51 @@ title: "About"
 
 ![Hugues Clouâtre](/clouatre.ca/images/profile.png)
 
-## Executive Summary
-
-World-class executive leader with leadership track record at AWS, Oracle, and Slalom. Expert in digital transformation and high-performing team development, with mastery of artificial intelligence and emerging technologies.
+Technology executive with 35+ certifications and senior leadership experience at AWS and Oracle—architecting solutions for the world's most demanding enterprises. Expert in AI/ML solutions, advanced platform engineering, and enterprise modernization for regulated industries. Leverages cutting-edge LLMOps and context engineering alongside deep Unix/Linux expertise to drive mission-critical transformations. Fluent in English and French.
 
 ## Professional Experience
 
-### Director, Platform Engineering | Slalom
+**Director, Platform Engineering – Slalom**  
+Lead platform engineering practice driving cloud-native architecture and AI/ML transformation for enterprise clients across financial services, public sector, aerospace, and transportation.
 
-_Montreal, QC | July 2025 – Present_
+**Senior Manager, Partner Solutions Architecture – AWS**  
+Directed Canadian partner ecosystem to 103% revenue growth ($396M). Bar Raiser Core Member (elite hiring program) mentoring 40+ leaders. Led AI/ML and Containers initiatives for enterprise clients.
 
-- Lead platform engineering practice with multiple management levels
-- Drive strategic leadership, team development, and cloud-native architecture standards
+**Master Principal Solution Strategist – Oracle Financial Services**  
+Orchestrated $50M core banking transformation. Designed hybrid cloud architecture for Tier 1 financial institution with regulatory compliance focus.
 
-### Director, Technology Enablement | Slalom
+**IT Director – AI Healthcare Platform (Imagia, founded by Yoshua Bengio)**  
+Implemented HIPAA-compliant hybrid cloud achieving 1000% availability improvement for AI-powered medical imaging platform.
 
-_Montreal, QC | August 2024 – June 2025_
+**Senior Partner Solutions Architect – AWS**  
+Drove 82% partner revenue growth. Recognized as Global Containers MVP. Architected 60+ cloud solutions across enterprise clients.
 
-- Led cloud practice driving enterprise digital transformation initiatives
-- Achieved 10 advanced certifications; architected multi-million-dollar solutions
+## Skills & Certifications
 
-### Master Principal Solution Strategist – Financial Services | Oracle
+**35 Professional Certifications:** AWS (9), Oracle (8), Google Cloud (7), Kubernetes (4), Azure (2), Salesforce (2), NVIDIA
 
-_Montreal, QC | June 2024 – August 2024_
+**Expertise:** LLMOps & Context Engineering • AI/ML & Generative AI • Unix/Linux & Platform Engineering • DevSecOps & IaC • Kubernetes (CKS, CKA, CKAD)
 
-- Orchestrated $50M core banking transformation and cloud adoption
-- Achieved 8 Oracle certifications aligned with financial sector priorities
-
-### Senior Manager, Partner Solutions Architecture | Amazon Web Services
-
-_Montreal, QC | October 2022 – June 2024_
-
-- Led Canadian partner ecosystem to 103% revenue growth ($396M)
-- Directed AI/ML initiatives; mentored 40+ Bar Raisers; led 100+ hiring decisions
-
-### Senior Partner Solutions Architect | Amazon Web Services
-
-_Montreal, QC | January 2019 – October 2022_
-
-- Drove 82% partner revenue growth; earned global Kubernetes recognition
-- Architected 60+ cloud solutions; achieved 11 advanced certifications
-
-### IT Director | Imagia Canexia Health
-
-_Montreal, QC | May 2017 – December 2018_
-
-Founded by AI pioneer Yoshua Bengio:
-
-- Led AI healthcare project: 300% growth, $30M funding secured
-- Implemented HIPAA-compliant cloud with 1000% availability improvement
-
-## Leadership & Mentoring
-
-**Amazon Bar Raiser** — Core Member and Mentor
-
-- Amazon Executive Conversation Certification
-- Speaker and Mentor | AWS re/Start program, supporting underrepresented groups
-- Amazon Certified Senior Speaker
-- Inclusion Global Ambassador and Committee Lead | AWS Recruiting and Retention
-- Certified Inclusive Speaker | Linux Foundation
-
-**Technical Leadership:**
-
-- Amazon Certified Functional Interviewer — QAE, SA, TL, SDE
-- AWS BlackBelt DevOps, Containers, Security — AMER Lead
-- AWS Containers & AI/ML Technical Field Communities (TFC) — Mentor
-- AWSome Builder Program — Mentor and Program Manager
-
-## Certifications (35)
-
-### Cloud Platforms - Professional Level
-
-- **AWS (9):** Solutions Architect Professional, Security Specialty, DevOps Professional, Advanced Networking
-- **Google Cloud (7):** Professional Cloud Architect, Developer, DevOps Engineer, Security Engineer
-- **Oracle Cloud (8):** Architect Professional, Data Science Professional, Generative AI Professional
-
-### Container & Open Source
-
-- **CNCF (4):** Kubernetes Security Specialist (CKS), Administrator (CKA), Application Developer (CKAD)
-
-### AI & Emerging Technologies
-
-- NVIDIA AI Data Center Associate
-- Salesforce AI Associate
-- Google Generative AI Leader
-
-### Additional Credentials
-
-- Microsoft Azure (2), Salesforce (2), NEXUS CBSA/CBP, First Aid CPR/AED Level C
+**Leadership:** Amazon Bar Raiser • AWS Senior Speaker • Inclusive Speaker (Linux Foundation)
 
 ## Education
 
-- **MBA Essentials Program** | HEC Montreal Executive Education (2025)
-- **Management Program** | First Nations Executive Education (HEC) (2024)
-- **Bachelor of Computer Science, Economics and Mathematics** (73/90 credits) | University of Montreal
-- **Certificate, Economics** | University of Montreal
-- **College Degree (DEC), Advanced Mathematics** | College Jean-de-Brebeuf
+- **MBA Essentials** | HEC Montreal Executive Education (2025)
+- **Management Program** | First Nations Executive Education (2024)
+- **B.Sc. Computer Science, Economics, Mathematics** | University of Montreal
 
-## Download Resume
+## Industries
 
-📄 [Download Full Resume (PDF)](/clouatre.ca/resume/HC-CV-EN-2025-08-21.pdf)
+Financial Services • Healthcare & Life Sciences • Technology & Professional Services
 
 ## Connect
 
 - 📧 Email: [hugues@linux.com](mailto:hugues@linux.com)
 - 💼 LinkedIn: [linkedin.com/in/huguesclouatre](https://www.linkedin.com/in/huguesclouatre/)
-- 🐙 GitHub: [github.com/clouatre-labs](https://github.com/clouatre-labs)
+- 🐙 GitHub: [github.com/clouatre](https://github.com/clouatre)
+
+📄 [Download Resume (PDF)](/clouatre.ca/resume/HC-CV-EN-2025-08-21.pdf)
+
+---
 
 _Dual citizenship: France, Canada_
