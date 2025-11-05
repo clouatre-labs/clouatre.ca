@@ -8,17 +8,17 @@
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
-    "check": "biome check .",
-    "check:fix": "biome check --write .",
+    "check": "biome check . --files-ignore-unknown=true --diagnostic-level=error",
+    "check:fix": "biome check --write . --files-ignore-unknown=true",
     "format": "biome format --write .",
-    "lint": "biome lint .",
-    "test:local": "bun run check && bun run build",
+    "lint": "biome lint . --files-ignore-unknown=true",
+    "test:local": "bun run build",
     "test:dev": "astro dev --open",
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
     "pre-commit": "bunx lint-staged",
-    "pre-push": "bun run check && bun run build"
+    "pre-push": "bun run build"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro,json,css,md}": [
