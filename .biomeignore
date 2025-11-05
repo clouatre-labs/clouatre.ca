@@ -1,0 +1,5 @@
+# Biome ignores files in .gitignore by default due to vcs.useIgnoreFile
+# This file is for additional Biome-specific ignores
+
+# CSS files - Biome doesn't support Tailwind @apply directives
+**/*.css
