@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-![Hugues Clouatre](/clouatre.ca/images/profile.png)
+![Hugues Clouâtre](/clouatre.ca/images/profile.png)
 
 ## Executive Summary
 
