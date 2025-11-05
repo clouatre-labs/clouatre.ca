@@ -1,5 +1,4 @@
 import type { Props } from "astro";
-import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
 import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
@@ -28,12 +27,6 @@ export const SOCIALS: Social[] = [
     href: "https://www.linkedin.com/in/huguesclouatre/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
-  },
-  {
-    name: "Mail",
-    href: "mailto:hugues@linux.com",
-    linkTitle: `Send an email to ${SITE.title}`,
-    icon: IconMail,
   },
 ] as const;
 
