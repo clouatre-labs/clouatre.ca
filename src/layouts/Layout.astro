@@ -130,7 +130,8 @@ const structuredData = {
 
     <ClientRouter />
 
-    <script is:inline src="/toggle-theme.js"></script>
+    <script is:inline src={`${import.meta.env.BASE_URL}toggle-theme.js`}
+    ></script>
   </head>
   <body>
     <slot />
