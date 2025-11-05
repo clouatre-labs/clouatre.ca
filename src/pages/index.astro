@@ -30,7 +30,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </h1>
       <a
         target="_blank"
-        href="/clouatre.ca/rss.xml"
+        href={`${base}/rss.xml`}
         class="inline-block"
         aria-label="rss feed"
         title="RSS Feed"
@@ -53,7 +53,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         workflows, cloud architecture, and emerging technologies. Check out my
         <LinkButton
           class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="/clouatre.ca/about/"
+          href={`${base}/about/`}
         >
           About page
         </LinkButton> to learn more about my background and experience.
