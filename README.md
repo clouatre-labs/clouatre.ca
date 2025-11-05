@@ -1,4 +1,4 @@
-# Hugues Clouatre - Personal Website
+# Hugues Clouâtre - Personal Website
 
 Personal website and blog at [clouatre-labs.github.io/clouatre.ca](https://clouatre-labs.github.io/clouatre.ca/)
 
@@ -21,4 +21,4 @@ pnpm build    # Build for production
 ## License
 
 Code/structure: MIT License  
-Content: © 2025 Hugues Clouatre
+Content: © 2025 Hugues Clouâtre
