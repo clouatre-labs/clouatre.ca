@@ -12,39 +12,46 @@ World-class executive leader with leadership track record at AWS, Oracle, and Sl
 ## Professional Experience
 
 ### Director, Platform Engineering | Slalom
-*Montreal, QC | July 2025 – Present*
+
+_Montreal, QC | July 2025 – Present_
 
 - Lead platform engineering practice with multiple management levels
 - Drive strategic leadership, team development, and cloud-native architecture standards
 
 ### Director, Technology Enablement | Slalom
-*Montreal, QC | August 2024 – June 2025*
+
+_Montreal, QC | August 2024 – June 2025_
 
 - Led cloud practice driving enterprise digital transformation initiatives
 - Achieved 10 advanced certifications; architected multi-million-dollar solutions
 
 ### Master Principal Solution Strategist – Financial Services | Oracle
-*Montreal, QC | June 2024 – August 2024*
+
+_Montreal, QC | June 2024 – August 2024_
 
 - Orchestrated $50M core banking transformation and cloud adoption
 - Achieved 8 Oracle certifications aligned with financial sector priorities
 
 ### Senior Manager, Partner Solutions Architecture | Amazon Web Services
-*Montreal, QC | October 2022 – June 2024*
+
+_Montreal, QC | October 2022 – June 2024_
 
 - Led Canadian partner ecosystem to 103% revenue growth ($396M)
 - Directed AI/ML initiatives; mentored 40+ Bar Raisers; led 100+ hiring decisions
 
 ### Senior Partner Solutions Architect | Amazon Web Services
-*Montreal, QC | January 2019 – October 2022*
+
+_Montreal, QC | January 2019 – October 2022_
 
 - Drove 82% partner revenue growth; earned global Kubernetes recognition
 - Architected 60+ cloud solutions; achieved 11 advanced certifications
 
 ### IT Director | Imagia Canexia Health
-*Montreal, QC | May 2017 – December 2018*
+
+_Montreal, QC | May 2017 – December 2018_
 
 Founded by AI pioneer Yoshua Bengio:
+
 - Led AI healthcare project: 300% growth, $30M funding secured
 - Implemented HIPAA-compliant cloud with 1000% availability improvement
 
@@ -59,6 +66,7 @@ Founded by AI pioneer Yoshua Bengio:
 - Certified Inclusive Speaker | Linux Foundation
 
 **Technical Leadership:**
+
 - Amazon Certified Functional Interviewer — QAE, SA, TL, SDE
 - AWS BlackBelt DevOps, Containers, Security — AMER Lead
 - AWS Containers & AI/ML Technical Field Communities (TFC) — Mentor
@@ -67,19 +75,23 @@ Founded by AI pioneer Yoshua Bengio:
 ## Certifications (35)
 
 ### Cloud Platforms - Professional Level
+
 - **AWS (9):** Solutions Architect Professional, Security Specialty, DevOps Professional, Advanced Networking
 - **Google Cloud (7):** Professional Cloud Architect, Developer, DevOps Engineer, Security Engineer
 - **Oracle Cloud (8):** Architect Professional, Data Science Professional, Generative AI Professional
 
 ### Container & Open Source
+
 - **CNCF (4):** Kubernetes Security Specialist (CKS), Administrator (CKA), Application Developer (CKAD)
 
 ### AI & Emerging Technologies
+
 - NVIDIA AI Data Center Associate
 - Salesforce AI Associate
 - Google Generative AI Leader
 
 ### Additional Credentials
+
 - Microsoft Azure (2), Salesforce (2), NEXUS CBSA/CBP, First Aid CPR/AED Level C
 
 ## Education
@@ -100,4 +112,4 @@ Founded by AI pioneer Yoshua Bengio:
 - 💼 LinkedIn: [linkedin.com/in/huguesclouatre](https://www.linkedin.com/in/huguesclouatre/)
 - 🐙 GitHub: [github.com/clouatre-labs](https://github.com/clouatre-labs)
 
-*Dual citizenship: France, Canada*
+_Dual citizenship: France, Canada_

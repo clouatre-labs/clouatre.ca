@@ -1,50 +1,61 @@
 name: CI
 
-permissions:
-  contents: read
-
 on:
+  push:
+    branches: [main, develop]
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
-  workflow_call:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GITLEAKS_VERSION: 8.29.0
 
 jobs:
-  build:
-    name: Code standards & build
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-
-    strategy:
-      matrix:
-        node-version: [20]
-
+  test:
+    if: github.event_name == 'push' || github.event.pull_request.draft == false
+    runs-on: ubuntu-24.04
     steps:
-      - name: "☁️ Checkout repository"
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # For gitleaks
 
-      - name: "📦 Install pnpm"
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.11.1
+          version: 9
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          node-version: 20
+          cache: pnpm
 
-      - name: "📦 Install dependencies"
+      - name: Install dependencies
         run: pnpm install
 
-      - name: "🔎 Lint code"
+      - name: Security - Secret scanning
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v${{ env.GITLEAKS_VERSION }}/gitleaks_${{ env.GITLEAKS_VERSION }}_linux_x64.tar.gz | tar -xz
+          cat > .gitleaks.toml << 'EOF'
+          [allowlist]
+          paths = [
+            '''.venv/.*''',
+            '''node_modules/.*''',
+            '''\.git/.*''',
+            '''dist/.*''',
+            '''public/.*'''
+          ]
+          EOF
+          ./gitleaks detect --no-git --config .gitleaks.toml -v
+
+      - name: Lint code
         run: pnpm run lint
 
-      - name: "📝 Checking code format"
+      - name: Format check
         run: pnpm run format:check
 
-      - name: "🚀 Build the project"
+      - name: Build site
         run: pnpm run build
