@@ -3,8 +3,6 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-![Hugues Clouâtre](/clouatre.ca/images/profile.png)
-
 Technology executive with 35+ certifications and senior leadership experience at AWS and Oracle—architecting solutions for the world's most demanding enterprises. Expert in AI/ML solutions, advanced platform engineering, and enterprise modernization for regulated industries. Leverages cutting-edge LLMOps and context engineering alongside deep Unix/Linux expertise to drive mission-critical transformations. Fluent in English and French.
 
 ## Professional Experience
