@@ -20,8 +20,38 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# Coding agents (critical - prevents accidental commit of AI instructions)
+CLAUDE.md
+.claude/
+.amazonq/
+opencode.json
+.codex/
+.cursor/
+.windsurf/
+aider.chat.history.md
+.aider*
+
+# IDEs & editors
+.vscode/settings.json
+.vscode/*.code-workspace
 .idea/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Confidential/Internal files
+*.confidential
+*.internal
+*_CONFIDENTIAL*
+*_INTERNAL*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
 
 # pagefind
 
