@@ -1,0 +1,10 @@
+# Gitleaks configuration
+# https://github.com/gitleaks/gitleaks
+
+[allowlist]
+description = "Allowlist for known false positives"
+
+# Ignore README.md which contains example gitleaks output
+paths = [
+  '''README\.md''',
+]
