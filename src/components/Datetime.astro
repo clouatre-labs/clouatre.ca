@@ -1,7 +1,7 @@
 ---
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import IconCalendar from "@/assets/icons/IconCalendar.svg";
 import { SITE } from "@/config";
 
@@ -28,7 +28,7 @@ const {
 const isModified = modDatetime && modDatetime > pubDatetime;
 
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
-  postTimezone || SITE.timezone
+  postTimezone || SITE.timezone,
 );
 
 const date = datetime.format("D MMM, YYYY"); // e.g., '22 Mar, 2025'
