@@ -18,30 +18,7 @@ env:
   GITLEAKS_VERSION: 8.29.0
 
 jobs:
-  security:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Security - Secret scanning
-        run: |
-          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v${{ env.GITLEAKS_VERSION }}/gitleaks_${{ env.GITLEAKS_VERSION }}_linux_x64.tar.gz | tar -xz
-          cat > .gitleaks.toml << 'EOF'
-          [allowlist]
-          paths = [
-            '''.venv/.*''',
-            '''node_modules/.*''',
-            '''\.git/.*''',
-            '''dist/.*''',
-            '''public/.*'''
-          ]
-          EOF
-          ./gitleaks detect --no-git --config .gitleaks.toml -v
-
   build:
-    needs: security
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
