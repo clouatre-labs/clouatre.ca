@@ -127,13 +127,16 @@ Goose discovered our infrastructure (Route53), analyzed the records, and execute
 
 ### 2. Pre-Validation Eliminates Risk
 
-Goose validated the new infrastructure before switching traffic:
+Goose validated all DNS records against Cloudflare's nameservers before switching:
 
 ```bash
-dig @new-nameserver.example.com yourdomain.com MX +short
+dig @oaklyn.ns.cloudflare.com clouatre.ca MX +short
+dig @oaklyn.ns.cloudflare.com clouatre.ca TXT +short
+dig @oaklyn.ns.cloudflare.com agenda.clouatre.ca CNAME +short
+# ... validated all 15 critical records
 ```
 
-We knew email would work before changing nameservers. No guessing, no hoping.
+Generated a validation report confirming every record matched. We knew email, Google Workspace, and website would work before changing nameservers. Zero guessing.
 
 ### 3. Automate Record Migration
 
