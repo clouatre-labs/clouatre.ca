@@ -8,7 +8,6 @@ import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import ShareLinks from "@/components/ShareLinks.astro";
 import Tag from "@/components/Tag.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
@@ -36,6 +35,9 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+
+// Calculate reading time (average 200 words per minute)
+const readingTime = Math.ceil(post.body.split(/\s+/).length / 200);
 
 let ogImageUrl: string | undefined;
 
@@ -99,8 +101,10 @@ const nextPost =
     >
       {title}
     </h1>
-    <div class="my-2 flex items-center gap-2">
+    <div class="my-2 flex items-center gap-2 text-sm">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+      <span aria-hidden="true">•</span>
+      <span class="text-foreground/75">{readingTime} min read</span>
       <span
         aria-hidden="true"
         class:list={[
@@ -119,6 +123,21 @@ const nextPost =
 
     <hr class="my-8 border-dashed" />
 
+    <!-- Author Bio -->
+    <div class="rounded-lg border border-border bg-muted/30 p-6 mb-8">
+      <div class="flex items-start gap-4">
+        <div class="flex-1">
+          <h3 class="text-lg font-bold mb-2">About {SITE.author}</h3>
+          <p class="text-sm text-foreground/85 leading-relaxed">
+            {SITE.desc}
+          </p>
+          <a href={SITE.profile} class="inline-block mt-3 text-sm text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+            Follow on GitHub →
+          </a>
+        </div>
+      </div>
+    </div>
+
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
     <ul class="mt-4 mb-8 sm:my-8">
@@ -126,8 +145,6 @@ const nextPost =
     </ul>
 
     <BackToTopButton />
-
-    <ShareLinks />
 
     <hr class="my-6 border-dashed" />
 

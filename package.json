@@ -21,7 +21,7 @@
     "pre-push": "bun run build"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,astro,json,css,md}": [
+    "*.{js,ts,jsx,tsx,astro,json,md}": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ]
   },
