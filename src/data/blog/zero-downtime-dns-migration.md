@@ -8,7 +8,7 @@ featured: true
 
 We migrated a complete website infrastructure—hosting, DNS, CI/CD—from AWS Route53 + GitHub Pages to Cloudflare in 2 hours during business hours. Zero downtime. Zero manual commands. Zero stress.
 
-**Why this matters:** DNS migrations are nerve-wracking. One typo breaks email. Miss a record, services go down. Traditional approach: hope everything works after you switch nameservers. With Goose, we validated every record before switching. Complete peace of mind.
+**Why this matters:** DNS migrations are nerve-wracking. One typo breaks email. Miss a record, services go down. Traditional approach requires specialized knowledge (exact dig commands), a structured validation approach, and is still error-prone. With Goose, we automated the validation and migration process. Complete peace of mind.
 
 The only manual step: Creating a Cloudflare API token.
 
@@ -85,12 +85,7 @@ Pull requests included change descriptions, migration rationale, rollback proced
 
 ### 6. Preview Deployments
 
-The best part: Every PR branch gets a preview URL **before** merging to production.
-
-**This blog post?** You're reading it at a preview URL right now:
-- Preview: `https://feat-update-blog-post-final.clouatre-ca.pages.dev`
-- We review changes BEFORE they go live
-- Production deploys only after approval
+The best part: Every PR branch gets a preview URL **before** merging to production. We review changes BEFORE they go live, and production deploys only after approval.
 
 ## The Only Manual Step
 
