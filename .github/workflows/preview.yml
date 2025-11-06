@@ -47,9 +47,12 @@ jobs:
         with:
           script: |
             // Cloudflare Pages converts branch names: slashes become hyphens
-            const branchName = context.payload.pull_request.head.ref.replace(/\//g, '-');
+            // and truncates to 28 characters max
+            const branchName = context.payload.pull_request.head.ref
+              .replace(/\//g, '-')
+              .substring(0, 28);
             const previewUrl = `https://${branchName}.clouatre-ca.pages.dev`;
-            const comment = `## 🚀 Preview Deployment Ready
+            const comment = `## Preview Deployment Ready
 
             Your changes are deployed to:
             **${previewUrl}**

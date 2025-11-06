@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+  "files": {
+    "ignoreUnknown": true
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -25,6 +28,17 @@
       "quoteStyle": "double"
     }
   },
+  "css": {
+    "parser": {
+      "cssModules": false
+    },
+    "formatter": {
+      "enabled": false
+    },
+    "linter": {
+      "enabled": false
+    }
+  },
   "assist": {
     "enabled": true,
     "actions": {
@@ -43,6 +57,15 @@
             "noUnusedImports": "off"
           }
         }
+      }
+    },
+    {
+      "includes": ["**/*.css"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
       }
     }
   ]
