@@ -49,6 +49,51 @@ Git hooks are automatically installed via `simple-git-hooks`:
 - **Pre-commit**: Auto-format staged files with Biome
 - **Pre-push**: Run full validation (check + build)
 
+## Dependency Management
+
+This project uses **Dependabot** for automated dependency updates.
+
+### How Dependabot Works with Bun
+
+Dependabot updates `package.json` weekly (Mondays at 9 AM ET) but doesn't update `bun.lock` yet.
+
+**Most PRs (70-80%):** CI passes automatically → Just merge  
+**Some PRs (20-30%):** CI fails → Update lockfile manually
+
+### Handling Dependabot PRs
+
+**If CI passes (most cases):**
+```bash
+# Just merge the PR
+gh pr merge <number> --squash
+```
+
+**If CI fails (lockfile out of sync):**
+```bash
+# Checkout the Dependabot branch
+gh pr checkout <number>
+
+# Update lockfile
+bun install
+
+# Commit and push
+git add bun.lock
+git commit -m "chore: update bun.lock"
+git push
+
+# Now merge (CI will pass)
+gh pr merge <number> --squash
+```
+
+**View all Dependabot PRs:**
+```bash
+gh pr list --label dependencies
+```
+
+### Why Not Renovate?
+
+Renovate supports `bun.lock` updates but adds complexity for minimal benefit at our scale (~10-15 updates/month). The occasional manual lockfile update (2-3 min, 2-3 times/month) is an acceptable trade-off for simpler, GitHub-native automation.
+
 ## License
 
 Code/structure: MIT License  
