@@ -97,7 +97,7 @@ Pull requests included change descriptions, migration rationale, rollback proced
 
 ### 6. Preview Deployments
 
-The best part: Every PR branch gets a preview URL **before** merging to production. We review changes BEFORE they go live, and production deploys only after approval.
+The best part: Every PR branch gets a preview URL **before** merging to production. We review changes BEFORE they go live, and production deploys only after approval. Goose even configured automatic cleanup (7-day TTL for old previews)—zero maintenance required.
 
 ## The Only Manual Step
 
