@@ -14,7 +14,9 @@ import Layout from "@/layouts/Layout.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 
 const posts = await getCollection("blog");
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+// Normalize base URL: remove trailing slash unless it's the root "/"
+const base = rawBase === "/" ? "" : rawBase.replace(/\/$/, "");
 
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
