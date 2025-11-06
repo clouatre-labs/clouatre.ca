@@ -12,6 +12,8 @@ We migrated a complete website infrastructure—hosting, DNS, CI/CD—from AWS R
 
 The only manual step: Creating a Cloudflare API token.
 
+## Table of contents
+
 ## The Starting Point
 
 **Infrastructure:**
