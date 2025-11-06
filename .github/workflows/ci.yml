@@ -28,6 +28,8 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Security - Secret scanning
+        # Skip for Dependabot PRs (secrets not available for security)
+        if: github.actor != 'dependabot[bot]'
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
