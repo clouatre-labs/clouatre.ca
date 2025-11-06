@@ -51,37 +51,28 @@ Git hooks are automatically installed via `simple-git-hooks`:
 
 ## Dependency Management
 
-This project uses **Dependabot** for automated dependency updates.
+This project uses **Dependabot** for automated dependency updates with automatic lockfile synchronization.
 
-### How Dependabot Works with Bun
+### How It Works
 
-Dependabot updates `package.json` weekly (Mondays at 9 AM ET) but doesn't update `bun.lock` yet.
+**Every Monday at 9 AM ET:**
+1. Dependabot scans for dependency updates
+2. Creates grouped PRs (Astro, Tailwind, dev tools, etc.)
+3. **GitHub Actions automatically updates `bun.lock`**
+4. CI validates the changes
+5. You just review and merge
 
-**Most PRs (70-80%):** CI passes automatically → Just merge  
-**Some PRs (20-30%):** CI fails → Update lockfile manually
+**Fully automated workflow:**
+- ✅ Dependabot updates `package.json`
+- ✅ GitHub Actions updates `bun.lock` automatically
+- ✅ CI validates everything
+- ✅ You just click "Merge"
 
 ### Handling Dependabot PRs
 
-**If CI passes (most cases):**
+**Standard workflow (100% automated):**
 ```bash
-# Just merge the PR
-gh pr merge <number> --squash
-```
-
-**If CI fails (lockfile out of sync):**
-```bash
-# Checkout the Dependabot branch
-gh pr checkout <number>
-
-# Update lockfile
-bun install
-
-# Commit and push
-git add bun.lock
-git commit -m "chore: update bun.lock"
-git push
-
-# Now merge (CI will pass)
+# Just merge the PR - lockfile is auto-updated
 gh pr merge <number> --squash
 ```
 
@@ -90,9 +81,34 @@ gh pr merge <number> --squash
 gh pr list --label dependencies
 ```
 
+### Technical Details
+
+**Lockfile automation:**
+- Workflow: `.github/workflows/dependabot-auto-update-lockfile.yml`
+- Triggers when Dependabot updates `package.json`
+- Runs `bun install --no-save` to update `bun.lock`
+- Commits lockfile with `github-actions[bot]`
+- CI then validates the complete change
+
+**Why This Works:**
+- Dependabot doesn't support `bun.lock` natively (yet)
+- GitHub Actions bot fills this gap automatically
+- Zero manual intervention required
+- Best of both worlds: Dependabot simplicity + Bun speed
+
 ### Why Not Renovate?
 
-Renovate supports `bun.lock` updates but adds complexity for minimal benefit at our scale (~10-15 updates/month). The occasional manual lockfile update (2-3 min, 2-3 times/month) is an acceptable trade-off for simpler, GitHub-native automation.
+Renovate supports `bun.lock` natively but:
+- ❌ Complex configuration (100+ lines JSON vs 70 lines YAML)
+- ❌ Third-party app (not GitHub-native)
+- ❌ Steeper learning curve
+- ❌ More maintenance overhead
+
+Our approach:
+- ✅ Simple Dependabot config
+- ✅ Small GitHub Actions workflow
+- ✅ GitHub-native solution
+- ✅ Fully automated (no manual steps)
 
 ## License
 
