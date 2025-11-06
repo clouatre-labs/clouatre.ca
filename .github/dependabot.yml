@@ -1,0 +1,70 @@
+# Dependabot configuration for automated dependency updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# NOTE: This project uses Bun as the package manager.
+# Dependabot updates package.json only (doesn't support bun.lock yet).
+#
+# Solution: GitHub Actions workflow automatically updates bun.lock
+# Workflow: .github/workflows/dependabot-auto-update-lockfile.yml
+# Result: 100% automated - just review and merge PRs!
+#
+# The "npm" ecosystem works with package.json regardless of actual package manager.
+
+version: 2
+updates:
+  # npm dependencies (package.json)
+  # Note: Uses "npm" ecosystem but project actually uses Bun
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Toronto"
+    open-pull-requests-limit: 10
+    groups:
+      # Group Astro-related packages together
+      astro:
+        patterns:
+          - "astro*"
+          - "@astrojs/*"
+      # Group development tools together
+      dev-tools:
+        patterns:
+          - "@biomejs/*"
+          - "eslint*"
+          - "@typescript-eslint/*"
+          - "prettier*"
+      # Group Tailwind-related packages
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      # Group Shiki transformers
+      shiki:
+        patterns:
+          - "@shikijs/*"
+    # Prefix commit messages
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    # Add labels to PRs
+    labels:
+      - "dependencies"
+    # Rebase strategy
+    rebase-strategy: "auto"
+
+  # GitHub Actions (workflow files)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Toronto"
+    commit-message:
+      prefix: "chore(ci)"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    rebase-strategy: "auto"
