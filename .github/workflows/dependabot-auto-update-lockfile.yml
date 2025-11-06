@@ -1,5 +1,17 @@
 name: Dependabot Auto-Update Lockfile
 
+# TEMPORARY WORKAROUND: Remove when Dependabot supports bun ecosystem natively
+# 
+# Dependabot has bun support in dependabot-core but it may not be enabled on GitHub.com yet.
+# This workflow fills the gap by automatically updating bun.lock when Dependabot updates package.json.
+#
+# When to remove:
+# 1. Test if "package-ecosystem: bun" works in .github/dependabot.yml
+# 2. If Dependabot updates both package.json AND bun.lock, delete this workflow
+# 3. Update README to remove lockfile automation section
+#
+# Test every few months to see if Bun ecosystem is supported.
+
 # Automatically update bun.lock when Dependabot updates package.json
 # This prevents CI failures due to lockfile being out of sync
 
