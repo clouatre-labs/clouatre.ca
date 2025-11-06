@@ -2,20 +2,16 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please email: **hugues@linux.com**
+Please report security vulnerabilities via GitHub's private vulnerability reporting:
 
-**Do not** open a public GitHub issue for security concerns.
+**https://github.com/clouatre-labs/clouatre.ca/security/advisories/new**
+
+Do not open public issues for security concerns.
 
 ## Security Measures
 
-This personal website implements:
-
-- **Static site** - No server-side code execution
-- **HTTPS enforced** - Via GitHub Pages
-- **Secret scanning** - Gitleaks in CI/CD
-- **No tracking** - Privacy-first (no analytics)
-- **Protected files** - `.gitignore` blocks AI configs and confidential files
-
-## Contact
-
-Security issues: **hugues@linux.com**
+- Static site (no server-side code execution)
+- HTTPS enforced via Cloudflare Pages
+- Secret scanning via Gitleaks in CI/CD
+- No tracking or analytics
+- Protected files via `.gitignore`
