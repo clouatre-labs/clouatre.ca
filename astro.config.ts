@@ -21,7 +21,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [
-      [remarkToc, { maxDepth: 2, tight: true }],
+      [remarkToc, { maxDepth: 3 }],
       [remarkCollapse, { test: "Table of contents", summary: "Contents" }],
     ],
     shikiConfig: {
