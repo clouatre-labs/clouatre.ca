@@ -157,9 +157,8 @@ That's it. Everything else: automated.
 | Deploy Time | 5-8 min | 38 sec |
 | DNS Cost | $12/year | $0 |
 | Preview Deployments | No | Yes (per PR) |
-| Migration Time | N/A | 2 hours |
-| Manual Commands | N/A | 0 |
-| Downtime | N/A | 0 minutes |
+
+**Migration completed in 2 hours, zero downtime, zero manual commands.**
 
 ### Developer Experience Improvements
 
@@ -215,15 +214,18 @@ git push origin feat/new-feature
 
 ## Key Lessons
 
-### 1. AI Can Discover Your Infrastructure
+### 1. Goose Handles Implementation Details
 
-We didn't know where DNS was hosted. Goose:
-- Checked domain whois
-- Found Route53 via AWS CLI
-- Discovered the hosted zone ID
-- Exported all records
+You still need to understand what you're migrating, but you don't need to remember:
+- Exact API syntax
+- AWS CLI flags for Route53 operations
+- Cloudflare API endpoints
+- DNS record format specifics
+- YAML workflow syntax
 
-**Traditional approach:** Manual discovery, documentation lookup, trial and error.
+Goose discovered our infrastructure (Route53), analyzed the records, and executed the migration. We provided the goals and constraints, reviewed the approach, and approved changes.
+
+**Value:** Reduces time from hours to minutes. Eliminates typos and omissions.
 
 ### 2. Pre-Validate Before Switching
 
