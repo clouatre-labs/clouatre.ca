@@ -249,6 +249,4 @@ Creating an API token requires human authentication (good security practice). Ev
 - [Cloudflare Pages docs](https://developers.cloudflare.com/pages/)
 - Our workflow: [GitHub repository](https://github.com/clouatre-labs/clouatre.ca)
 
-**Preview deployment example:** During the writing of this post, we used a preview URL (`feat-update-blog-post-final.clouatre-ca.pages.dev`) to review changes before publishing. That's the power of preview deployments—review everything before it goes live.
-
 *(We'll cover Goose setup in a future post.)*
