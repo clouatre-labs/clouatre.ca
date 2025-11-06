@@ -49,22 +49,24 @@ clouatre.ca is registered at Squarespace. I need zero downtime - email
 and Google Workspace cannot break. Use a risk-adverse approach.
 ```
 
-That's it. We didn't know:
-- Where DNS was hosted (Goose found Route53)
-- How many DNS records existed (Goose discovered 20+)
+**That's it.** We didn't need to specify:
+- Where DNS was hosted (Goose discovered Route53)
+- How many DNS records existed (Goose found 20+)
 - Which records were critical vs obsolete
 - How to configure Cloudflare Pages
 - How to set up GitHub Actions for Cloudflare
 
-**Goose figured everything out.**
+**Goose handled the discovery and analysis.**
 
 **What made this possible:**
-- Goose has access to CLI tools (AWS CLI, dig, git, gh)
-- Goose can discover infrastructure state (queried Route53)
+- Goose detects the environment (WSL, Linux, macOS) and installs needed tools (AWS CLI, dig, git, gh)
+- Goose discovers infrastructure state through exploration
 - Goose validates before executing (tested DNS against Cloudflare nameservers)
 - Goose creates audit trails (PRs with context, commit history)
 
 **Critical:** We reviewed every decision. The AI proposed, we approved. The combination of automation + human judgment enabled confidence.
+
+**Timeline:** DNS migration took ~1 hour. Additional time spent on Astro configuration adjustments.
 
 ## What Goose Automated
 
@@ -117,7 +119,7 @@ That's it. Everything else: automated.
 | DNS Cost | $12/year | $0 |
 | Preview Deployments | No | Yes (per PR) |
 
-**Migration completed in 2 hours, zero downtime, zero manual commands.**
+**DNS migration: ~1 hour. Total time including Astro configuration adjustments: ~2 hours. Zero downtime, zero manual commands.**
 
 ## Business Impact
 
