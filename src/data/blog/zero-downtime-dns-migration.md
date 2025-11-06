@@ -66,8 +66,6 @@ and Google Workspace cannot break. Use a risk-adverse approach.
 
 **Critical:** We reviewed every decision. The AI proposed, we approved. The combination of automation + human judgment enabled confidence.
 
-**Timeline:** DNS migration took ~1 hour. Additional time spent on Astro configuration adjustments.
-
 ## What Goose Automated
 
 ### 1. DNS Discovery & Cleanup
@@ -119,7 +117,7 @@ That's it. Everything else: automated.
 | DNS Cost | $12/year | $0 |
 | Preview Deployments | No | Yes (per PR) |
 
-**DNS migration: ~1 hour. Total time including Astro configuration adjustments: ~2 hours. Zero downtime, zero manual commands.**
+**Complete migration (DNS + Hosting + CI/CD) completed in ~2 hours. Zero downtime, zero manual commands.**
 
 ## Business Impact
 
