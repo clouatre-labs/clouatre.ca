@@ -42,11 +42,9 @@ Financial Services • Healthcare & Life Sciences • Technology & Professional 
 
 ## Connect
 
-- 📧 Email: [hugues@linux.com](mailto:hugues@linux.com)
-- 💼 LinkedIn: [linkedin.com/in/huguesclouatre](https://www.linkedin.com/in/huguesclouatre/)
-- 🐙 GitHub: [github.com/clouatre](https://github.com/clouatre)
-
-📄 [Download Resume (PDF)](/clouatre.ca/resume/HC-CV-EN-2025-08-21.pdf)
+- Email: [hugues@linux.com](mailto:hugues@linux.com)
+- LinkedIn: [linkedin.com/in/huguesclouatre](https://www.linkedin.com/in/huguesclouatre/)
+- GitHub: [github.com/clouatre](https://github.com/clouatre)
 
 ---
 
