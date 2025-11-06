@@ -2,11 +2,13 @@
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T02:00:00Z
 description: "How we migrated hosting, DNS, and CI/CD from AWS Route53 + GitHub Pages to Cloudflare—with a single prompt to an AI assistant. Preview deployments, automated validation, zero downtime. The only manual step: creating an API token."
-tags: ["devops", "ai", "cloudflare", "cicd", "automation"]
+tags: ["devops", "ai", "cloudflare", "cicd", "automation", "aws", "goose", "route53"]
 featured: true
 ---
 
-We migrated a complete website infrastructure—hosting, DNS, CI/CD—from AWS Route53 + GitHub Pages to Cloudflare in 2 hours during business hours. Zero downtime. Zero manual commands.
+We migrated a complete website infrastructure—hosting, DNS, CI/CD—from AWS Route53 + GitHub Pages to Cloudflare in 2 hours during business hours. Zero downtime. Zero manual commands. Zero stress.
+
+**Why this matters:** DNS migrations are nerve-wracking. One typo breaks email. Miss a record, services go down. Traditional approach: hope everything works after you switch nameservers. With Goose, we validated every record before switching. Complete peace of mind.
 
 The only manual step: Creating a Cloudflare API token.
 
@@ -56,80 +58,30 @@ That's it. We didn't know:
 
 ### 1. DNS Discovery & Cleanup
 
-Goose analyzed all Route53 records and categorized them:
-
-**Critical (migrate these):**
-- 5 MX records (Google Mail with priorities)
-- SPF, DKIM, DMARC (email authentication)
-- 4 Google Workspace CNAMEs (agenda, contacts, hugues, mail)
-- 2 website records (apex + www)
-
-**Temporary (can delete):**
-- SSL validation records (Let's Encrypt, AWS ACM)
-- Old Redmine server records (h1, redmine, redminegr)
-
-Goose deleted 5 obsolete records, kept 15 critical ones.
+Goose analyzed all Route53 records, kept 15 critical ones (MX, SPF, DKIM, DMARC, Google Workspace CNAMEs), deleted 5 obsolete ones (old Redmine servers, temporary SSL validation records).
 
 ### 2. DNS Migration with Pre-Validation
 
-Goose exported Route53 records (AWS CLI), imported to Cloudflare (API), then validated BEFORE switching nameservers:
+Exported Route53 records (AWS CLI), imported to Cloudflare (API), validated BEFORE switching nameservers:
 
 ```bash
-# Goose tested against Cloudflare nameservers (domain still on Route53)
 dig @oaklyn.ns.cloudflare.com clouatre.ca MX +short
 # Verified: All 5 Google Mail servers ✓
-
-dig @oaklyn.ns.cloudflare.com agenda.clouatre.ca CNAME +short
-# Verified: Google Workspace working ✓
 ```
 
-Every record validated before switching. Traditional migrations? You find out after.
+Every record validated before switching.
 
 ### 3. GitHub Actions CI/CD Setup
 
-Goose created `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to Cloudflare Pages
-on:
-  push:
-    branches: [main]
-jobs:
-  deploy:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install --frozen-lockfile
-      - run: bun run build
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist --project-name=clouatre-ca
-          packageManager: bun
-```
-
-**Result:** 38-second deployments (vs 5-8 minutes on GitHub Pages)
+Created `.github/workflows/deploy.yml` for 38-second deployments (vs 5-8 minutes on GitHub Pages).
 
 ### 4. Fixed Base URL Issues
 
-GitHub Pages served at `/repo-name/`. Cloudflare Pages serves at root. Goose:
-- Removed `base` config from `astro.config.ts`
-- Fixed BASE_URL handling in all components
-- Updated navigation links
-- Fixed theme toggle script loading
+GitHub Pages served at `/repo-name/`, Cloudflare at root. Goose removed `base` config, fixed all component paths, updated navigation and theme toggle.
 
-All broken paths fixed automatically. We just reviewed the changes.
+### 5. Created PRs with Context
 
-### 5. Created PRs with Full Context
-
-Goose created pull requests with:
-- Detailed change descriptions
-- Migration rationale
-- Rollback procedures
-- Testing verification
-
-Example: PR #20 for Cloudflare migration, PR #21 for package manager fix.
+Pull requests included change descriptions, migration rationale, rollback procedures, and testing verification.
 
 ### 6. Preview Deployments
 
@@ -157,83 +109,36 @@ That's it. Everything else: automated.
 | Deploy Time | 5-8 min | 38 sec |
 | DNS Cost | $12/year | $0 |
 | Preview Deployments | No | Yes (per PR) |
-| Migration Time | N/A | 2 hours |
-| Manual Commands | N/A | 0 |
-| Downtime | N/A | 0 minutes |
 
-### Developer Experience Improvements
-
-**Before (GitHub Pages):**
-- Push to main → wait 5-8 minutes → hope it works
-- No preview deployments
-- Hard to test changes before production
-
-**After (Cloudflare Pages):**
-- Push to branch → preview URL in 40 seconds
-- Review changes before merging
-- Merge to main → production in 38 seconds
-- Rollback: revert commit, 38 seconds
-
-## What Goose Actually Did
-
-1. **Discovered infrastructure** (AWS CLI: found Route53, 20 DNS records)
-2. **Analyzed DNS records** (categorized critical vs obsolete)
-3. **Cleaned Route53** (deleted 5 old records)
-4. **Created Cloudflare zone** (API)
-5. **Imported 15 records** (API, programmatic)
-6. **Pre-validated DNS** (dig commands against Cloudflare nameservers)
-7. **Created GitHub workflow** (`.github/workflows/deploy.yml`)
-8. **Created Wrangler config** (`wrangler.toml`)
-9. **Fixed base URL issues** (Astro config, components, scripts)
-10. **Created PRs** (with context and rollback procedures)
-11. **Stored secrets** (GitHub repository secrets via `gh` CLI)
-12. **Monitored propagation** (created monitoring scripts)
-
-**Commands executed:** 100+  
-**Commands we ran manually:** 0  
-**Our time:** Reviewing outputs, approving changes  
-
-## The Magic: Preview Deployments
-
-Every branch gets a preview URL automatically:
-
-```bash
-# Push a branch
-git push origin feat/new-feature
-
-# Cloudflare builds and deploys in ~40 seconds
-# Preview URL: https://feat-new-feature.clouatre-ca.pages.dev
-```
-
-**Use cases:**
-- Review blog posts before publishing (this post!)
-- Test UI changes with stakeholders
-- Validate DNS changes (we did this!)
-- Share work-in-progress
-
-**Cost:** $0 (Cloudflare free tier: 500 builds/month, unlimited bandwidth)
+**Migration completed in 2 hours, zero downtime, zero manual commands.**
 
 ## Key Lessons
 
-### 1. AI Can Discover Your Infrastructure
+### 1. Goose Handles Implementation Details
 
-We didn't know where DNS was hosted. Goose:
-- Checked domain whois
-- Found Route53 via AWS CLI
-- Discovered the hosted zone ID
-- Exported all records
+You still need to understand what you're migrating, but you don't need to remember:
+- Exact API syntax
+- AWS CLI flags for Route53 operations
+- Cloudflare API endpoints
+- DNS record format specifics
+- YAML workflow syntax
 
-**Traditional approach:** Manual discovery, documentation lookup, trial and error.
+Goose discovered our infrastructure (Route53), analyzed the records, and executed the migration. We provided the goals and constraints, reviewed the approach, and approved changes.
 
-### 2. Pre-Validate Before Switching
+**Value:** Reduces time from hours to minutes. Eliminates typos and omissions.
 
-Test new infrastructure before switching traffic:
+### 2. Pre-Validation Eliminates Risk
+
+Goose validated all DNS records against Cloudflare's nameservers before switching:
 
 ```bash
-dig @new-nameserver.example.com yourdomain.com MX +short
+dig @oaklyn.ns.cloudflare.com clouatre.ca MX +short
+dig @oaklyn.ns.cloudflare.com clouatre.ca TXT +short
+dig @oaklyn.ns.cloudflare.com agenda.clouatre.ca CNAME +short
+# ... validated all 15 critical records
 ```
 
-This eliminated risk. We knew email would work before switching nameservers.
+Generated a validation report confirming every record matched. We knew email, Google Workspace, and website would work before changing nameservers. Zero guessing.
 
 ### 3. Automate Record Migration
 
@@ -297,17 +202,19 @@ This approach works for any infrastructure migration:
 
 ## The Bottom Line
 
-Modern infrastructure migrations don't require:
-- Weekend deployment windows
-- Manual command execution
-- Hope-based testing
-- Extended downtime
+DNS migrations used to mean:
+- Weekend deployment windows (pray nothing breaks Monday morning)
+- Manual command execution (one typo = disaster)
+- Hope-based testing (find out after switching if you missed something)
+- Extended downtime windows (plan for the worst)
 
 With AI assistance:
 - Describe the goal
 - Review what AI discovers
 - Approve changes
-- AI executes everything
+- AI executes and validates everything
+
+**The real win:** Confidence. We knew every record worked before switching. No anxiety. No "crossing fingers." Just validation, approval, execution.
 
 **The proof:** This blog post exists at a preview URL, created by the same automation we're describing. We're using the system to document itself.
 
@@ -318,6 +225,6 @@ With AI assistance:
 - [Cloudflare Pages docs](https://developers.cloudflare.com/pages/)
 - Our workflow: [GitHub repository](https://github.com/clouatre-labs/clouatre.ca)
 
-**Preview this exact post:** [feat-update-blog-post-final.clouatre-ca.pages.dev](https://feat-update-blog-post-final.clouatre-ca.pages.dev/posts/zero-downtime-dns-migration/)
+**Preview deployment example:** During the writing of this post, we used a preview URL (`feat-update-blog-post-final.clouatre-ca.pages.dev`) to review changes before publishing. That's the power of preview deployments—review everything before it goes live.
 
 *(We'll cover Goose setup in a future post.)*
