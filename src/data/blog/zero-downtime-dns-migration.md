@@ -125,15 +125,15 @@ Goose discovered our infrastructure (Route53), analyzed the records, and execute
 
 **Value:** Reduces time from hours to minutes. Eliminates typos and omissions.
 
-### 2. Pre-Validate Before Switching
+### 2. Pre-Validation Eliminates Risk
 
-Test new infrastructure before switching traffic:
+Goose validated the new infrastructure before switching traffic:
 
 ```bash
 dig @new-nameserver.example.com yourdomain.com MX +short
 ```
 
-This eliminated risk. We knew email would work before switching nameservers.
+We knew email would work before changing nameservers. No guessing, no hoping.
 
 ### 3. Automate Record Migration
 
