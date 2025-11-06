@@ -37,7 +37,7 @@ const {
 const { Content } = await render(post);
 
 // Calculate reading time (average 200 words per minute)
-const readingTime = Math.ceil(post.body.split(/\s+/).length / 200);
+const readingTime = Math.ceil((post.body || "").split(/\s+/).length / 200);
 
 let ogImageUrl: string | undefined;
 
