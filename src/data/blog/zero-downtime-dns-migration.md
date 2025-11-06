@@ -37,24 +37,21 @@ A single mistake in an MX record can black-hole email for days.
 
 **About Goose:** [Goose](https://github.com/block/goose) is an open-source AI assistant that can execute terminal commands, use APIs, and automate infrastructure tasks. It runs locally and integrates with your existing tools (AWS CLI, GitHub CLI, etc.). *(We'll cover our Goose setup in a future post.)*
 
-**Our prompts to Goose:**
+**Our prompt to Goose:**
 
-```bash
-# Initial request
-"I want to migrate from AWS Route53 + GitHub Pages to Cloudflare DNS + 
-Cloudflare Pages. I have 15 DNS records including email (Google Workspace) 
-and need zero downtime. Use a risk-adverse approach - validate everything 
-before switching nameservers."
+```
+I want to migrate from GitHub Pages to Cloudflare Pages. The domain 
+clouatre.ca is registered at Squarespace. I need zero downtime - email 
+and Google Workspace cannot break. Use a risk-adverse approach.
 ```
 
-```bash
-# Follow-up validation request
-"Before I change nameservers at Squarespace, I want 100% confidence. 
-Compare every Route53 record with Cloudflare. Test email, Google Workspace, 
-and the website by querying Cloudflare nameservers directly."
-```
+That's it. We didn't know:
+- Where DNS was hosted (Goose found Route53)
+- How many DNS records existed (Goose discovered 15)
+- What the records were (Goose exported them all)
+- The hosted zone ID (Goose looked it up)
 
-Goose executed everything. We didn't run a single command.
+Goose figured everything out and executed all commands. We just directed the outcome.
 
 ### Step 1: Export Existing DNS
 
