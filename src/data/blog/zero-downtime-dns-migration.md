@@ -2,7 +2,7 @@
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T02:00:00Z
 description: "How we migrated hosting, DNS, and CI/CD from AWS Route53 + GitHub Pages to Cloudflare—starting with a single prompt to an AI assistant. Preview deployments, automated validation, zero downtime. The only manual step: creating an API token."
-tags: ["devops", "ai", "cloudflare", "cicd", "automation", "aws", "goose", "route53"]
+tags: ["devops", "ai", "cloudflare", "cicd", "automation", "goose", "dns", "migration"]
 featured: true
 ---
 
