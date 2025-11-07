@@ -1,7 +1,7 @@
 ---
 title: "AI-Assisted Development: From Implementation to Judgment"
 pubDatetime: 2025-11-07T00:00:00Z
-description: "Senior engineers spend 80% of time implementing, 20% deciding. AI assistants flip this ratio, enabling parallel exploration of solutions at the cost of sequential implementation. Real examples, quantifiable results, and when this approach works."
+description: "Flip the ratio: 20% reviewing code, 80% strategy. AI-assisted development with 70-80% time savings on infrastructure tasks. Real metrics from production."
 tags: ["ai", "goose", "productivity", "devops", "engineering-leadership", "automation", "cicd"]
 featured: true
 ---
@@ -19,6 +19,9 @@ AI assistants flip the ratio: 20% reviewing code, 80% applying judgment.
 Critical thinking scales. Implementation doesn't. You can evaluate 3 architectural approaches in the time it takes to implement one.
 
 Example: [Goose](https://github.com/block/goose) (open-source AI assistant) handles codebase analysis, implementation, testing, and documentation. You provide business context, architectural judgment, and approve decisions at critical gates.
+
+![Time allocation comparison: traditional vs AI-assisted development](/assets/time-allocation-comparison.png)
+*Figure 1: The 80/20 flip - Traditional approach wastes expert judgment on implementation, AI-assisted approach maximizes strategic thinking*
 
 ## Real Example: Dependency Management
 
@@ -54,12 +57,16 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 **Problem:** `math-mcp-learning-server` had no CI workflow. Legacy tooling (mypy) was slow and unused.
 
-**AI-assisted approach:**
+### The Approach
+
+**AI-assisted process:**
 - Goose learned modern stack from previous project (`options-trading-mcp`)
 - Applied pattern to new project: Ruff (linter/formatter) + uv (package manager) + pytest-cov
 - I reviewed: Risk assessment, performance trade-offs, zero regressions
 
-**Results:**
+### The Results
+
+**Quantifiable outcomes:**
 - **Time:** 1 hour (vs. 3-4 hours manual research and implementation)
 - **Performance:** 100x faster linting (Ruff vs. legacy tools)
 - **CI runtime:** 5 seconds total
@@ -78,11 +85,11 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 ### Senior Engineer Leverage
 
-| Metric | Traditional | AI-Assisted |
-|--------|-------------|-------------|
-| Time allocation | 80% implement, 20% strategy | 20% review, 80% strategy |
-| Scope per engineer | 1-2 specialties | Full stack |
-| Exploration cost | High (must implement) | Low (preview and abandon) |
+| Metric | Traditional | AI-Assisted | Business Impact |
+|--------|-------------|-------------|-----------------|
+| Time allocation | 80% implement, 20% strategy | 20% review, 80% strategy | **4x leverage** on expert judgment |
+| Scope per engineer | 1-2 specialties | Full stack | Eliminate specialist bottlenecks |
+| Exploration cost | High (must implement) | Low (preview and abandon) | Ship best solution, not first |
 
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
@@ -90,6 +97,8 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 - **DNS migration:** 2 hours oversight (vs. 6+ hours execution) - **67% savings**
 
 **Average: 70-80% time savings on infrastructure and DevOps tasks**
+
+At 10 infrastructure tasks per month, this recovers ~60 hours per year per engineer—equivalent to 1.5 weeks of productive time returned to strategic work.
 
 ### Strategic Impact
 - Solo engineer scope: Content plus infrastructure plus CI/CD plus OSS contributions
@@ -109,6 +118,9 @@ Goose uses "recipes" (YAML workflow definitions) that codify your judgment and p
 5. **PREPARE** - Create PR, verify branch, push
 
 **5 mandatory STOP points:** AI proposes, you approve before proceeding.
+
+![Recipe workflow diagram with 5 STOP gates for human approval](/assets/recipe-workflow.png)
+*Figure 2: Recipe workflow enforces governance through 5 mandatory approval gates - AI proposes, human judges*
 
 **Example recipe structure:**
 
@@ -149,7 +161,7 @@ instructions: |
 - Human judgment at critical gates (governance, not blind automation)
 - Onboarding tool (codified expertise)
 
-**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/575502cd845706f8ad72a7e089da7ef0)
+**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)
 
 The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
 
@@ -172,10 +184,12 @@ The recipe enforces branch hygiene (never push to main), conventional commits, t
 
 ## The Transformation
 
-**Traditional:** Senior time is expensive → minimize exploration → ship first working solution
+**Traditional:** Expert time is expensive → minimize exploration → ship first working solution
 
-**AI-assisted:** Senior time focused on judgment → maximize exploration → ship best solution
+**AI-assisted:** Expert time focused on judgment → maximize exploration → ship best solution
 
-The shift: From typing code to evaluating proposals. From 80% implementation to 80% strategy.
+**The shift:** Your role transforms from typing code to evaluating proposals. 80% implementation becomes 80% strategy.
 
-For technical leaders: This amplifies your most expensive resource—senior judgment. When your bottleneck is making the right decision (not typing code), AI becomes a strategic multiplier.
+**Why this matters for your career:** As AI handles more implementation, critical thinking and judgment become the scarce, valuable skills. Engineers who master AI-assisted workflows position themselves for the future job market—where strategic thinking, not typing speed, determines value.
+
+For technical leaders: This amplifies your most expensive resource—expert judgment. When your bottleneck is making the right decision (not typing code), AI becomes a strategic multiplier.
