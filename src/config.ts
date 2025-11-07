@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://clouatre-ca.pages.dev",
+  website: "https://clouatre.ca",
   author: "Hugues Clouâtre",
   profile: "https://github.com/clouatre",
   desc: "Technology leadership, AI workflows, and cloud architecture insights from a world-class executive leader with expertise in AWS, Oracle, and digital transformation.",

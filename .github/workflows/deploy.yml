@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment:
       name: production
-      url: https://clouatre-ca.pages.dev
+      url: https://clouatre.ca
     steps:
       - name: Checkout
         uses: actions/checkout@v4
