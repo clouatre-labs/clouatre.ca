@@ -20,7 +20,7 @@ Critical thinking scales. Implementation doesn't. You can evaluate 3 architectur
 
 Example: [Goose](https://github.com/block/goose) (open-source AI assistant) handles codebase analysis, implementation, testing, and documentation. You provide business context, architectural judgment, and approve decisions at critical gates.
 
-![Time allocation comparison: traditional vs AI-assisted development](/assets/time-allocation-comparison.png)
+![Time allocation comparison: traditional vs AI-assisted development](@/assets/images/time-allocation-comparison.png)
 *Figure 1: The 80/20 flip - Traditional approach wastes expert judgment on implementation, AI-assisted approach maximizes strategic thinking*
 
 ## Real Example: Dependency Management
@@ -119,7 +119,7 @@ Goose uses "recipes" (YAML workflow definitions) that codify your judgment and p
 
 **5 mandatory STOP points:** AI proposes, you approve before proceeding.
 
-![Recipe workflow diagram with 5 STOP gates for human approval](/assets/recipe-workflow.png)
+![Recipe workflow diagram with 5 STOP gates for human approval](@/assets/images/recipe-workflow.png)
 *Figure 2: Recipe workflow enforces governance through 5 mandatory approval gates - AI proposes, human judges*
 
 **Example recipe structure:**
