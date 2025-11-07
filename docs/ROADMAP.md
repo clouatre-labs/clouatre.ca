@@ -4,7 +4,7 @@ Concise roadmap for clouatre.ca based on AstroPaper v5 reference implementation.
 
 ## ✅ Already Working
 
-These features are already configured and working:
+Features configured and working in production:
 - Professional color scheme (custom blue)
 - Reading time in post details
 - Author bio section
@@ -18,17 +18,21 @@ These features are already configured and working:
 - Light/dark mode toggle
 - Syntax highlighting (Shiki with transformers)
 - View transitions
+- Table of contents (auto-generated with remark-collapse)
+- Tag-based related posts (2-3 posts per article)
+- Optimized images (automatic WebP conversion, 50% size reduction)
+- Dependabot with automated lockfile updates
+- Fast deploys (38 seconds, Cloudflare Pages)
 
-## 🔍 To Verify
+## 🚀 Infrastructure
 
-### Table of Contents
-**Already configured** - just needs testing
-
-Theme has `remarkToc` and `remark-collapse` plugins configured. 
-
-**Test:** Add `## Table of contents` heading to a blog post with multiple sections.
-
-**Files:** Already in `astro.config.ts`
+- **Hosting:** Cloudflare Pages (edge deployment, global CDN)
+- **DNS:** Cloudflare (migrated from Route53)
+- **Deployment:** 38 seconds (was 5-8 minutes on GitHub Pages)
+- **Preview URLs:** Every PR gets automatic preview deployment
+- **Dependencies:** Automated updates (Dependabot + lockfile sync)
+- **Security:** Gitleaks secret scanning (organization license)
+- **Image Optimization:** Automatic WebP conversion (50% size reduction)
 
 ---
 
@@ -45,21 +49,6 @@ Show "X min read" on post cards (homepage, archives, search results).
 - `src/pages/index.astro` - Calculate and pass reading time
 - `src/pages/posts/[...page].astro` - Same
 - `src/pages/archives/index.astro` - Same
-
----
-
-### Related Posts
-**Status:** Not implemented  
-**Impact:** High - increases engagement
-
-Show 2-3 related posts at end of each article (tag-based similarity).
-
-**Files to create:**
-- `src/components/RelatedPosts.astro`
-- `src/utils/getRelatedPosts.ts`
-
-**Files to modify:**
-- `src/layouts/PostDetails.astro` - Add related posts section
 
 ---
 
@@ -178,18 +167,16 @@ Add predefined color scheme options from official theme (Astro Dark, Dracula, Ni
 ## Priority Sequence
 
 **Do First (High Impact, Low Effort):**
-1. Verify TOC works
-2. Reading time on cards
-3. Related posts
+1. Reading time on cards
 
 **Do Next (High Impact, Medium Effort):**
-4. Giscus comments
-5. Newsletter signup
+2. Giscus comments
+3. Newsletter signup
 
 **Nice to Have:**
-6. Popular tags
-7. Enhanced search
-8. Post series
+4. Popular tags
+5. Enhanced search
+6. Post series
 
 ---
 

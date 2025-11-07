@@ -7,18 +7,27 @@
 [![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=flat&logo=astro&logoColor=white)](https://astro.build)
 [![Protected by Gitleaks](https://img.shields.io/badge/protected%20by-gitleaks-blue)](https://github.com/gitleaks/gitleaks)
 
-Personal website and blog at [clouatre-labs.github.io/clouatre.ca](https://clouatre-labs.github.io/clouatre.ca/)
+Personal website and technical blog at [clouatre.ca](https://clouatre.ca)
 
-Technology leadership, AI workflows, and cloud architecture insights.
+Technology leadership, AI-assisted development, and cloud architecture insights for executive audiences.
 
 ## Tech Stack
 
-- **Astro** with Astro Paper theme
-- **Bun** - Fast JavaScript runtime and package manager
-- **Biome** - Fast linter and formatter
-- **GitHub Pages** deployment
-- **Tailwind CSS** styling
-- **Gitleaks** - Secret scanning (organization license)
+- **[Astro](https://astro.build)** - Static site generator with [Astro Paper](https://github.com/satnaing/astro-paper) theme
+- **[Bun](https://bun.sh)** - Fast JavaScript runtime and package manager
+- **[Biome](https://biomejs.dev)** - Fast linter and formatter (replaces ESLint + Prettier)
+- **[Cloudflare Pages](https://pages.cloudflare.com)** - Edge deployment with global CDN
+- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first styling
+- **[Gitleaks](https://github.com/gitleaks/gitleaks)** - Secret scanning (organization license)
+
+## Features
+
+- ✅ **Optimized Images** - Automatic WebP conversion (50% size reduction)
+- ✅ **Preview Deployments** - Every PR gets a preview URL
+- ✅ **Auto Dependencies** - Dependabot + automated lockfile updates
+- ✅ **Fast Deploys** - 38 seconds (was 5-8 minutes on GitHub Pages)
+- ✅ **SEO Optimized** - Meta tags, sitemaps, responsive images
+- ✅ **Type Safe** - TypeScript throughout
 
 ## Development
 
@@ -27,7 +36,7 @@ Technology leadership, AI workflows, and cloud architecture insights.
 bun install
 
 # Start dev server
-bun dev      # http://localhost:4321/clouatre.ca/
+bun dev      # http://localhost:4321
 
 # Run checks (lint + format)
 bun run check
