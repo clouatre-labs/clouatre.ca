@@ -110,13 +110,48 @@ Goose uses "recipes" (YAML workflow definitions) that codify your judgment and p
 
 **5 mandatory STOP points:** AI proposes, you approve before proceeding.
 
+**Example recipe structure:**
+
+```yaml
+name: oss-coder
+title: OSS Contribution Specialist
+description: |
+  Open-source contribution specialist with mandatory approval checkpoints.
+
+instructions: |
+  ## Workflow Phases (with Mandatory STOPs)
+  
+  ### Phase 1: ANALYZE
+  **STOP - Present to user:**
+  - Repository architecture summary
+  - Issue/problem statement
+  - Relevant files identified
+  **ASK:** "Does this analysis look correct? Should I proceed to research?"
+  
+  ### Phase 2: RESEARCH
+  **STOP - Present to user:**
+  - 2-3 possible solution approaches
+  - Trade-offs for each
+  **ASK:** "Which approach do you prefer?"
+  
+  ### Phase 3: PLAN
+  **STOP - Present to user:**
+  - Specific files to modify
+  - Implementation steps
+  **ASK:** "Do you approve this plan?"
+  
+  # ... continues through IMPLEMENT and PREPARE phases
+```
+
 **Why this matters:**
 - Repeatable process (not ad-hoc prompting)
 - Audit trails (every decision documented in PR history)
 - Human judgment at critical gates (governance, not blind automation)
 - Onboarding tool (codified expertise)
 
-**Example:** The `oss-coder.yaml` recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
+**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/43572dc557f2629c433243e24722d59c)
+
+The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
 
 ## When This Approach Works
 
