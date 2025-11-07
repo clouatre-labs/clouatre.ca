@@ -8,7 +8,7 @@ featured: true
 
 We migrated complete website infrastructure from Amazon Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. This included hosting, DNS, and CI/CD. Zero downtime. Zero manual commands.
 
-**The entire migration:** Started with one prompt, then reviewed and approved AI-proposed changes.
+**The entire migration:** One prompt. Then review and approve AI-proposed changes.
 
 **Why this matters for executives:** DNS migrations traditionally require specialized DevOps knowledge, extended maintenance windows, and carry significant risk. A single misconfigured record can break email, take down services, or disrupt business operations for hours. This approach eliminates that risk through programmatic validation and automation.
 
@@ -56,7 +56,7 @@ Infrastructure changes shift from high-stress, weekend events requiring senior e
 
 **The transformation:** From possible-but-stressful to routine-and-confident.
 
-## The Prompt
+## The Starting Prompt
 
 **What we told Goose ([open-source AI assistant](https://github.com/block/goose)):**
 
@@ -66,7 +66,7 @@ clouatre.ca is registered at Squarespace. I need zero downtime - email
 and Google Workspace cannot break. Use a risk-adverse approach.
 ```
 
-**That's it.** We didn't need to specify:
+We didn't need to specify:
 - Where DNS was hosted (Goose discovered Route53)
 - How many DNS records existed (Goose found 20+)
 - Which records were critical vs obsolete
@@ -86,45 +86,36 @@ and Google Workspace cannot break. Use a risk-adverse approach.
 ![Migration workflow diagram showing approval gates and validation steps](/assets/migration-workflow.png)
 *Figure 1: AI-assisted migration workflow with two human approval gates ensuring governance and confidence*
 
-## What Goose Automated
+## What Got Automated
 
-### 1. DNS Discovery & Cleanup
+Goose handled five critical phases:
 
-Goose analyzed all Route53 records, kept 15 critical ones (MX, SPF, DKIM, DMARC, Google Workspace CNAMEs), deleted 5 obsolete ones (old Redmine servers, temporary SSL validation records).
+**Discovery & Cleanup**
+- Analyzed 20+ Route53 records
+- Identified 15 critical (email, Google Workspace, SSL)
+- Flagged 5 obsolete (old servers, expired validations)
 
-### 2. DNS Migration with Pre-Validation
+**Pre-Migration Validation**
+- Exported Route53 → imported to Cloudflare via APIs
+- Tested all records against Cloudflare nameservers BEFORE switching
+- Verified email servers, SPF, DKIM, DMARC, CNAMEs
+- Generated validation report: 100% match confirmed
 
-**The validation approach:**
+**CI/CD Reconfiguration**
+- Updated GitHub Actions deployment target (GitHub Pages → Cloudflare)
+- Fixed base URL issues (GitHub's `/repo/` → root `/`)
+- Created preview deployment workflow with 7-day auto-cleanup
+- Result: 38-second deploys (was 5-8 minutes)
 
-1. Export all Route53 records using AWS CLI
-2. Import to Cloudflare via API
-3. Test against Cloudflare nameservers BEFORE switching
-4. Verify all 5 email servers respond correctly
+**Governance Trail**
+- Created PRs with migration context, rationale, rollback procedures
+- Every change reviewable before production
+- Audit trail for compliance
 
-**Result:** Zero risk. We confirmed email would work before changing anything in production.
-
-Every record validated before switching.
-
-### 3. GitHub Actions CI/CD Setup
-
-**What changed:** Deployment target only. Code still lives in GitHub repository.
-
-**Before:** GitHub Actions → GitHub Pages  
-**After:** GitHub Actions → Cloudflare Pages
-
-Created `.github/workflows/deploy.yml` for 38-second deployments (vs 5-8 minutes on GitHub Pages).
-
-### 4. Fixed Base URL Issues
-
-GitHub Pages served content at `/repo-name/`, Cloudflare at root. Goose identified this, removed the `base` configuration, and fixed all component paths—navigation, theme toggle, asset references. We reviewed the PR and approved.
-
-### 5. Created PRs with Context
-
-Pull requests included change descriptions, migration rationale, rollback procedures, and testing verification.
-
-### 6. Preview Deployments
-
-The best part: Every PR branch gets a preview URL **before** merging to production. We review changes BEFORE they go live, and production deploys only after approval. Goose even configured automatic cleanup (7-day TTL for old previews)—zero maintenance required.
+**Preview Infrastructure**
+- Every branch gets preview URL automatically
+- Stakeholder review before merge
+- Zero maintenance (auto-cleanup configured)
 
 ## The Only Manual Step
 
@@ -133,7 +124,7 @@ Creating a Cloudflare API token (2 minutes):
 2. Create token with Pages permissions
 3. Store in GitHub secrets
 
-That's it. Everything else: automated.
+Everything else: automated.
 
 ![Infrastructure comparison showing before and after architecture](/assets/infrastructure-comparison.png)
 *Figure 2: Infrastructure transformation - from fragmented AWS/GitHub setup to unified Cloudflare platform*
@@ -144,7 +135,7 @@ That's it. Everything else: automated.
 |--------|--------|-------|-----------------|
 | DNS Resolution | 20-30ms | 10-15ms | 50% faster global access |
 | Deploy Time | 5-8 min | 38 sec | **88% reduction** - 10x faster iteration |
-| DNS Cost | $12/year | Free | $12/year savings |
+| Platform Cost | Route53: $12/year | Cloudflare: Free | Cost-neutral migration |
 | Preview Deployments | None | Per PR | Catch issues before production |
 | Migration Time | Days (typical) | 2 hours | **67% time savings** vs traditional |
 
@@ -157,7 +148,7 @@ That's it. Everything else: automated.
 - **Reduce specialized knowledge dependency** - DevOps tasks no longer require memorizing cloud provider CLIs, DNS record formats, or deployment configurations
 - **Lower operational risk** - Programmatic validation means migrations happen with confidence, not guesswork
 - **Faster iteration** - Preview deployments enable stakeholder review before production release
-- **Cost efficiency** - Eliminated $12/year DNS hosting, reduced deployment time by 88% (5-8min → 38sec)
+- **Cost efficiency** - Reduced deployment time by 88% (5-8min → 38sec), freeing developer time for feature work
 
 **Who benefits:**
 - Small businesses without dedicated DevOps teams
@@ -224,7 +215,7 @@ The ability to review changes before production delivers multiple benefits.
 
 **Traditional DNS migration approach:**
 
-- Weekend deployment windows (lower risk window, but stressful)
+- Weekend deployment windows (lower risk, higher stress)
 - Manual command execution (careful, but one typo = disaster)
 - Sequential testing after switching (discover errors in production)
 - Specialized knowledge required (dig syntax, DNS formats, cloud CLIs)
@@ -240,7 +231,7 @@ The ability to review changes before production delivers multiple benefits.
 
 **The transformation:** From "plan exhaustively and execute carefully" to "validate programmatically and execute confidently."
 
-Traditional migrations CAN achieve zero downtime, but they require more planning and carry higher risk of manual errors. We knew every record worked before switching nameservers. No deployment anxiety. No extensive contingency planning. Just confidence through automation.
+We knew every record worked before switching. No deployment anxiety, no weekend stress, no contingency planning—just confidence through programmatic validation.
 
 **The proof:** This blog post was reviewed at a preview URL before going live—using the same automation we're describing. The system documents itself.
 
@@ -268,18 +259,25 @@ Traditional migrations CAN achieve zero downtime, but they require more planning
 - Environments where API access is prohibited
 - Situations where humans lack domain knowledge to evaluate AI proposals
 
-## Cost Reality
+## Return on Investment
 
-**Cloudflare Pages free tier:**
-- 500 builds/month
-- 1 concurrent build
-- Unlimited bandwidth and requests
-- Unlimited preview deployments
+**Time savings compound quickly:**
 
-**Perfect for:** Personal sites, small businesses, most projects.  
-**Paid plans needed for:** High-traffic sites (millions of requests), teams needing multiple concurrent builds.
+- **Deployment speed:** 88% faster (5-8min → 38sec) = ~7 minutes saved per deploy
+- **At 5 deploys/day:** 35 minutes/day = 145 hours/year of developer time recovered
+- **Migration execution:** 2 hours (vs typical 2-3 day weekend projects)
 
-**GitHub Pages:** Remains free regardless of traffic (but slower globally, no preview deployments).
+**Risk avoidance value:**
+
+- Zero-downtime migrations eliminate revenue loss windows
+- Pre-validation prevents email outages (typical cost: hours of missed customer communications)
+- Preview deployments catch production issues before customer impact
+
+**Platform economics:**
+
+Cloudflare Pages free tier (500 builds/month, unlimited bandwidth) serves most businesses. High-traffic sites may need paid plans ($20-$200/month), but deployment speed gains alone justify the cost through developer productivity.
+
+**The real ROI:** Developer time back for feature work, not infrastructure babysitting.
 
 ---
 
