@@ -248,5 +248,3 @@ Creating an API token requires human authentication (good security practice). Ev
 - [Goose AI assistant](https://github.com/block/goose) (open source)
 - [Cloudflare Pages docs](https://developers.cloudflare.com/pages/)
 - Our workflow: [GitHub repository](https://github.com/clouatre-labs/clouatre.ca)
-
-*(We'll cover Goose setup in a future post.)*
