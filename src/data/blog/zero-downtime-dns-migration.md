@@ -2,7 +2,7 @@
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T02:00:00Z
 description: "How we migrated hosting, DNS, and CI/CD from AWS Route53 + GitHub Pages to Cloudflare—starting with a single prompt to an AI assistant. Preview deployments, automated validation, zero downtime. The only manual step: creating an API token."
-tags: ["devops", "ai", "cloudflare", "cicd", "automation", "aws", "goose", "route53"]
+tags: ["devops", "ai", "cloudflare", "cicd", "automation", "goose", "dns", "migration"]
 featured: true
 ---
 
@@ -249,4 +249,4 @@ Creating an API token requires human authentication (good security practice). Ev
 - [Cloudflare Pages docs](https://developers.cloudflare.com/pages/)
 - Our workflow: [GitHub repository](https://github.com/clouatre-labs/clouatre.ca)
 
-*(We'll cover Goose setup in a future post.)*
+**Read next:** [AI-Assisted Development: From Implementation to Judgment](/posts/ai-assisted-development-judgment-over-implementation/) - The workflow framework that enables migrations like this.

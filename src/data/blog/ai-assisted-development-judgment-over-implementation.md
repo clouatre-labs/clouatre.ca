@@ -179,3 +179,7 @@ The recipe enforces branch hygiene (never push to main), conventional commits, t
 The shift: From typing code to evaluating proposals. From 80% implementation to 80% strategy.
 
 For technical leaders: This amplifies your most expensive resource—senior judgment. When your bottleneck is making the right decision (not typing code), AI becomes a strategic multiplier.
+
+---
+
+**Real-world example:** [Migrating to Cloudflare Pages: One Prompt, Zero Manual Work](/posts/zero-downtime-dns-migration/) - Complete DNS, hosting, and CI/CD migration using this workflow.
