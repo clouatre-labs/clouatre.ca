@@ -6,7 +6,7 @@ tags: ["devops", "ai", "cloudflare", "cicd", "automation", "goose", "dns", "migr
 featured: true
 ---
 
-We migrated complete website infrastructure—hosting, DNS, CI/CD—from AWS Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. Zero downtime. Zero manual commands.
+We migrated complete website infrastructure from Amazon Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. This included hosting, DNS, and CI/CD. Zero downtime. Zero manual commands.
 
 **The entire migration:** Started with one prompt, then reviewed and approved AI-proposed changes.
 
@@ -19,10 +19,11 @@ The only manual step: Creating a Cloudflare API token.
 ## The Starting Point
 
 **Infrastructure:**
-- Hosting: GitHub Pages
-- DNS: AWS Route53 (20+ DNS records)
-- Domain: Squarespace (registrar)
-- CI/CD: GitHub Actions → GitHub Pages
+- **Code repository:** GitHub (unchanged after migration)
+- **Hosting:** GitHub Pages
+- **DNS:** Amazon Route53 (20+ DNS records)
+- **Domain:** Squarespace (registrar)
+- **CI/CD:** GitHub Actions → GitHub Pages
 
 **Critical services:**
 - Email (5 MX records for Google Workspace)
@@ -43,7 +44,7 @@ Migrate everything to Cloudflare:
 
 **The traditional challenge:**
 
-DNS migrations CAN be done with zero downtime, but they require extensive planning, careful execution, and carry high stress. One misconfigured MX record means email down for hours. The cost: potential revenue loss plus customer impact.
+DNS migrations CAN be done with zero downtime, but they require extensive planning and careful execution. One misconfigured MX record means email down for hours—imagine missing customer orders, support tickets, or sales inquiries during your peak season.
 
 **The difference with AI assistance:**
 
@@ -82,7 +83,7 @@ and Google Workspace cannot break. Use a risk-adverse approach.
 
 **Critical:** We reviewed every decision. The AI proposed, we approved. The combination of automation + human judgment enabled confidence.
 
-![Migration workflow diagram showing approval gates and validation steps](../../../public/assets/migration-workflow.png)
+![Migration workflow diagram showing approval gates and validation steps](/assets/migration-workflow.png)
 *Figure 1: AI-assisted migration workflow with two human approval gates ensuring governance and confidence*
 
 ## What Goose Automated
@@ -105,6 +106,11 @@ Goose analyzed all Route53 records, kept 15 critical ones (MX, SPF, DKIM, DMARC,
 Every record validated before switching.
 
 ### 3. GitHub Actions CI/CD Setup
+
+**What changed:** Deployment target only. Code still lives in GitHub repository.
+
+**Before:** GitHub Actions → GitHub Pages  
+**After:** GitHub Actions → Cloudflare Pages
 
 Created `.github/workflows/deploy.yml` for 38-second deployments (vs 5-8 minutes on GitHub Pages).
 
@@ -129,7 +135,7 @@ Creating a Cloudflare API token (2 minutes):
 
 That's it. Everything else: automated.
 
-![Infrastructure comparison showing before and after architecture](../../../public/assets/infrastructure-comparison.png)
+![Infrastructure comparison showing before and after architecture](/assets/infrastructure-comparison.png)
 *Figure 2: Infrastructure transformation - from fragmented AWS/GitHub setup to unified Cloudflare platform*
 
 ## Results
@@ -234,7 +240,7 @@ The ability to review changes before production delivers multiple benefits.
 
 **The transformation:** From "plan exhaustively and execute carefully" to "validate programmatically and execute confidently."
 
-Traditional migrations CAN achieve zero downtime - they just require more planning, more stress, and carry higher risk of manual errors. We knew every record worked before switching nameservers. No deployment anxiety. No extensive contingency planning. Just confidence through automation.
+Traditional migrations CAN achieve zero downtime, but they require more planning and carry higher risk of manual errors. We knew every record worked before switching nameservers. No deployment anxiety. No extensive contingency planning. Just confidence through automation.
 
 **The proof:** This blog post was reviewed at a preview URL before going live—using the same automation we're describing. The system documents itself.
 
