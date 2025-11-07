@@ -44,6 +44,7 @@ aider.chat.history.md
 *.internal
 *_CONFIDENTIAL*
 *_INTERNAL*
+internal/
 
 # Temporary files
 *.tmp
