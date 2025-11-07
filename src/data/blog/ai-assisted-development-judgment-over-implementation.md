@@ -149,7 +149,7 @@ instructions: |
 - Human judgment at critical gates (governance, not blind automation)
 - Onboarding tool (codified expertise)
 
-**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/43572dc557f2629c433243e24722d59c)
+**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/575502cd845706f8ad72a7e089da7ef0)
 
 The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
 
