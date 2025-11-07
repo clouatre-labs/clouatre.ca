@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPath } from "@/utils/getPath";
+import { slugifyStr } from "@/utils/slugify";
+
+export interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class="pb-6 pt-12">
+      <h2 class="mb-8 text-2xl font-semibold tracking-wide">Related Posts</h2>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map(({ data, id, filePath }) => (
+          <li>
+            <a
+              href={getPath(id, filePath)}
+              class="group block h-full rounded-lg border border-foreground/10 p-4 transition-colors hover:border-accent hover:bg-accent/5"
+            >
+              <h3
+                class="mb-2 font-medium text-accent decoration-dashed group-hover:underline"
+                style={{ viewTransitionName: slugifyStr(data.title) }}
+              >
+                {data.title}
+              </h3>
+              <p class="text-sm text-foreground/75">{data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
