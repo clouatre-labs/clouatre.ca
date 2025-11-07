@@ -81,9 +81,14 @@ const allPosts = posts.map(({ data: { title }, id, filePath }) => ({
 
 const currentPostIndex = allPosts.findIndex((a) => a.id === post.id);
 
-const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
-const nextPost =
-  currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
+// Posts are sorted newest first, so:
+// - "Previous" (older) = later in array (higher index)
+// - "Next" (newer) = earlier in array (lower index)
+const prevPost =
+  currentPostIndex < allPosts.length - 1
+    ? allPosts[currentPostIndex + 1]
+    : null;
+const nextPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 
 /* ========== Related Posts ========== */
 
