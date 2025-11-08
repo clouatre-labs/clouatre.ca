@@ -1,0 +1,3 @@
+# Redirect www and hugues subdomains to apex domain
+https://www.clouatre.ca/* https://clouatre.ca/:splat 301
+https://hugues.clouatre.ca/* https://clouatre.ca/:splat 301
