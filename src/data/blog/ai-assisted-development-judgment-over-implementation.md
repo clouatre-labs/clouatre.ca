@@ -67,8 +67,8 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 ### The Results
 
 **Quantifiable outcomes:**
-- **Time:** 1 hour (vs. 3-4 hours manual research and implementation)
-- **Performance:** 100x faster linting (Ruff vs. legacy tools)
+- **Time:** ~20 minutes (reused patterns from previous project, vs. 3-4 hours typical from scratch)
+- **Performance:** [10-100x faster linting](https://github.com/astral-sh/ruff) than mypy/Pylint (replaced mypy)
 - **CI runtime:** 5 seconds total
 - **Testing:** 67/67 tests passing, 83% coverage, zero regressions
 
@@ -93,7 +93,7 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
-- **CI modernization:** 1 hour (vs. 3-4 hours) - **67-75% savings**
+- **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
 - **DNS migration:** 2 hours oversight (vs. 6+ hours execution) - **67% savings**
 
 **Average: 70-80% time savings on infrastructure and DevOps tasks**

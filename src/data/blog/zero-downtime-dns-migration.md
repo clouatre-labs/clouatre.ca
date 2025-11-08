@@ -264,7 +264,7 @@ We knew every record worked before switching. No deployment anxiety, no weekend 
 **Time savings compound quickly:**
 
 - **Deployment speed:** 88% faster (5-8min → 38sec) = ~7 minutes saved per deploy
-- **At 5 deploys/day:** 35 minutes/day = 145 hours/year of developer time recovered
+- **At 5 deploys/day:** 35 minutes/day = 213 hours/year of developer time recovered
 - **Migration execution:** 2 hours (vs typical 2-3 day weekend projects)
 
 **Risk avoidance value:**
