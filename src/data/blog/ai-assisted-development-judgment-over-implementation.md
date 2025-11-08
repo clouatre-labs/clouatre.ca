@@ -68,7 +68,7 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 **Quantifiable outcomes:**
 - **Time:** ~20 minutes (reused patterns from previous project, vs. 3-4 hours typical from scratch)
-- **Performance:** 100x faster linting (Ruff vs. legacy tools, per Ruff benchmarks)
+- **Performance:** [10-100x faster linting](https://github.com/astral-sh/ruff) than mypy/Pylint (replaced mypy)
 - **CI runtime:** 5 seconds total
 - **Testing:** 67/67 tests passing, 83% coverage, zero regressions
 
