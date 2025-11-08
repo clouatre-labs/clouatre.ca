@@ -1,3 +1,9 @@
-# Redirect www and hugues subdomains to apex domain
-https://www.clouatre.ca/* https://clouatre.ca/:splat 301
-https://hugues.clouatre.ca/* https://clouatre.ca/:splat 301
+# Domain-level redirects are handled by Cloudflare Page Rules (not _redirects file)
+# See: https://dash.cloudflare.com/?to=/37bb5c37b44385ff0a8b645d7b34e924/rules/page-rules
+#
+# Active Page Rules:
+# - www.clouatre.ca/* → https://clouatre.ca/$1 (301)
+# - hugues.clouatre.ca/* → https://clouatre.ca/$1 (301)
+#
+# Note: Cloudflare Pages _redirects file does NOT support domain-level redirects.
+# Only path-based redirects work here (e.g., /old-path → /new-path)
