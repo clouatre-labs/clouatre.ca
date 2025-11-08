@@ -52,7 +52,7 @@ Same zero-downtime outcome, but with programmatic validation instead of manual c
 
 **Strategic value:**
 
-Infrastructure changes shift from high-stress, weekend events requiring senior engineers to low-risk, automated processes that junior engineers can review and approve. Preview deployments enable stakeholder review before release.
+Infrastructure changes shift from high-stress, weekend events to business-hours execution with automated validation—still requiring experienced engineers to evaluate proposals, but with dramatically reduced risk and time investment. Preview deployments enable stakeholder review before release.
 
 **The transformation:** From possible-but-stressful to routine-and-confident.
 
@@ -131,13 +131,15 @@ Everything else: automated.
 
 ## Results
 
+Traditional manual DNS migrations—planning, exporting records, importing, testing, monitoring propagation—typically require 4-6 hours of focused work and weekend execution windows to minimize business risk.
+
 | Metric | Before | After | Business Impact |
 |--------|--------|-------|-----------------|
 | DNS Resolution | 20-30ms | 10-15ms | 50% faster global access |
 | Deploy Time | 5-8 min | 38 sec | **88% reduction** - 10x faster iteration |
 | Platform Cost | Route53: $12/year | Cloudflare: Free | Cost-neutral migration |
 | Preview Deployments | None | Per PR | Catch issues before production |
-| Migration Time | Days (typical) | 2 hours | **67% time savings** vs traditional |
+| Migration Window | Weekend (risk mitigation) | 2 hours, business hours | Eliminates deployment stress |
 
 **Complete migration (DNS + Hosting + CI/CD) completed in 2 hours. Zero downtime, zero manual commands.**
 
@@ -168,7 +170,7 @@ You still need to understand what you're migrating, but you don't need to rememb
 
 Goose discovered our infrastructure (Route53), analyzed the records, and executed the migration. We provided the goals and constraints, reviewed the approach, and approved changes.
 
-**Value:** Reduces specialized knowledge requirement, eliminates manual typos, compresses migration timeline from days (planning + execution + validation) to hours (review + approval).
+**Value:** Reduces specialized knowledge requirement, eliminates manual typos, compresses migration timeline from 4-6 hours (planning + execution + validation) to 2 hours (review + approval).
 
 ### 2. Pre-Validation Eliminates Risk
 
