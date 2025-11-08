@@ -42,10 +42,5 @@ Financial Services • Healthcare & Life Sciences • Technology & Professional 
 
 ## Connect
 
-- Email: [hugues@linux.com](mailto:hugues@linux.com)
 - LinkedIn: [linkedin.com/in/huguesclouatre](https://www.linkedin.com/in/huguesclouatre/)
 - GitHub: [github.com/clouatre](https://github.com/clouatre)
-
----
-
-_Dual citizenship: France, Canada_
