@@ -91,6 +91,8 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 | Scope per engineer | 1-2 specialties | Full stack | Eliminate specialist bottlenecks |
 | Exploration cost | High (must implement) | Low (preview and abandon) | Ship best solution, not first |
 
+*Table 1: Comparison of senior engineer time allocation and scope between traditional and AI-assisted approaches*
+
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
 - **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
@@ -108,6 +110,8 @@ At 10 infrastructure tasks per month, this recovers ~60 hours per year per engin
 | Production risk | Manual review only | AI + approval gates | Governance without slowdown |
 | Knowledge retention | Tribal (turnover risk) | Codified in recipes | Team continuity despite turnover |
 | Onboarding time | Weeks (shadowing) | Hours (follow recipes) | Faster team scaling |
+
+*Table 2: Strategic outcomes and business value comparison between traditional and AI-assisted workflows*
 
 ## The Recipe Model: Codifying Judgment
 
@@ -142,20 +146,20 @@ description: |
 instructions: |
   ## Workflow Phases (with Mandatory STOPs)
   
-  ### Phase 1: ANALYZE
+  ### Phase 1: ANALYZE  // [!code highlight]
   **STOP - Present to user:**
   - Repository architecture summary
   - Issue/problem statement
   - Relevant files identified
   **ASK:** "Does this analysis look correct? Should I proceed to research?"
   
-  ### Phase 2: RESEARCH
+  ### Phase 2: RESEARCH  // [!code highlight]
   **STOP - Present to user:**
   - 2-3 possible solution approaches
   - Trade-offs for each
   **ASK:** "Which approach do you prefer?"
   
-  ### Phase 3: PLAN
+  ### Phase 3: PLAN  // [!code highlight]
   **STOP - Present to user:**
   - Specific files to modify
   - Implementation steps

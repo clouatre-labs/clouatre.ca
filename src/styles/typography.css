@@ -110,7 +110,7 @@
       @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
     }
     .line.highlighted {
-      @apply inline-block w-full bg-slate-400/20;
+      @apply relative inline-block w-full bg-slate-400/20 pl-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-accent;
     }
     .highlighted-word {
       @apply rounded-sm border border-border px-0.5 py-px;
