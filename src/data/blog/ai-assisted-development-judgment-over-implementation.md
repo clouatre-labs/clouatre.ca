@@ -94,17 +94,20 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
 - **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
-- **DNS migration:** 2 hours oversight (vs. 6+ hours execution) - **67% savings**
+- **DNS migration:** 2 hours total (vs. 4-6 hours typical manual process) - **~60% savings**
 
 **Average: 70-80% time savings on infrastructure and DevOps tasks**
 
 At 10 infrastructure tasks per month, this recovers ~60 hours per year per engineer—equivalent to 1.5 weeks of productive time returned to strategic work.
 
 ### Strategic Impact
-- Solo engineer scope: Content plus infrastructure plus CI/CD plus OSS contributions
-- Production incidents: Zero from AI-assisted changes (approval gates work)
-- Knowledge distribution: Codified in recipes, not tribal knowledge
-- Onboarding: New team members follow recipes from day one
+
+| Outcome | Traditional | AI-Assisted | Business Value |
+|---------|-------------|-------------|----------------|
+| Engineer capability | 1-2 specialties | Full-stack scope | Eliminate specialist bottlenecks |
+| Production risk | Manual review only | AI + approval gates | Governance without slowdown |
+| Knowledge retention | Tribal (turnover risk) | Codified in recipes | Team continuity despite turnover |
+| Onboarding time | Weeks (shadowing) | Hours (follow recipes) | Faster team scaling |
 
 ## The Recipe Model: Codifying Judgment
 
