@@ -125,9 +125,15 @@ Goose uses "recipes" (YAML workflow definitions) that codify your judgment and p
 ![Recipe workflow diagram with 5 STOP gates for human approval](@/assets/images/recipe-workflow.png)
 *Figure 2: Recipe workflow enforces governance through 5 mandatory approval gates - AI proposes, human judges*
 
+**Why this matters:**
+- Repeatable process (not ad-hoc prompting)
+- Audit trails (every decision documented in PR history)
+- Human judgment at critical gates (governance, not blind automation)
+- Onboarding tool (codified expertise)
+
 **Example recipe structure:**
 
-```yaml
+```yaml file="~/.config/goose/recipes/oss-coder.yaml"
 name: oss-coder
 title: OSS Contribution Specialist
 description: |
@@ -158,13 +164,7 @@ instructions: |
   # ... continues through IMPLEMENT and PREPARE phases
 ```
 
-**Why this matters:**
-- Repeatable process (not ad-hoc prompting)
-- Audit trails (every decision documented in PR history)
-- Human judgment at critical gates (governance, not blind automation)
-- Onboarding tool (codified expertise)
-
-**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)
+*Full recipe: [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)*
 
 The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
 
