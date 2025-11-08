@@ -9,6 +9,7 @@ import EditPost from "@/components/EditPost.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import RelatedPosts from "@/components/RelatedPosts.astro";
+import Socials from "@/components/Socials.astro";
 import Tag from "@/components/Tag.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
@@ -142,9 +143,9 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
           <p class="text-sm text-foreground/85 leading-relaxed">
             {SITE.desc}
           </p>
-          <a href={SITE.profile} class="inline-block mt-3 text-sm text-accent hover:underline" target="_blank" rel="noopener noreferrer">
-            Follow on GitHub →
-          </a>
+          <div class="mt-3">
+            <Socials />
+          </div>
         </div>
       </div>
     </div>
