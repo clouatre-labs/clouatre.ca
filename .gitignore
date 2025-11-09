@@ -21,15 +21,17 @@ pnpm-debug.log*
 .DS_Store
 
 # Coding agents (critical - prevents accidental commit of AI instructions)
-CLAUDE.md
-.claude/
+.aider*
 .amazonq/
-opencode.json
+.bolt/
+.claude/
 .codex/
 .cursor/
+.goose*
 .windsurf/
 aider.chat.history.md
-.aider*
+CLAUDE.md
+opencode.json
 
 # IDEs & editors
 .vscode/settings.json
