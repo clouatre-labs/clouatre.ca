@@ -103,6 +103,10 @@
   /* Styles for Shiki transformers */
   /* https://shiki.style/packages/transformers */
   .astro-code {
+    .line {
+      @apply pl-4;
+    }
+    
     .line.diff.add {
       @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
     }
@@ -110,7 +114,7 @@
       @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
     }
     .line.highlighted {
-      @apply relative inline-block w-full bg-slate-400/20 pl-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-accent;
+      @apply relative inline-block w-full bg-slate-400/20 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-accent;
     }
     .highlighted-word {
       @apply rounded-sm border border-border px-0.5 py-px;
