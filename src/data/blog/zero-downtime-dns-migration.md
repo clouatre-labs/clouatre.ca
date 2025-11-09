@@ -60,11 +60,13 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 
 **What we told Goose ([open-source AI assistant](https://github.com/block/goose)):**
 
-```
+```text file="Initial_Prompt"
 I want to migrate from GitHub Pages to Cloudflare Pages. The domain 
 clouatre.ca is registered at Squarespace. I need zero downtime - email 
 and Google Workspace cannot break. Use a risk-adverse approach.
 ```
+
+*The entire migration was guided by this single initial prompt - Goose handled discovery, planning, and execution*
 
 We didn't need to specify:
 - Where DNS was hosted (Goose discovered Route53)
@@ -141,7 +143,7 @@ Traditional manual DNS migrations—planning, exporting records, importing, test
 | Preview Deployments | None | Per PR | Catch issues before production |
 | Migration Window | Weekend (risk mitigation) | 2 hours, business hours | Eliminates deployment stress |
 
-**Complete migration (DNS + Hosting + CI/CD) completed in 2 hours. Zero downtime, zero manual commands.**
+*Table 1: Before and after metrics - Complete migration (DNS + Hosting + CI/CD) completed in 2 hours, zero downtime, zero manual commands*
 
 ## Business Impact
 

@@ -91,6 +91,8 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 | Scope per engineer | 1-2 specialties | Full stack | Eliminate specialist bottlenecks |
 | Exploration cost | High (must implement) | Low (preview and abandon) | Ship best solution, not first |
 
+*Table 1: Comparison of senior engineer time allocation and scope between traditional and AI-assisted approaches*
+
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
 - **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
@@ -109,6 +111,8 @@ At 10 infrastructure tasks per month, this recovers ~60 hours per year per engin
 | Knowledge retention | Tribal (turnover risk) | Codified in recipes | Team continuity despite turnover |
 | Onboarding time | Weeks (shadowing) | Hours (follow recipes) | Faster team scaling |
 
+*Table 2: Strategic outcomes and business value comparison between traditional and AI-assisted workflows*
+
 ## The Recipe Model: Codifying Judgment
 
 Goose uses "recipes" (YAML workflow definitions) that codify your judgment and process:
@@ -125,9 +129,15 @@ Goose uses "recipes" (YAML workflow definitions) that codify your judgment and p
 ![Recipe workflow diagram with 5 STOP gates for human approval](@/assets/images/recipe-workflow.png)
 *Figure 2: Recipe workflow enforces governance through 5 mandatory approval gates - AI proposes, human judges*
 
+**Why this matters:**
+- Repeatable process (not ad-hoc prompting)
+- Audit trails (every decision documented in PR history)
+- Human judgment at critical gates (governance, not blind automation)
+- Onboarding tool (codified expertise)
+
 **Example recipe structure:**
 
-```yaml
+```yaml file="~/.config/goose/recipes/oss-coder.yaml"
 name: oss-coder
 title: OSS Contribution Specialist
 description: |
@@ -136,20 +146,20 @@ description: |
 instructions: |
   ## Workflow Phases (with Mandatory STOPs)
   
-  ### Phase 1: ANALYZE
+  ### Phase 1: ANALYZE  // [!code highlight]
   **STOP - Present to user:**
   - Repository architecture summary
   - Issue/problem statement
   - Relevant files identified
   **ASK:** "Does this analysis look correct? Should I proceed to research?"
   
-  ### Phase 2: RESEARCH
+  ### Phase 2: RESEARCH  // [!code highlight]
   **STOP - Present to user:**
   - 2-3 possible solution approaches
   - Trade-offs for each
   **ASK:** "Which approach do you prefer?"
   
-  ### Phase 3: PLAN
+  ### Phase 3: PLAN  // [!code highlight]
   **STOP - Present to user:**
   - Specific files to modify
   - Implementation steps
@@ -158,13 +168,7 @@ instructions: |
   # ... continues through IMPLEMENT and PREPARE phases
 ```
 
-**Why this matters:**
-- Repeatable process (not ad-hoc prompting)
-- Audit trails (every decision documented in PR history)
-- Human judgment at critical gates (governance, not blind automation)
-- Onboarding tool (codified expertise)
-
-**Full recipe:** [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)
+*Full recipe: [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)*
 
 The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
 
