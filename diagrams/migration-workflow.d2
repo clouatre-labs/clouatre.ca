@@ -1,0 +1,289 @@
+direction: down
+
+# AI-Assisted Migration Workflow
+
+# Step 1: Discovery & Cleanup
+step1: 1. Discovery & Cleanup {
+  style: {
+    fill: "#38bdf8"
+    stroke: "#60a5fa"
+    stroke-width: 2
+    font-color: "#ffffff"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+  
+  sub1: AI analyzes Route53 records {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub2: 20+ records → 15 critical, 5 obsolete {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub3: Email, Google Workspace, SSL identified {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+}
+
+# Approval Gate 1
+approval1: APPROVAL GATE 1\nReview Migration Plan {
+  style: {
+    fill: "#f59e0b"
+    stroke: "#fbbf24"
+    stroke-width: 3
+    font-color: "#451a03"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+}
+
+# Step 2: Pre-Migration Validation
+step2: 2. Pre-Migration Validation {
+  style: {
+    fill: "#38bdf8"
+    stroke: "#60a5fa"
+    stroke-width: 2
+    font-color: "#ffffff"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+  
+  sub1: Export Route53 via AWS CLI {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub2: Import to Cloudflare via API {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub3: Test against Cloudflare nameservers {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub4: 100% match confirmed {
+    style: {
+      fill: "#10b981"
+      stroke: "#34d399"
+      font-color: "#022c22"
+      border-radius: 6
+      font-size: 14
+      bold: true
+    }
+  }
+}
+
+# Step 3: CI/CD Reconfiguration
+step3: 3. CI/CD Reconfiguration {
+  style: {
+    fill: "#38bdf8"
+    stroke: "#60a5fa"
+    stroke-width: 2
+    font-color: "#ffffff"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+  
+  sub1: Update GitHub Actions workflow {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub2: Fix base URL (repo → root) {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub3: Configure preview deployments {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+}
+
+# Step 4: Governance Trail
+step4: 4. Governance Trail {
+  style: {
+    fill: "#38bdf8"
+    stroke: "#60a5fa"
+    stroke-width: 2
+    font-color: "#ffffff"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+  
+  sub1: Create PRs with context {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub2: Document rollback procedures {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+}
+
+# Approval Gate 2
+approval2: APPROVAL GATE 2\nReady for Production? {
+  style: {
+    fill: "#f59e0b"
+    stroke: "#fbbf24"
+    stroke-width: 3
+    font-color: "#451a03"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+}
+
+# Step 5: Execute Migration
+step5: 5. Execute Migration {
+  style: {
+    fill: "#38bdf8"
+    stroke: "#60a5fa"
+    stroke-width: 2
+    font-color: "#ffffff"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+  
+  sub1: Update nameservers at Squarespace {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub2: Deploy to Cloudflare Pages {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+  
+  sub3: Monitor DNS propagation {
+    style: {
+      fill: "#1e293b"
+      stroke: "#334155"
+      font-color: "#f1f5f9"
+      border-radius: 6
+      font-size: 14
+    }
+  }
+}
+
+# Completion
+complete: ✓ Migration Complete\n2 hours, Zero Downtime {
+  style: {
+    fill: "#10b981"
+    stroke: "#34d399"
+    stroke-width: 3
+    font-color: "#022c22"
+    border-radius: 8
+    shadow: true
+    font-size: 16
+    bold: true
+  }
+}
+
+# Manual step note
+manual: Manual Step:\nCloudflare API token\n(2 minutes) {
+  style: {
+    fill: "#1e293b"
+    stroke: "#38bdf8"
+    font-color: "#f1f5f9"
+    border-radius: 8
+    shadow: true
+    font-size: 14
+    italic: true
+  }
+}
+
+# Connections
+step1 -> approval1
+approval1 -> step2
+step2 -> step3
+step3 -> step4
+step4 -> approval2
+approval2 -> step5
+step5 -> complete
+approval1 -> manual: {style.stroke-dash: 3}

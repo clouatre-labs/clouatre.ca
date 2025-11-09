@@ -1,0 +1,251 @@
+direction: right
+
+# Infrastructure Transformation: BEFORE → AFTER
+
+before: BEFORE {
+  style: {
+    fill: "#ffffff"
+    stroke: "#ef4444"
+    stroke-width: 3
+    font-color: "#ef4444"
+    border-radius: 10
+    shadow: true
+    font-size: 20
+    bold: true
+  }
+  
+  dns_section: DNS {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    dns1: Amazon Route53 {
+      style: {
+        fill: "#ef4444"
+        stroke: "#f87171"
+        font-color: "#fef2f2"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+    
+    dns2: 20+ DNS records {
+      style: {
+        fill: "#ef4444"
+        stroke: "#f87171"
+        font-color: "#fef2f2"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+    
+    dns3: 20-30ms resolution {
+      style: {
+        fill: "#f59e0b"
+        stroke: "#fbbf24"
+        font-color: "#451a03"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+  }
+  
+  hosting: Hosting {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    host1: GitHub Pages {
+      style: {
+        fill: "#f59e0b"
+        stroke: "#fbbf24"
+        font-color: "#451a03"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+    
+    host2: No preview deploys {
+      style: {
+        fill: "#ef4444"
+        stroke: "#f87171"
+        font-color: "#fef2f2"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+  }
+  
+  cicd: CI/CD {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    cicd1: GitHub Actions {
+      style: {
+        fill: "#334155"
+        stroke: "#475569"
+        font-color: "#cbd5e1"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+    
+    cicd2: 5-8 min deploys {
+      style: {
+        fill: "#ef4444"
+        stroke: "#f87171"
+        font-color: "#fef2f2"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+  }
+}
+
+after: AFTER {
+  style: {
+    fill: "#ffffff"
+    stroke: "#10b981"
+    stroke-width: 3
+    font-color: "#10b981"
+    border-radius: 10
+    shadow: true
+    font-size: 20
+    bold: true
+  }
+  
+  dns_section: DNS {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    dns1: Cloudflare DNS {
+      style: {
+        fill: "#10b981"
+        stroke: "#34d399"
+        font-color: "#022c22"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+    
+    dns2: All records migrated {
+      style: {
+        fill: "#10b981"
+        stroke: "#34d399"
+        font-color: "#022c22"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+    
+    dns3: 10-15ms resolution {
+      style: {
+        fill: "#10b981"
+        stroke: "#34d399"
+        font-color: "#022c22"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+  }
+  
+  hosting: Hosting {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    host1: Cloudflare Pages {
+      style: {
+        fill: "#38bdf8"
+        stroke: "#60a5fa"
+        font-color: "#0c1222"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+    
+    host2: Per-PR previews {
+      style: {
+        fill: "#10b981"
+        stroke: "#34d399"
+        font-color: "#022c22"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+  }
+  
+  cicd: CI/CD {
+    style: {
+      fill: "#1e293b"
+      stroke: "#475569"
+      font-color: "#1e293b"
+      border-radius: 6
+      font-size: 16
+      bold: true
+    }
+    
+    cicd1: GitHub Actions {
+      style: {
+        fill: "#334155"
+        stroke: "#475569"
+        font-color: "#cbd5e1"
+        border-radius: 4
+        font-size: 14
+      }
+    }
+    
+    cicd2: 38 sec deploys {
+      style: {
+        fill: "#10b981"
+        stroke: "#34d399"
+        font-color: "#022c22"
+        border-radius: 4
+        font-size: 14
+        bold: true
+      }
+    }
+  }
+}
+
+# Migration arrow
+before -> after: 2 hours\nZero Downtime {
+  style: {
+    stroke: "#38bdf8"
+    stroke-width: 4
+    font-size: 16
+    bold: true
+  }
+}
