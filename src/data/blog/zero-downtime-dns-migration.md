@@ -66,7 +66,7 @@ clouatre.ca is registered at Squarespace. I need zero downtime - email
 and Google Workspace cannot break. Use a risk-adverse approach.
 ```
 
-*The entire migration was guided by this single initial prompt - Goose handled discovery, planning, and execution*
+*This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.*
 
 We didn't need to specify:
 - Where DNS was hosted (Goose discovered Route53)
