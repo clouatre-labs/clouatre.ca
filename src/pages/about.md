@@ -26,7 +26,7 @@ Drove 82% partner revenue growth. Recognized as Global Containers MVP. Architect
 
 **35 Professional Certifications:** AWS (9), Oracle (8), Google Cloud (7), Kubernetes (4), Azure (2), Salesforce (2), NVIDIA
 
-**Expertise:** AI & Generative AI (LLMOps, Agentic AI, Context Engineering) • Cloud & Platform Engineering (AWS, GCP, Kubernetes) • Executive Leadership (strategic planning, talent development) • Security & Governance (Zero Trust, compliance)
+**Expertise:** AI & Generative AI (Agentic AI, Context Engineering, LLMOps) • Cloud & Platform Engineering (AWS, GCP, Kubernetes, Oracle) • Executive Leadership (strategic planning, talent development) • Security & Governance (compliance, Zero Trust)
 
 **Leadership:** Amazon Bar Raiser • AWS Senior Speaker • Guest Lecturer (HEC Montreal) • Inclusive Speaker (Linux Foundation)
 
