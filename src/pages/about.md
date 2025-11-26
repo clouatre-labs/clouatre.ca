@@ -17,7 +17,7 @@ Directed Canadian partner ecosystem to 103% revenue growth ($396M). Bar Raiser C
 Orchestrated $50M core banking transformation. Designed hybrid cloud architecture for Tier 1 financial institution with regulatory compliance focus.
 
 **IT Director – AI Healthcare Platform (Imagia, founded by Yoshua Bengio)**  
-Implemented HIPAA-compliant hybrid cloud achieving 1000% availability improvement for AI-powered medical imaging platform.
+Implemented HIPAA-compliant hybrid cloud achieving 99.95% uptime for AI-powered medical imaging platform.
 
 **Senior Partner Solutions Architect – AWS**  
 Drove 82% partner revenue growth. Recognized as Global Containers MVP. Architected 60+ cloud solutions across enterprise clients.
@@ -26,9 +26,9 @@ Drove 82% partner revenue growth. Recognized as Global Containers MVP. Architect
 
 **35 Professional Certifications:** AWS (9), Oracle (8), Google Cloud (7), Kubernetes (4), Azure (2), Salesforce (2), NVIDIA
 
-**Expertise:** LLMOps & Context Engineering • AI/ML & Generative AI • Unix/Linux & Platform Engineering • DevSecOps & IaC • Kubernetes (CKS, CKA, CKAD)
+**Expertise:** AI & Generative AI (Agentic AI, Context Engineering, LLMOps) • Cloud & Platform Engineering (AWS, GCP, Kubernetes, Oracle) • Executive Leadership (strategic planning, talent development) • Security & Governance (compliance, Zero Trust)
 
-**Leadership:** Amazon Bar Raiser • AWS Senior Speaker • Inclusive Speaker (Linux Foundation)
+**Leadership:** Amazon Bar Raiser • AWS Senior Speaker • Guest Lecturer (HEC Montreal) • Inclusive Speaker (Linux Foundation)
 
 ## Education
 
