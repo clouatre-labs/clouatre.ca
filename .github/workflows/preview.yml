@@ -12,8 +12,8 @@ permissions:
 
 jobs:
   deploy-preview:
-    # Only run for PRs from branches in this repo (not forks)
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # Only run for PRs from branches in this repo (not forks or Dependabot)
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
