@@ -17,7 +17,7 @@ AI in CI/CD isn't about replacing humans. It's about giving your pipeline the in
 
 ## The Real Cost of Manual Review
 
-Your development team runs at the speed of your slowest code review. Code review bottlenecks are well-documented across engineering teams—feedback loops stretch from hours to days while developers context-switch or wait on reviewers.
+Your development team runs at the speed of your slowest code review. Code review bottlenecks are well-documented across engineering teams—feedback loops stretch from hours to days while developers context-switch or wait on reviewers. Research from Forsgren et al. (2024) shows context-switching during code review significantly reduces developer productivity and satisfaction.
 
 The cost multiplier gets worse with security. IBM and Software Engineering Institute research confirms production fixes can be orders of magnitude more expensive than early detection—the exact multiplier depends on when the defect surfaces. The expenses compound: rework costs, deployment delays, and potential security incidents all increase exponentially downstream.
 
@@ -157,5 +157,6 @@ Your CI/CD can be faster and more secure. Not instead of humans—alongside them
 ## References
 
 - Boehm & Basili, "Software Defect Reduction Top 10 List" (2001) — https://www.cs.umd.edu/projects/SoftEng/ESEG/papers/82.78.pdf
+- Forsgren et al., "DevEx in Action: A study of its tangible impacts" (2024) — https://dl.acm.org/doi/10.1145/3639443
 - GitHub Octoverse 2024 — https://github.blog/news-insights/octoverse/octoverse-2024/
 - OWASP LLM Top 10 (2025 edition) – Prompt Injection #1 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
