@@ -44,7 +44,7 @@ Migrate everything to Cloudflare:
 
 **The traditional challenge:**
 
-DNS migrations CAN be done with zero downtime, but they require extensive planning and careful execution. One misconfigured MX record means email down for hours—imagine missing customer orders, support tickets, or sales inquiries during your peak season.
+DNS migrations CAN be done with zero downtime, but they require extensive planning and careful execution. One misconfigured MX record means email down for hours. Imagine missing customer orders, support tickets, or sales inquiries during your peak season.
 
 **The difference with AI assistance:**
 
@@ -133,7 +133,7 @@ Everything else: automated.
 
 ## Results
 
-Traditional manual DNS migrations—planning, exporting records, importing, testing, monitoring propagation—typically require 4-6 hours of focused work and weekend execution windows to minimize business risk.
+Traditional manual DNS migrations typically require 4-6 hours of focused work and weekend execution windows to minimize business risk: planning, exporting records, importing, testing, monitoring propagation.
 
 | Metric | Before | After | Business Impact |
 |--------|--------|-------|-----------------|
@@ -204,9 +204,7 @@ Goose tested all DNS records against Cloudflare's nameservers before we switched
 
 ### 4. Preview Deployments Change Everything
 
-The ability to review changes before production delivers multiple benefits.
-
-**Impact areas:**
+Preview deployments:
 
 - Reduces deployment anxiety
 - Catches issues early
