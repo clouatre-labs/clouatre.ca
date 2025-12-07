@@ -89,25 +89,7 @@ The workflow is simple. Linter runs, produces JSON. AI analyzes JSON. Results up
 
 Use Tier 1 by default. It's the safest pattern. Public repos should mandate it. Open-source projects must use it. External contributors change the threat model—don't accept that risk.
 
-```mermaid
-flowchart LR
-    Start([Pull Request]) --> Linter[Run Linter]
-    Linter --> Output[JSON Output]
-    Output --> AI[AI Review]
-    AI --> Results([Results])
-    
-    Safe[No Code Exposure<br/>Immune to Injection] -.-> AI
-    
-    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
-    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
-    classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
-    classDef terminal fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
-    
-    class AI primary
-    class Linter,Output secondary
-    class Safe safe
-    class Start,Results terminal
-```
+![Tier 1 defensive pattern—AI analyzes tool output, never sees raw code. Immune to prompt injection.](@/assets/images/tier1-workflow.png)
 
 *Figure 1: Tier 1 defensive pattern—AI analyzes tool output, never sees raw code. Immune to prompt injection.*
 
@@ -121,38 +103,7 @@ The comparison is straightforward. Each tier trades visibility for security. Tie
 
 **Choose your tier based on three factors:** who has access to your repo (external contributors vs internal), how much context AI needs to be useful (tool output vs full diffs), and how comfortable you are accepting injection risk in exchange for deeper analysis.
 
-```mermaid
-flowchart LR
-    subgraph tier1[Tier 1: Maximum Security]
-        T1Input[Tool Output] --> T1AI[AI Analysis]
-        T1AI --> T1Artifact[Artifact]
-    end
-    
-    subgraph tier2[Tier 2: Balanced]
-        T2Stats[File Stats] --> T2AI[AI Analysis]
-        T2AI --> T2Gate{Approval}
-        T2Gate -->|Yes| T2Post[Post]
-    end
-    
-    subgraph tier3[Tier 3: Advanced]
-        T3Diff[Code Diff] --> T3Filter[Filters]
-        T3Filter --> T3AI[AI Analysis]
-        T3AI --> T3Artifact[Artifact]
-    end
-    
-    Risk1[No Injection Risk] -.-> tier1
-    Risk2[Low Risk] -.-> tier2
-    Risk3[Controlled Risk] -.-> tier3
-    
-    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
-    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
-    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
-    classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
-    
-    class T1AI,T2AI,T3AI primary
-    class T2Gate accent
-    class Risk1,Risk2,Risk3 safe
-```
+![Three security tiers side-by-side showing input type, approval gates, and risk levels for each tier.](@/assets/images/tier-comparison.png)
 
 *Figure 2: Three security tiers—choose based on your threat model and team trust level.*
 
@@ -170,39 +121,7 @@ The decision framework is simple: start at Tier 1. Measure your deployment veloc
 
 The naive approach is to feed AI your code diff directly and let it comment on the PR. That's fast, looks smart, and creates an injection surface. The improved approach layers security tiers on top, giving you a decision framework that matches your threat model.
 
-```mermaid
-flowchart LR
-    subgraph before[Uncontrolled Approach]
-        B1[Pull Request] --> B2[Generate Diff]
-        B2 --> B3[AI Analyzes Diff]
-        B3 --> B4[Post Results]
-        Risk1[High Risk] -.-> B3
-    end
-    
-    subgraph after[Managed 3-Tier Model]
-        A1[Pull Request] --> A2{Choose<br/>Tier}
-        A2 -->|Public| A3[Tool Output]
-        A2 -->|Private| A4[Stats + Gate]
-        A2 -->|Trusted| A5[Diff + Defense]
-        A3 --> A6[Results]
-        A4 --> A6
-        A5 --> A6
-        Risk2[Risk Controlled] -.-> A6
-    end
-    
-    before -.Evolution.-> after
-    
-    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
-    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
-    classDef warning fill:#fee2e2,stroke:#fca5a5,stroke-width:2px,color:#282728
-    classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
-    
-    class B3 warning
-    class A2 primary
-    class A3,A4,A5 secondary
-    class Risk1 warning
-    class Risk2 safe
-```
+![Evolution from uncontrolled AI analysis (high risk) to managed 3-tier model (risk controlled).](@/assets/images/security-evolution.png)
 
 *Figure 3: Evolution from uncontrolled AI analysis to risk-managed tiers.*
 
