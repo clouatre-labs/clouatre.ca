@@ -23,7 +23,7 @@ The cost multiplier gets worse with security. IBM and Software Engineering Insti
 
 GitHub's 2024 Octoverse showed median time from PR open to first review is 4 hours in large organizations, 22 hours in enterprises. AI summaries collapse that to under 3 minutes.
 
-Traditional CI/CD handles this poorly. Your pipeline runs automated linters and security scanners, generates reports, then stops. A human reads the output, interprets it, decides if it matters, and either approves or comments. That handoff is where velocity dies. Eight-hour review windows become production delays. Critical insights get buried in noise. And the smarter your engineers, the more expensive this wait becomes.
+Traditional CI/CD handles this poorly. Your pipeline runs automated linters and security scanners, generates reports, then stops. A human reads the output, interprets it, decides if it matters, and either approves or comments. That handoff is where velocity dies. Eight-hour review windows become production delays. Critical insights get buried in noise. Studies confirm developers fear review delays will slow delivery, even though they recognize reviews' long-term quality benefits (Santos et al., 2024). And the smarter your engineers, the more expensive this wait becomes.
 
 ## Why AI Fits Here (And Why It's Risky)
 
@@ -160,3 +160,4 @@ Your CI/CD can be faster and more secure. Not instead of humans—alongside them
 - Forsgren et al., "DevEx in Action: A study of its tangible impacts" (2024) — https://dl.acm.org/doi/10.1145/3639443
 - GitHub Octoverse 2024 — https://github.blog/news-insights/octoverse/octoverse-2024/
 - OWASP LLM Top 10 (2025 edition) – Prompt Injection #1 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- Santos et al., "Modern code review in practice: A developer-centric study" (2024) — https://www.sciencedirect.com/science/article/pii/S0164121224003327
