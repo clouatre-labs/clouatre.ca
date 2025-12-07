@@ -19,7 +19,7 @@ AI in CI/CD isn't about replacing humans. It's about giving your pipeline the in
 
 Your development team runs at the speed of your slowest code review. Code review bottlenecks are well-documented across engineering teams—feedback loops stretch from hours to days while developers context-switch or wait on reviewers.
 
-The cost multiplier gets worse with security. Research from IBM and the Software Engineering Institute shows that fixing a defect in production costs 30-100× more than fixing it during design, depending on the development phase. The expenses compound: rework costs, deployment delays, and potential security incidents all increase exponentially the later a problem surfaces.
+The cost multiplier gets worse with security. IBM and Software Engineering Institute research confirms production fixes can be orders of magnitude more expensive than early detection—the exact multiplier depends on when the defect surfaces. The expenses compound: rework costs, deployment delays, and potential security incidents all increase exponentially downstream.
 
 GitHub's 2024 Octoverse showed median time from PR open to first review is 4 hours in large organizations, 22 hours in enterprises. AI summaries collapse that to under 3 minutes.
 
@@ -83,6 +83,8 @@ jobs:
           path: analysis.md
 ```
 
+*Production hardening: Pin `ubuntu-24.04` (not `latest`) and use commit SHAs for actions (`actions/checkout@8e8c483...`) to prevent supply chain attacks.*
+
 **Key pattern:** Linter output (JSON) is appended to the prompt—never raw source code. The AI sees only structured data describing issues, not the code itself. This boundary eliminates injection risk entirely.
 
 The workflow is simple. Linter runs, produces JSON. AI analyzes JSON. Results upload as an artifact. No posting to the PR, no automated approvals, no AI-driven decisions that affect the merge. A human reviews the AI's summary before deciding what to do. Speed improves (2-5 minute feedback vs. 8-hour wait), security stays intact (zero injection risk), and you retain human judgment on what matters.
@@ -129,7 +131,7 @@ The shift is architectural, not just operational. You're moving from "AI sees ev
 
 ## Real Outcomes: Velocity, Quality, Confidence
 
-Typical first-review latency drops from 4–22 hours (Octoverse 2024) to under 5 minutes — a 50–250× reduction. Developers iterate faster because they see feedback immediately. CI/CD pipelines don't stall waiting for human review availability. Your smartest engineers spend less time waiting and more time building.
+Typical first-review latency drops from 4–22 hours (Octoverse 2024) to under 5 minutes, a 50–250× reduction. Developers iterate faster because they see feedback immediately. CI/CD pipelines don't stall waiting for human review availability. Your smartest engineers spend less time waiting and more time building.
 
 Quality improves because AI catches patterns humans miss at 2 AM or during context-switching. Linting issues get flagged automatically. Security tool outputs get analyzed for severity and context. Fewer critical issues reach production because they're caught earlier in the workflow.
 
@@ -139,12 +141,12 @@ The business outcome is measurable: deployment frequency increases, mean time to
 
 ## Your Next Step: Start With Tier 1
 
-Fork the Tier 1 starter workflow (30-second setup):
-→ https://github.com/clouatre-labs/setup-goose-action
+Get the Tier 1 workflow (30-second setup):
+→ https://github.com/clouatre-labs/setup-goose-action/blob/main/examples/tier1-maximum-security.yml
 
 Measure your baseline: current review time, deployment frequency, security incident rate. Run for two weeks, then measure again.
 
-Real repos to fork:
+Full action docs and examples:
 - https://github.com/clouatre-labs/setup-goose-action (multiple AI models: Gemini, Claude, Llama)
 - https://github.com/clouatre-labs/setup-kiro-action (AWS-native SIGV4 authentication, no API keys in secrets)
 
