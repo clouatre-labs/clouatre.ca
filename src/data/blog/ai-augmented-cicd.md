@@ -52,40 +52,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+      
       - name: Lint Code
         run: pipx run ruff check --output-format=json . > lint.json || exit 0
-
-      - name: Setup Goose CLI
+      
+      - name: Setup Goose
         uses: clouatre-labs/setup-goose-action@v1
-
+      
       - name: AI Analysis
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
-          mkdir -p ~/.config/goose
-          cat > ~/.config/goose/config.yaml << 'EOF'
-          GOOSE_PROVIDER: google
-          GOOSE_MODEL: gemini-2.5-flash
-          keyring: false
-          EOF
-          
           echo "Summarize these linting issues:" > prompt.txt
           cat lint.json >> prompt.txt
           # [!code highlight]
-          # Never concatenate raw source files here — only trusted tool output
+          # Only structured tool output appended—never raw source code
           goose run --instructions prompt.txt --no-session --quiet > analysis.md
-
-      - name: Upload Analysis Artifact
+      
+      - name: Upload Analysis
         uses: actions/upload-artifact@v5
         with:
           name: ai-analysis
           path: analysis.md
 ```
 
-*Production hardening: Pin `ubuntu-24.04` (not `latest`) and use commit SHAs for actions (`actions/checkout@8e8c483...`) to prevent supply chain attacks.*
-
-**Key pattern:** Linter output (JSON) is appended to the prompt—never raw source code. The AI sees only structured data describing issues, not the code itself. This boundary eliminates injection risk entirely.
+*Defensive boundary: AI analyzes only JSON output from the linter, never raw code. [See the full Tier 1 example](https://github.com/clouatre-labs/setup-goose-action/blob/main/examples/tier1-maximum-security.yml)*
 
 The workflow is simple. Linter runs, produces JSON. AI analyzes JSON. Results upload as an artifact. No posting to the PR, no automated approvals, no AI-driven decisions that affect the merge. A human reviews the AI's summary before deciding what to do. Speed improves (2-5 minute feedback vs. 8-hour wait), security stays intact (zero injection risk), and you retain human judgment on what matters.
 
@@ -99,7 +90,88 @@ Use Tier 1 by default. It's the safest pattern. Public repos should mandate it. 
 
 Not every team needs Tier 1. Private repositories with trusted contributors can tolerate more AI context. That's Tier 2: the AI sees file statistics and change scope, but not the full diff. It requires manual approval before posting results to the PR. The injection risk is low—the AI has less input to manipulate—but it's not zero. Use Tier 2 when your team is internal and you trust everyone to follow security practices.
 
+```yaml file="tier2-balanced-security.yml"
+name: AI Analysis - Balanced Security
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      
+      - name: Get Changed Files
+        id: files
+        run: |
+          git diff --name-only origin/main...HEAD > files.txt
+          wc -l files.txt >> summary.txt
+      
+      - name: Setup Goose
+        uses: clouatre-labs/setup-goose-action@v1
+      
+      - name: AI Analysis
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          echo "Review these file changes:" > prompt.txt
+          cat files.txt summary.txt >> prompt.txt
+          # [!code highlight]
+          # File names and stats—not the actual code content
+          goose run --instructions prompt.txt --no-session --quiet > analysis.md
+      
+      - name: Upload Analysis
+        uses: actions/upload-artifact@v5
+        with:
+          name: ai-analysis
+          path: analysis.md
+```
+
+*Balanced approach: AI sees file scope and metadata, but not code diffs. [See the full Tier 2 example](https://github.com/clouatre-labs/setup-goose-action/blob/main/examples/tier2-balanced-security.yml)*
+
 Tier 3 gives the AI full visibility into code diffs. It can detect subtle patterns, suggest contextual improvements, and provide the deepest analysis. It's also the most vulnerable to prompt injection. Use Tier 3 only when your repo is 100% private and your team size is small enough that you trust everyone completely. The gain in AI insight comes at the cost of accepting injection risk.
+
+```yaml file="tier3-advanced-patterns.yml"
+name: AI Analysis - Advanced Patterns
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      
+      - name: Get Full Diff
+        run: git diff origin/main...HEAD > changes.diff
+      
+      - name: Setup Goose
+        uses: clouatre-labs/setup-goose-action@v1
+      
+      - name: AI Analysis
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          echo "Deeply analyze these code changes:" > prompt.txt
+          cat changes.diff >> prompt.txt
+          # [!code highlight]
+          # Complete code diffs for maximum context and detail
+          goose run --instructions prompt.txt --no-session --quiet > analysis.md
+      
+      - name: Upload Analysis
+        uses: actions/upload-artifact@v5
+        with:
+          name: ai-analysis
+          path: analysis.md
+```
+
+*Maximum context: AI sees full diffs for subtle patterns. [See the full Tier 3 example](https://github.com/clouatre-labs/setup-goose-action/blob/main/examples/tier3-advanced-patterns.yml)*
 
 The comparison is straightforward. Each tier trades visibility for security. Tier 1 sacrifices some context to eliminate injection risk. Tier 2 accepts low risk for moderate context. Tier 3 prioritizes insight over security and should be rare.
 
