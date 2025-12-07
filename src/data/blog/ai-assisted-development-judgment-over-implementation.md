@@ -25,7 +25,7 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 ## Real Example: Dependency Management
 
-**Problem:** Need automated dependency updates. Bun package manager is new—Dependabot doesn't support `bun.lock` files.
+**Problem:** Need automated dependency updates. Bun package manager is new. Dependabot doesn't support `bun.lock` files.
 
 **Traditional approach:**
 - Research Dependabot documentation (1 hour)
@@ -170,7 +170,7 @@ instructions: |
 
 *Full recipe: [oss-coder.yaml on GitHub Gist](https://gist.github.com/clouatre/11e8afc102d659420921db6fcff4409a)*
 
-The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt—now requires thorough local testing before any OSS contribution.
+The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt. Now requires thorough local testing before any OSS contribution.
 
 ## When This Approach Works
 
