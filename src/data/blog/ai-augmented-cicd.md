@@ -210,7 +210,7 @@ The shift is architectural, not just operational. You're moving from "AI sees ev
 
 ## Real Outcomes: Velocity, Quality, Confidence
 
-Speed improves dramatically. Manual reviews that took 4-8 hours now get AI-generated summaries in 2-5 minutes. Developers iterate faster because they see feedback immediately. CI/CD pipelines don't stall waiting for human review availability. Your smartest engineers spend less time waiting and more time building.
+Typical first-review latency drops from 4–22 hours (Octoverse 2024) to under 5 minutes — a 50–250× reduction. Developers iterate faster because they see feedback immediately. CI/CD pipelines don't stall waiting for human review availability. Your smartest engineers spend less time waiting and more time building.
 
 Quality improves because AI catches patterns humans miss at 2 AM or during context-switching. Linting issues get flagged automatically. Security tool outputs get analyzed for severity and context. Fewer critical issues reach production because they're caught earlier in the workflow.
 
@@ -235,6 +235,6 @@ Your CI/CD can be faster and more secure. Not instead of humans—alongside them
 
 ## References
 
-- IBM and Software Engineering Institute: Cost of fixing defects by development phase
-- Research on code review bottlenecks in modern engineering teams
-- OWASP and security research: Prompt injection vulnerabilities in AI systems
+- Boehm & Basili, "Software Defect Reduction Top 10 List" (2001) — https://www.cs.umd.edu/~basili/publications/journals/S81.pdf
+- GitHub Octoverse 2024 — https://octoverse.github.com/2024
+- OWASP LLM Top 10 (2025 edition) – Prompt Injection #1 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
