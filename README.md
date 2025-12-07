@@ -24,7 +24,7 @@ Technology leadership, AI-assisted development, and cloud architecture insights 
 
 - ✅ **Optimized Images** - Automatic WebP conversion (50% size reduction)
 - ✅ **Preview Deployments** - Every PR gets a preview URL
-- ✅ **Auto Dependencies** - Dependabot + automated lockfile updates
+- ✅ **Auto Dependencies** - Renovate with merge queue
 - ✅ **Fast Deploys** - 38 seconds (was 5-8 minutes on GitHub Pages)
 - ✅ **SEO Optimized** - Meta tags, sitemaps, responsive images
 - ✅ **Type Safe** - TypeScript throughout
@@ -57,67 +57,6 @@ Git hooks are automatically installed via `simple-git-hooks`:
 
 - **Pre-commit**: Auto-format staged files with Biome
 - **Pre-push**: Run full validation (check + build)
-
-## Dependency Management
-
-This project uses **Dependabot** for automated dependency updates with automatic lockfile synchronization.
-
-### How It Works
-
-**Every Monday at 9 AM ET:**
-1. Dependabot scans for dependency updates
-2. Creates grouped PRs (Astro, Tailwind, dev tools, etc.)
-3. **GitHub Actions automatically updates `bun.lock`**
-4. CI validates the changes
-5. You just review and merge
-
-**Fully automated workflow:**
-- ✅ Dependabot updates `package.json`
-- ✅ GitHub Actions updates `bun.lock` automatically
-- ✅ CI validates everything
-- ✅ You just click "Merge"
-
-### Handling Dependabot PRs
-
-**Standard workflow (100% automated):**
-```bash
-# Just merge the PR - lockfile is auto-updated
-gh pr merge <number> --squash
-```
-
-**View all Dependabot PRs:**
-```bash
-gh pr list --label dependencies
-```
-
-### Technical Details
-
-**Lockfile automation:**
-- Workflow: `.github/workflows/dependabot-auto-update-lockfile.yml`
-- Triggers when Dependabot updates `package.json`
-- Runs `bun install --no-save` to update `bun.lock`
-- Commits lockfile with `github-actions[bot]`
-- CI then validates the complete change
-
-**Why This Works:**
-- Dependabot doesn't support `bun.lock` natively (yet)
-- GitHub Actions bot fills this gap automatically
-- Zero manual intervention required
-- Best of both worlds: Dependabot simplicity + Bun speed
-
-### Why Not Renovate?
-
-Renovate supports `bun.lock` natively but:
-- ❌ Complex configuration (100+ lines JSON vs 70 lines YAML)
-- ❌ Third-party app (not GitHub-native)
-- ❌ Steeper learning curve
-- ❌ More maintenance overhead
-
-Our approach:
-- ✅ Simple Dependabot config
-- ✅ Small GitHub Actions workflow
-- ✅ GitHub-native solution
-- ✅ Fully automated (no manual steps)
 
 ## License
 
