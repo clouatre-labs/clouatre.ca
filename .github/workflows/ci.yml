@@ -30,8 +30,8 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Security - Secret scanning
-        # Skip for Dependabot PRs (secrets not available for security)
-        if: github.actor != 'dependabot[bot]'
+        # Skip for Renovate PRs (secrets not available for security) and merge_group (not supported)
+        if: github.actor != 'renovate[bot]' && github.event_name != 'merge_group'
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
