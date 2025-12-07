@@ -1,7 +1,7 @@
 ---
 title: AI-Augmented CI/CD - Shift Left Security Without the Risk
 pubDatetime: 2025-12-06
-description: How to integrate AI into CI/CD pipelines to catch security issues faster without introducing prompt injection vulnerabilities. Real patterns, defensive architecture, three security tiers.
+description: Integrate AI into CI/CD without prompt injection risk. Defensive architecture, three security tiers, and real patterns for fast code review feedback.
 tags:
   - AI
   - CI/CD
