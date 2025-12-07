@@ -154,6 +154,6 @@ Your CI/CD can be faster and more secure. Not instead of humans—alongside them
 
 ## References
 
-- Boehm & Basili, "Software Defect Reduction Top 10 List" (2001) — https://www.cs.umd.edu/~basili/publications/journals/S81.pdf
-- GitHub Octoverse 2024 — https://octoverse.github.com/2024
+- Boehm & Basili, "Software Defect Reduction Top 10 List" (2001) — https://www.cs.umd.edu/projects/SoftEng/ESEG/papers/82.78.pdf
+- GitHub Octoverse 2024 — https://github.blog/news-insights/octoverse/octoverse-2024/
 - OWASP LLM Top 10 (2025 edition) – Prompt Injection #1 — https://owasp.org/www-project-top-10-for-large-language-model-applications/
