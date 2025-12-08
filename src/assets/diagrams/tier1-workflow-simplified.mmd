@@ -1,0 +1,17 @@
+flowchart LR
+    Start([Pull Request]) --> Linter[Run Linter]
+    Linter --> Output[JSON Output]
+    Output --> AI[AI Review]
+    AI --> Results([Results])
+    
+    Safe[No Code Exposure<br/>Immune to Injection] -.-> AI
+    
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
+    classDef terminal fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+    
+    class AI primary
+    class Linter,Output secondary
+    class Safe safe
+    class Start,Results terminal
