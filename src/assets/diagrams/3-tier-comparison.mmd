@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph tier1[Tier 1: Maximum Security]
+        T1Input[Tool Output] --> T1AI[AI Analysis]
+        T1AI --> T1Artifact[Artifact]
+    end
+    
+    subgraph tier2[Tier 2: Balanced]
+        T2Stats[File Stats] --> T2AI[AI Analysis]
+        T2AI --> T2Gate{Approval}
+        T2Gate -->|Yes| T2Post[Post]
+    end
+    
+    subgraph tier3[Tier 3: Advanced]
+        T3Diff[Code Diff] --> T3Filter[Filters]
+        T3Filter --> T3AI[AI Analysis]
+        T3AI --> T3Artifact[Artifact]
+    end
+    
+    Risk1[No Injection Risk] -.-> tier1
+    Risk2[Low Risk] -.-> tier2
+    Risk3[Controlled Risk] -.-> tier3
+    
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
+    
+    class T1AI,T2AI,T3AI primary
+    class T2Gate accent
+    class Risk1,Risk2,Risk3 safe
