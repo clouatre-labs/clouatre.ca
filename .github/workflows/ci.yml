@@ -17,12 +17,12 @@ jobs:
     if: github.event_name == 'push' || github.event.pull_request.draft == false
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           fetch-depth: 0 # For gitleaks
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
         with:
           bun-version: latest
 
@@ -32,7 +32,7 @@ jobs:
       - name: Security - Secret scanning
         # Skip for Renovate PRs (secrets not available for security) and merge_group (not supported)
         if: github.actor != 'renovate[bot]' && github.event_name != 'merge_group'
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
