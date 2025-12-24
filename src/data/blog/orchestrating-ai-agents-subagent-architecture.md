@@ -69,6 +69,8 @@ The cost structure matters. Building involves the most token-heavy work: reading
 
 Opus handles the high-value planning work where reasoning matters. Haiku handles the high-volume execution work where speed matters. The savings compound across projects.
 
+Beyond cost, fresh context enables tasks that fail with single agents. A 12-file refactor that exhausts a single model's context window succeeds when each subagent starts clean.
+
 ### Why Minimalist Instructions Matter
 
 Smaller models like Haiku excel with focused, explicit prompts. Complex multi-step instructions cause drift. The recipe went through multiple iterations to find the right balance: enough context to execute correctly, minimal enough to avoid confusion. Each phase prompt fits in under 500 tokens. The builder receives a structured JSON plan, not prose. Constraints beat verbosity.
@@ -117,40 +119,7 @@ Why files instead of memory? Three reasons:
 
 ## Quick Start
 
-The full recipe is a YAML file defining each phase. Key elements:
-
-```yaml file="goose-coder.yaml"
-name: goose-coder
-settings:
-  goose_model: "claude-opus-4-5@20251101"  # [!code highlight]
-  temperature: 0.5
-
-instructions: |
-  # OSS Coder - Subagent Architecture
-  You orchestrate the full OSS contribution flow using subagents.
-  
-  ## Phase 4: BUILD [SUBAGENT]
-  Call the `subagent` tool with:  # [!code highlight]
-  {
-    "instructions": "# BUILD Subagent\nYou implement approved plans...",
-    "settings": {
-      "model": "claude-haiku-4-5@20251001",  # [!code highlight]
-      "temperature": 0.2
-    }
-  }
-  
-  ## Phase 5: CHECK [SUBAGENT]
-  Call the `subagent` tool with:  # [!code highlight]
-  {
-    "instructions": "# CHECK Subagent\nValidate implementation...",
-    "settings": {
-      "model": "claude-sonnet-4-5@20250929",  # [!code highlight]
-      "temperature": 0.1
-    }
-  }
-```
-
-*The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).*
+The recipe defines each phase with model-specific settings—Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
 
 ## Human Gates: Where Judgment Stays
 
