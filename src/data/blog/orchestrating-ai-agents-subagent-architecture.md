@@ -13,9 +13,9 @@ featured: true
 
 Single-agent AI coding hits a ceiling. Context windows fill up. Role confusion creeps in. Output quality degrades. The solution: multiple specialized models with structured handoffs. One model plans, another builds, a third validates. Each starts fresh. Each excels at its role.
 
-Basic code assistants show roughly 10% productivity gains. But companies pairing AI with end-to-end process transformation report [25-30% improvements](https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/) (Bain, 2025). The difference isn't the model—it's the architecture.
+Basic code assistants show roughly 10% productivity gains. But companies pairing AI with end-to-end process transformation report [25-30% improvements](https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/) (Bain, 2025). The difference isn't the model. It's the architecture.
 
-This post documents a production workflow using [Goose](https://github.com/block/goose), an open-source AI assistant. The architecture separates planning, building, and validation into distinct phases—each with a different model optimized for the task.
+This post documents a production workflow using [Goose](https://github.com/block/goose), an open-source AI assistant. The architecture separates planning, building, and validation into distinct phases, each with a different model optimized for the task.
 
 ## The Single-Agent Ceiling
 
@@ -33,34 +33,15 @@ The business impact is measurable. Longer sessions correlate with more rework. C
 
 The fix: spawn specialized subagents for each phase. An orchestrator handles high-level coordination and human interaction. Subagents handle execution with fresh context.
 
-```mermaid
-flowchart LR
-    subgraph Orchestrator["Orchestrator (Opus)"]
-        A[ANALYZE] -->|GATE| R[RESEARCH]
-        R -->|GATE| P[PLAN]
-    end
-    
-    subgraph Builder["Builder (Haiku)"]
-        B[BUILD]
-    end
-    
-    subgraph Validator["Validator (Sonnet)"]
-        C[CHECK]
-    end
-    
-    P -->|spawn| B
-    B -->|handoff| C
-    C -->|PASS| PR[COMMIT/PR]
-    C -->|FAIL| B
-```
+![Subagent workflow diagram showing Orchestrator with ANALYZE, RESEARCH, PLAN phases flowing to Builder (BUILD) and Validator (CHECK)](@/assets/images/recipe-workflow.png)
 
 *Figure 1: Subagent workflow. Orchestrator handles planning with human gates. Builder and Validator run as separate subagents with fresh context.*
 
-The orchestrator (Claude Opus) handles ANALYZE, RESEARCH, and PLAN phases. These require high reasoning capability and human judgment at each gate. After plan approval, it spawns a BUILD subagent (Claude Haiku) that receives only the plan—no accumulated history. The builder writes code, runs tests, then hands off to a CHECK subagent (Claude Sonnet) for validation.
+The orchestrator (Claude Opus 4.5) handles ANALYZE, RESEARCH, and PLAN phases. These require high reasoning capability and human judgment at each gate. After plan approval, it spawns a BUILD subagent (Claude Haiku 4.5) that receives only the plan, not accumulated history. The builder writes code, runs tests, then hands off to a CHECK subagent (Claude Sonnet 4.5) for validation.
 
 Each subagent starts with clean context. The builder knows what to build, not how we decided to build it. The validator knows what was built, not what alternatives we considered. This isolation prevents context pollution.
 
-The pattern has broader validation: [Anthropic's Research feature](https://www.anthropic.com/engineering/multi-agent-research-system) uses similar orchestration—a LeadResearcher coordinating parallel subagents with fresh context. The principle scales across domains.
+The pattern has broader validation: [Anthropic's Research feature](https://www.anthropic.com/engineering/multi-agent-research-system) uses similar orchestration, a LeadResearcher coordinating parallel subagents with fresh context. The principle scales across domains.
 
 ## Model Selection Strategy
 
@@ -68,8 +49,8 @@ Different phases need different capabilities. Planning requires reasoning. Build
 
 | Model | Role | Temperature | Rationale |
 |-------|------|-------------|-----------|
-| Claude Opus | Orchestrator | 0.5 | High reasoning for analysis and planning |
-| Claude Haiku 3.5 | Builder | 0.2 | Fast, cheap, precise instruction-following |
+| Claude Opus 4.5 | Orchestrator | 0.5 | High reasoning for analysis and planning |
+| Claude Haiku 4.5 | Builder | 0.2 | Fast, cheap, precise instruction-following |
 | Claude Sonnet 4.5 | Validator | 0.1 | Balanced judgment, conservative (catches issues) |
 
 *Table 1: Model selection by phase. Temperature decreases as tasks become more deterministic.*
@@ -84,9 +65,13 @@ The cost structure matters. Building involves the most token-heavy work: reading
 | Recipe-based | 20% Opus, 60% Haiku, 20% Sonnet | ~$0.90 |
 | **Savings** | | **~75%** |
 
-*Table 2: Cost comparison for a typical multi-file refactor (~100K tokens). Prices based on Anthropic API pricing, December 2024.*
+*Table 2: Cost comparison for a typical multi-file refactor (~100K tokens). Prices based on Anthropic API pricing, December 2025.*
 
 Opus handles the high-value planning work where reasoning matters. Haiku handles the high-volume execution work where speed matters. The savings compound across projects.
+
+### Why Minimalist Instructions Matter
+
+Smaller models like Haiku excel with focused, explicit prompts. Complex multi-step instructions cause drift. The recipe went through multiple iterations to find the right balance: enough context to execute correctly, minimal enough to avoid confusion. Each phase prompt fits in under 500 tokens. The builder receives a structured JSON plan, not prose. Constraints beat verbosity.
 
 ## The Handoff Protocol
 
@@ -143,7 +128,7 @@ Not every phase needs human approval. The workflow distinguishes between decisio
 - BUILD: Execute the approved plan
 - CHECK: Validate against plan requirements
 
-This separation preserves governance without creating bottlenecks. Humans make strategic decisions. AI executes. If validation fails, the system loops back to BUILD with specific feedback—no human intervention for mechanical fixes.
+This separation preserves governance without creating bottlenecks. Humans make strategic decisions. AI executes. If validation fails, the system loops back to BUILD with specific feedback. No human intervention for mechanical fixes.
 
 The gates also create natural documentation points. Each approval is a checkpoint in the decision record.
 
@@ -159,7 +144,7 @@ This architecture produced three merged PRs on the [aptu](https://github.com/clo
 
 *Table 3: PRs using subagent architecture. All passed CI, all merged without rework.*
 
-The validation phase caught issues the builder missed. In PR #272, the CHECK subagent identified a missing trait bound that would have failed compilation. The builder fixed it on the retry loop—no human intervention required.
+The validation phase caught issues the builder missed. In PR #272, the CHECK subagent identified a missing trait bound that would have failed compilation. The builder fixed it on the retry loop. No human intervention required.
 
 ### Design Targets
 
@@ -186,7 +171,7 @@ Research on multi-agent frameworks for code generation shows they [consistently 
 - Legacy systems without clear patterns (builder lacks context)
 - Exploratory work where plans change during implementation
 
-The overhead of spawning subagents and writing handoff files adds 2-3 minutes per task. For a 10-minute fix, that's significant. For a 2-hour refactor, it's negligible—and the quality improvement justifies it.
+The overhead of spawning subagents and writing handoff files adds 2-3 minutes per task. For a 10-minute fix, that's significant. For a 2-hour refactor, it's negligible, and the quality improvement justifies it.
 
 ## Takeaways
 
@@ -195,7 +180,7 @@ The overhead of spawning subagents and writing handoff files adds 2-3 minutes pe
 3. **Structured handoffs create audit trails.** JSON files document what was planned, built, and validated.
 4. **Gates at decisions, not execution.** Human judgment for strategy. Automated loops for implementation.
 
-The full recipe is available as a [GitHub Gist](https://gist.github.com/clouatre/goose-coder-recipe). It builds on patterns from [AI-Assisted Development: From Implementation to Judgment](/posts/ai-assisted-development-judgment-over-implementation/).
+The full recipe is available as a [GitHub Gist](https://gist.github.com/clouatre/575502cd845706f8ad72a7e089da7ef0). It builds on patterns from [AI-Assisted Development: From Implementation to Judgment](/posts/ai-assisted-development-judgment-over-implementation/).
 
 For technical leaders: Multi-agent orchestration is the next step after single-agent productivity gains. When context management becomes your bottleneck, subagents provide the isolation that scales.
 
