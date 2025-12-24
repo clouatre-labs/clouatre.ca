@@ -115,6 +115,43 @@ Why files instead of memory? Three reasons:
 2. **Resumable.** Interrupt and resume without losing state. Files persist across sessions.
 3. **Debuggable.** When validation fails, the validator writes specific issues to `04-validation.json`. The builder reads them on retry.
 
+## Quick Start
+
+The full recipe is a YAML file defining each phase. Key elements:
+
+```yaml file="goose-coder.yaml"
+name: goose-coder
+settings:
+  goose_model: "claude-opus-4-5@20251101"  # [!code highlight]
+  temperature: 0.5
+
+instructions: |
+  # OSS Coder - Subagent Architecture
+  You orchestrate the full OSS contribution flow using subagents.
+  
+  ## Phase 4: BUILD [SUBAGENT]
+  Call the `subagent` tool with:  # [!code highlight]
+  {
+    "instructions": "# BUILD Subagent\nYou implement approved plans...",
+    "settings": {
+      "model": "claude-haiku-4-5@20251001",  # [!code highlight]
+      "temperature": 0.2
+    }
+  }
+  
+  ## Phase 5: CHECK [SUBAGENT]
+  Call the `subagent` tool with:  # [!code highlight]
+  {
+    "instructions": "# CHECK Subagent\nValidate implementation...",
+    "settings": {
+      "model": "claude-sonnet-4-5@20250929",  # [!code highlight]
+      "temperature": 0.1
+    }
+  }
+```
+
+*The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).*
+
 ## Human Gates: Where Judgment Stays
 
 Not every phase needs human approval. The workflow distinguishes between decisions (require judgment) and execution (follow the plan).
