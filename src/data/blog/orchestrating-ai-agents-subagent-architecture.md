@@ -1,7 +1,7 @@
 ---
 title: "Orchestrating AI Agents: A Subagent Architecture for Code"
 pubDatetime: 2025-12-24T12:00:00Z
-description: Cut AI coding costs 75% with a subagent architecture. Separate planning (Opus), building (Haiku), and validation (Sonnet) for better results with less context bloat.
+description: Cut AI coding costs 50% with multi-agent architecture. Assign planning, building, and validation to specialized models for better output at lower spend.
 tags:
   - AI
   - LLM
