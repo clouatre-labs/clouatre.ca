@@ -90,36 +90,48 @@ The plan file contains everything the builder needs:
 
 ```json file=".goose/handoff/02-plan.json"
 {
-  "overview": "Consolidate 4 provider clients into generic AiClient",
+  "overview": "Remove 4 dead render_with_context methods",
   "files": [
-    {"path": "src/ai/client.rs", "action": "create", "description": "Generic client"},
-    {"path": "src/ai/openai.rs", "action": "delete", "description": "Remove"},
-    {"path": "src/ai/anthropic.rs", "action": "delete", "description": "Remove"}
+    {"path": "src/output/triage.rs", "action": "modify"},
+    {"path": "src/output/history.rs", "action": "modify"},
+    {"path": "src/output/bulk.rs", "action": "modify"},
+    {"path": "src/output/create.rs", "action": "modify"}
   ],
   "steps": [
-    "Create AiClient trait with send_message method",
-    "Implement for each provider using existing logic",
-    "Update mod.rs exports",
-    "Run cargo test and cargo clippy"
+    "Remove render_with_context impl blocks from each file",
+    "Remove #[allow(dead_code)] annotations",
+    "Remove unused imports",
+    "Run cargo fmt && cargo clippy && cargo test"
   ],
-  "test_strategy": {
-    "unit": "Existing tests should pass unchanged",
-    "integration": "Run aptu ai ask with each provider"
-  }
+  "risks": ["None - confirmed dead code"]
 }
 ```
 
-*Example handoff from the aptu#272 refactor. Builder receives structured instructions, not conversation history.*
+The validator reads both `02-plan.json` and `03-build.json` to verify implementation matches requirements. It writes structured feedback to `04-validation.json`:
+
+```json file=".goose/handoff/04-validation.json"
+{
+  "verdict": "FAIL",
+  "checks": [
+    {"name": "Remove #[allow(dead_code)] annotations", "status": "FAIL",
+     "notes": "Annotations still present in history.rs:145, bulk.rs:31, create.rs:63"}
+  ],
+  "issues": ["Plan required removing annotations, but these are still present"],
+  "next_steps": "Fix issue: Remove the three annotations, then re-validate"
+}
+```
+
+The builder reads this feedback, fixes the specific issues, and triggers another CHECK cycle until validation passes.
 
 Why files instead of memory? Three reasons:
 
 1. **Auditable.** Every decision is recorded. Debug failures by reading the handoff chain.
-2. **Resumable.** Interrupt and resume without losing state. Files persist across sessions.
-3. **Debuggable.** When validation fails, the validator writes specific issues to `04-validation.json`. The builder reads them on retry.
+2. **Resumable.** Interrupt and resume without losing state. Start a new session with the same handoff files and no work is lost.
+3. **Debuggable.** Failed validations include exact locations and actionable next steps.
 
 ## Quick Start
 
-The recipe defines each phase with model-specific settings—Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
+The recipe defines each phase with model-specific settings: Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
 
 ## Human Gates: Where Judgment Stays
 
