@@ -152,15 +152,15 @@ The gates also create natural documentation points. Each approval is a checkpoin
 
 ## Results
 
-This architecture produced three merged PRs on the [aptu](https://github.com/clouatre-labs/aptu) project:
+This architecture powers development across multiple projects. Three examples from [aptu](https://github.com/clouatre-labs/aptu):
 
 | PR | Scope | Files Changed |
 |----|-------|---------------|
 | [#272](https://github.com/clouatre-labs/aptu/pull/272) | Consolidate 4 clients → 1 generic | 12 files |
 | [#256](https://github.com/clouatre-labs/aptu/pull/256) | Add Groq + Cerebras providers | 8 files |
-| [#253](https://github.com/clouatre-labs/aptu/pull/253) | Remote config for curated repos | 6 files |
+| [#244](https://github.com/clouatre-labs/aptu/pull/244) | Extract shared AiProvider trait | 9 files |
 
-*Table 3: PRs using subagent architecture. All passed CI, all merged without rework.*
+*Table 3: Representative PRs using subagent architecture. All passed CI, all merged without rework.*
 
 The validation phase caught issues the builder missed. In PR #272, the CHECK subagent identified a missing trait bound that would have failed compilation. The builder fixed it on the retry loop. No human intervention required.
 
