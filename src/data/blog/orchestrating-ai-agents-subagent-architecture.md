@@ -57,17 +57,17 @@ Different phases need different capabilities. Planning requires reasoning. Build
 
 ### Cost Optimization
 
-The cost structure matters. Building involves the most token-heavy work: reading files, writing code, running tests. By routing this volume to cheaper models, you cut costs significantly.
+Building involves the most token-heavy work: reading files, writing code, running tests. Routing this volume to cheaper models cuts costs significantly.
 
-| Approach | Model Mix | Est. Cost per Task |
-|----------|-----------|-------------------|
-| All Opus | 100% Opus | ~$3.50 |
-| Recipe-based | 20% Opus, 60% Haiku, 20% Sonnet | ~$0.90 |
-| **Savings** | | **~75%** |
+| Model | Input | Output | Role in Workflow |
+|-------|-------|--------|------------------|
+| Opus 4.5 | $5/MTok | $25/MTok | Planning (~20% of tokens) |
+| Sonnet 4.5 | $3/MTok | $15/MTok | Validation (~20% of tokens) |
+| Haiku 4.5 | $1/MTok | $5/MTok | Building (~60% of tokens) |
 
-*Table 2: Cost comparison for a typical multi-file refactor (~100K tokens). Prices based on Anthropic API pricing, December 2025.*
+*Table 2: Anthropic API pricing, December 2025. Building consumes the most tokens at the lowest cost.*
 
-Opus handles the high-value planning work where reasoning matters. Haiku handles the high-volume execution work where speed matters. The savings compound across projects.
+Research on multi-agent LLM systems shows up to 94% cost reduction through model cascading (Gandhi et al., 2024). This architecture targets 50-60% savings by routing building work to Haiku while preserving Opus for planning.
 
 Beyond cost, fresh context enables tasks that fail with single agents. A 12-file refactor that exhausts a single model's context window succeeds when each subagent starts clean.
 
@@ -90,36 +90,48 @@ The plan file contains everything the builder needs:
 
 ```json file=".goose/handoff/02-plan.json"
 {
-  "overview": "Consolidate 4 provider clients into generic AiClient",
+  "overview": "Remove 4 dead render_with_context methods",
   "files": [
-    {"path": "src/ai/client.rs", "action": "create", "description": "Generic client"},
-    {"path": "src/ai/openai.rs", "action": "delete", "description": "Remove"},
-    {"path": "src/ai/anthropic.rs", "action": "delete", "description": "Remove"}
+    {"path": "src/output/triage.rs", "action": "modify"},
+    {"path": "src/output/history.rs", "action": "modify"},
+    {"path": "src/output/bulk.rs", "action": "modify"},
+    {"path": "src/output/create.rs", "action": "modify"}
   ],
   "steps": [
-    "Create AiClient trait with send_message method",
-    "Implement for each provider using existing logic",
-    "Update mod.rs exports",
-    "Run cargo test and cargo clippy"
+    "Remove render_with_context impl blocks from each file",
+    "Remove #[allow(dead_code)] annotations",
+    "Remove unused imports",
+    "Run cargo fmt && cargo clippy && cargo test"
   ],
-  "test_strategy": {
-    "unit": "Existing tests should pass unchanged",
-    "integration": "Run aptu ai ask with each provider"
-  }
+  "risks": ["None - confirmed dead code"]
 }
 ```
 
-*Example handoff from the aptu#272 refactor. Builder receives structured instructions, not conversation history.*
+The validator reads both `02-plan.json` and `03-build.json` to verify implementation matches requirements. It writes structured feedback to `04-validation.json`:
+
+```json file=".goose/handoff/04-validation.json"
+{
+  "verdict": "FAIL",
+  "checks": [
+    {"name": "Remove #[allow(dead_code)] annotations", "status": "FAIL",
+     "notes": "Annotations still present in history.rs:145, bulk.rs:31, create.rs:63"}
+  ],
+  "issues": ["Plan required removing annotations, but these are still present"],
+  "next_steps": "Fix issue: Remove the three annotations, then re-validate"
+}
+```
+
+The builder reads this feedback, fixes the specific issues, and triggers another CHECK cycle until validation passes.
 
 Why files instead of memory? Three reasons:
 
 1. **Auditable.** Every decision is recorded. Debug failures by reading the handoff chain.
-2. **Resumable.** Interrupt and resume without losing state. Files persist across sessions.
-3. **Debuggable.** When validation fails, the validator writes specific issues to `04-validation.json`. The builder reads them on retry.
+2. **Resumable.** Interrupt and resume without losing state. Start a new session with the same handoff files and no work is lost.
+3. **Debuggable.** Failed validations include exact locations and actionable next steps.
 
 ## Quick Start
 
-The recipe defines each phase with model-specific settings—Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
+The recipe defines each phase with model-specific settings: Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
 
 ## Human Gates: Where Judgment Stays
 
@@ -140,15 +152,15 @@ The gates also create natural documentation points. Each approval is a checkpoin
 
 ## Results
 
-This architecture produced three merged PRs on the [aptu](https://github.com/clouatre-labs/aptu) project:
+This architecture powers development across multiple projects. Three examples from [aptu](https://github.com/clouatre-labs/aptu):
 
 | PR | Scope | Files Changed |
 |----|-------|---------------|
 | [#272](https://github.com/clouatre-labs/aptu/pull/272) | Consolidate 4 clients → 1 generic | 12 files |
 | [#256](https://github.com/clouatre-labs/aptu/pull/256) | Add Groq + Cerebras providers | 8 files |
-| [#253](https://github.com/clouatre-labs/aptu/pull/253) | Remote config for curated repos | 6 files |
+| [#244](https://github.com/clouatre-labs/aptu/pull/244) | Extract shared AiProvider trait | 9 files |
 
-*Table 3: PRs using subagent architecture. All passed CI, all merged without rework.*
+*Table 3: Representative PRs using subagent architecture. All passed CI, all merged without rework.*
 
 The validation phase caught issues the builder missed. In PR #272, the CHECK subagent identified a missing trait bound that would have failed compilation. The builder fixed it on the retry loop. No human intervention required.
 
@@ -196,4 +208,5 @@ For technical leaders: Multi-agent orchestration is the next step after single-a
 
 - Bain & Company, "From Pilots to Payoff: Generative AI in Software Development" (2025) — https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/
 - Anthropic Engineering, "How we built our multi-agent research system" (2025) — https://www.anthropic.com/engineering/multi-agent-research-system
+- Gandhi et al., "BudgetMLAgent: A Cost-Effective LLM Multi-Agent System" (2024) — https://arxiv.org/abs/2411.07464
 - MOSAIC: Multi-agent Orchestration for Task-Intelligent Coding (arXiv, 2024) — https://arxiv.org/abs/2510.08804
