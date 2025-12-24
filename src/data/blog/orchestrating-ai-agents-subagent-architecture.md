@@ -180,7 +180,7 @@ The overhead of spawning subagents and writing handoff files adds 2-3 minutes pe
 3. **Structured handoffs create audit trails.** JSON files document what was planned, built, and validated.
 4. **Gates at decisions, not execution.** Human judgment for strategy. Automated loops for implementation.
 
-The full recipe is available as a [GitHub Gist](https://gist.github.com/clouatre/575502cd845706f8ad72a7e089da7ef0). It builds on patterns from [AI-Assisted Development: From Implementation to Judgment](/posts/ai-assisted-development-judgment-over-implementation/).
+The full recipe is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7). It builds on patterns from [AI-Assisted Development: From Implementation to Judgment](/posts/ai-assisted-development-judgment-over-implementation/).
 
 For technical leaders: Multi-agent orchestration is the next step after single-agent productivity gains. When context management becomes your bottleneck, subagents provide the isolation that scales.
 
