@@ -49,9 +49,9 @@ Different phases need different capabilities. Planning requires reasoning. Build
 
 | Model | Role | Temperature | Rationale |
 |-------|------|-------------|-----------|
-| Claude Opus 4.5 | Orchestrator | 0.5 | High reasoning for analysis and planning |
-| Claude Haiku 4.5 | Builder | 0.2 | Fast, cheap, precise instruction-following |
-| Claude Sonnet 4.5 | Validator | 0.1 | Balanced judgment, conservative (catches issues) |
+| Opus | Orchestrator | 0.5 | High reasoning for analysis and planning |
+| Haiku | Builder | 0.2 | Fast, cheap, precise instruction-following |
+| Sonnet | Validator | 0.1 | Balanced judgment, conservative (catches issues) |
 
 *Table 1: Model selection by phase. Temperature decreases as tasks become more deterministic.*
 
@@ -61,13 +61,13 @@ Building involves the most token-heavy work: reading files, writing code, runnin
 
 | Model | Input | Output | Role in Workflow |
 |-------|-------|--------|------------------|
-| Opus 4.5 | $5/MTok | $25/MTok | Planning (~20% of tokens) |
-| Sonnet 4.5 | $3/MTok | $15/MTok | Validation (~20% of tokens) |
-| Haiku 4.5 | $1/MTok | $5/MTok | Building (~60% of tokens) |
+| Opus | $5/MTok | $25/MTok | Planning (~20% of tokens) |
+| Sonnet | $3/MTok | $15/MTok | Validation (~20% of tokens) |
+| Haiku | $1/MTok | $5/MTok | Building (~60% of tokens) |
 
 *Table 2: Anthropic API pricing, December 2025. Building consumes the most tokens at the lowest cost.*
 
-Research on multi-agent LLM systems shows up to 94% cost reduction through model cascading (Gandhi et al., 2024). This architecture targets 50-60% savings by routing building work to Haiku while preserving Opus for planning.
+Research on multi-agent LLM systems shows up to 94% cost reduction through model cascading (Gandhi et al., 2025). This architecture targets 50-60% savings by routing building work to Haiku while preserving Opus for planning.
 
 Beyond cost, fresh context enables tasks that fail with single agents. A 12-file refactor that exhausts a single model's context window succeeds when each subagent starts clean.
 
@@ -166,7 +166,7 @@ The validation phase caught issues the builder missed. In PR #272, the CHECK sub
 
 ### Design Targets
 
-Research on multi-agent frameworks for code generation shows they [consistently outperform single-model systems](https://arxiv.org/abs/2510.08804) (MOSAIC, 2024). The architecture is designed to achieve:
+Research on multi-agent frameworks for code generation shows they [consistently outperform single-model systems](https://arxiv.org/abs/2510.08804) (Raghavan & Mallick, 2025). The architecture is designed to achieve:
 
 | Metric | Single Agent | Subagent Architecture |
 |--------|--------------|----------------------|
@@ -208,5 +208,5 @@ For technical leaders: Multi-agent orchestration is the next step after single-a
 
 - Bain & Company, "From Pilots to Payoff: Generative AI in Software Development" (2025) — https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/
 - Anthropic Engineering, "How we built our multi-agent research system" (2025) — https://www.anthropic.com/engineering/multi-agent-research-system
-- Gandhi et al., "BudgetMLAgent: A Cost-Effective LLM Multi-Agent System" (2024) — https://arxiv.org/abs/2411.07464
-- MOSAIC: Multi-agent Orchestration for Task-Intelligent Coding (arXiv, 2024) — https://arxiv.org/abs/2510.08804
+- Gandhi et al., "BudgetMLAgent: A Cost-Effective LLM Multi-Agent System" (2025) — https://arxiv.org/abs/2411.07464
+- Raghavan & Mallick, "MOSAIC: Multi-agent Orchestration for Task-Intelligent Scientific Coding" (2025) — https://arxiv.org/abs/2510.08804
