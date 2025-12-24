@@ -1,6 +1,6 @@
 ---
 title: AI-Augmented CI/CD - Shift Left Security Without the Risk
-pubDatetime: 2025-12-06
+pubDatetime: 2025-12-06T12:00:00Z
 description: Integrate AI into CI/CD without prompt injection risk. Defensive architecture, three security tiers, and real patterns for fast code review feedback.
 tags:
   - AI

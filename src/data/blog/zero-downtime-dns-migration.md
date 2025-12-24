@@ -1,6 +1,6 @@
 ---
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
-pubDatetime: 2025-11-06T02:00:00Z
+pubDatetime: 2025-11-06T12:00:00Z
 description: "Complete infrastructure migration in 2 hours with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with pre-validated testing. Real metrics."
 tags: ["devops", "ai", "cloudflare", "cicd", "automation", "goose", "dns", "migration"]
 featured: true
