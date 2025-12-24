@@ -90,32 +90,45 @@ The plan file contains everything the builder needs:
 
 ```json file=".goose/handoff/02-plan.json"
 {
-  "overview": "Consolidate 4 provider clients into generic AiClient",
+  "overview": "Create single generic AiClient replacing 4 provider clients",
   "files": [
-    {"path": "src/ai/client.rs", "action": "create", "description": "Generic client"},
-    {"path": "src/ai/openai.rs", "action": "delete", "description": "Remove"},
-    {"path": "src/ai/anthropic.rs", "action": "delete", "description": "Remove"}
+    {"path": "src/ai/client.rs", "action": "create"},
+    {"path": "src/ai/gemini.rs", "action": "delete"},
+    {"path": "src/ai/openrouter.rs", "action": "delete"}
   ],
   "steps": [
-    "Create AiClient trait with send_message method",
-    "Implement for each provider using existing logic",
-    "Update mod.rs exports",
+    "Create AiClient struct with constructors",
+    "Implement AiProvider trait",
+    "Update exports in mod.rs",
     "Run cargo test and cargo clippy"
   ],
   "test_strategy": {
-    "unit": "Existing tests should pass unchanged",
-    "integration": "Run aptu ai ask with each provider"
-  }
+    "response": "Existing trait tests cover parsing",
+    "external_calls": "Manual integration test if needed"
+  },
+  "risks": ["OpenRouter header regression - mitigated by provider check"]
 }
 ```
 
-*Example handoff from the aptu#272 refactor. Builder receives structured instructions, not conversation history.*
+The validator reads both `02-plan.json` and `03-build.json` to verify implementation matches requirements. It writes structured feedback to `04-validation.json`—on success, a detailed checklist; on failure, specific locations for the builder's retry:
+
+```json file=".goose/handoff/04-validation.json"
+{
+  "verdict": "FAIL",
+  "checks": [
+    {"name": "Remove #[allow(dead_code)] annotations", "status": "FAIL",
+     "notes": "Annotations still present in history.rs:145, bulk.rs:31, create.rs:63"}
+  ],
+  "issues": ["Plan required removing annotations, but these are still present"],
+  "next_steps": "Fix issue: Remove the three annotations, then re-validate"
+}
+```
 
 Why files instead of memory? Three reasons:
 
 1. **Auditable.** Every decision is recorded. Debug failures by reading the handoff chain.
-2. **Resumable.** Interrupt and resume without losing state. Files persist across sessions.
-3. **Debuggable.** When validation fails, the validator writes specific issues to `04-validation.json`. The builder reads them on retry.
+2. **Resumable.** Interrupt and resume without losing state. Start a new session with the same handoff files and no work is lost.
+3. **Debuggable.** Failed validations include exact locations and actionable next steps.
 
 ## Quick Start
 
