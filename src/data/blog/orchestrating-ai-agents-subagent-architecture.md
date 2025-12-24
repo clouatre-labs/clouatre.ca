@@ -57,17 +57,17 @@ Different phases need different capabilities. Planning requires reasoning. Build
 
 ### Cost Optimization
 
-The cost structure matters. Building involves the most token-heavy work: reading files, writing code, running tests. By routing this volume to cheaper models, you cut costs significantly.
+Building involves the most token-heavy work: reading files, writing code, running tests. Routing this volume to cheaper models cuts costs significantly.
 
-| Approach | Model Mix | Est. Cost per Task |
-|----------|-----------|-------------------|
-| All Opus | 100% Opus | ~$3.50 |
-| Recipe-based | 20% Opus, 60% Haiku, 20% Sonnet | ~$0.90 |
-| **Savings** | | **~75%** |
+| Model | Input | Output | Role in Workflow |
+|-------|-------|--------|------------------|
+| Opus 4.5 | $5/MTok | $25/MTok | Planning (~20% of tokens) |
+| Sonnet 4.5 | $3/MTok | $15/MTok | Validation (~20% of tokens) |
+| Haiku 4.5 | $1/MTok | $5/MTok | Building (~60% of tokens) |
 
-*Table 2: Cost comparison for a typical multi-file refactor (~100K tokens). Prices based on Anthropic API pricing, December 2025.*
+*Table 2: Anthropic API pricing, December 2025. Building consumes the most tokens at the lowest cost.*
 
-Opus handles the high-value planning work where reasoning matters. Haiku handles the high-volume execution work where speed matters. The savings compound across projects.
+Research on multi-agent LLM systems shows up to 94% cost reduction through model cascading (Gandhi et al., 2024). This architecture targets 50-60% savings by routing building work to Haiku while preserving Opus for planning.
 
 Beyond cost, fresh context enables tasks that fail with single agents. A 12-file refactor that exhausts a single model's context window succeeds when each subagent starts clean.
 
@@ -208,4 +208,5 @@ For technical leaders: Multi-agent orchestration is the next step after single-a
 
 - Bain & Company, "From Pilots to Payoff: Generative AI in Software Development" (2025) — https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/
 - Anthropic Engineering, "How we built our multi-agent research system" (2025) — https://www.anthropic.com/engineering/multi-agent-research-system
+- Gandhi et al., "BudgetMLAgent: A Cost-Effective LLM Multi-Agent System" (2024) — https://arxiv.org/abs/2411.07464
 - MOSAIC: Multi-agent Orchestration for Task-Intelligent Coding (arXiv, 2024) — https://arxiv.org/abs/2510.08804
