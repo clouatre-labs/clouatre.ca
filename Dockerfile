@@ -12,6 +12,6 @@ COPY . .
 RUN pnpm run build
 
 # Runtime stage for serving the application
-FROM nginx:mainline-alpine-slim@sha256:4c175d0d849aae0e0eedc64d718ef6323bed2bc68ee673e2d0a1bd5d501d0e5f AS runtime
+FROM nginx:mainline-alpine-slim@sha256:fc0cff8d49db19250104d2fba8bd1ee3fc2a09ed8163de582804e5d137df7821 AS runtime
 COPY --from=base /app/dist /usr/share/nginx/html
 EXPOSE 80
