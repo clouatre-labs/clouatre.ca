@@ -1,5 +1,6 @@
 flowchart TD
     subgraph traditional["Traditional Model"]
+        direction LR
         T1[Developer needs help]
         T2[Visits documentation]
         T3[Discovers premium products]
@@ -8,12 +9,15 @@ flowchart TD
     end
 
     subgraph ai["AI-Disrupted Model"]
+        direction LR
         A1[Developer needs help]
         A2[Asks AI assistant]
         A3[Gets instant answer]
         A4[Never visits docs]
         A1 --> A2 --> A3 --> A4
     end
+
+    traditional ~~~ ai
 
     classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
     classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
