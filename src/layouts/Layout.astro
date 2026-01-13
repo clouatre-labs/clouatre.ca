@@ -172,7 +172,15 @@ const personSchema = {
     <ClientRouter />
 
     <script is:inline src={`${base}/toggle-theme.js`}></script>
-    <script is:inline src="/cdn-cgi/zaraz/i.js" referrerpolicy="origin"></script>
+
+    <!-- Google Analytics 4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-BY9N0GS7KS"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BY9N0GS7KS');
+    </script>
   </head>
   <body>
     <slot />
