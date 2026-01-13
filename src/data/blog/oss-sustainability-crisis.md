@@ -11,7 +11,7 @@ tags:
 featured: true
 ---
 
-Your CI pipeline trusts 400 packages. Last week, one of them laid off 75% of its engineering team. Ten months ago, another nearly shipped a backdoor to every major Linux distribution. Last month, attackers started registering package names that only exist because an AI hallucinated them.
+Your CI pipeline trusts 400 packages. Last week, one of them laid off 75% of its engineering team. Nearly two years ago, another nearly shipped a backdoor to every major Linux distribution. Last month, attackers started registering package names that only exist because an AI hallucinated them.
 
 Three incidents. Three attack vectors. One common thread: AI is reshaping software supply chain risk faster than most security programs can adapt.
 
