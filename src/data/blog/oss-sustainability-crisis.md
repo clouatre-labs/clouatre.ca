@@ -21,7 +21,7 @@ Tailwind is the first OSS project to publicly share these numbers. They won't be
 
 ## What Pattern Are We Seeing?
 
-On January 6, 2026, Tailwind Labs reduced their engineering team from four to two. Adam Wathan, the founder, attributed the layoffs directly to [AI's brutal impact on their business](https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957). Documentation traffic dropped 40% since early 2023. Revenue collapsed 80%. Yet Tailwind CSS downloads and usage continue climbing.
+On January 6, 2026, Adam Wathan attributed the cuts directly to [AI's brutal impact on their business](https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957). Revenue collapsed 80%. Yet Tailwind CSS downloads and usage continue climbing.
 
 This isn't a failing product. It's a failing business model.
 
@@ -136,21 +136,28 @@ Tailwind isn't going away tomorrow. The framework is stable, widely adopted, and
 
 ## What Should CTOs Do Now?
 
-### Immediate Actions
+### Automate the Audit
 
-1. **Run the 5-signal audit** on your critical path dependencies. Focus on Tier 2 projects first.
+Manual dependency audits don't scale. Use existing tools:
 
-2. **Identify concentration risk.** If multiple production systems depend on a single indie maintainer, that's a priority.
+- **OpenSSF Scorecard** (scorecard.dev) scores projects on maintainer activity, security practices, and bus factor
+- **deps.dev** provides dependency graphs with maintainer and vulnerability data
+- **GitHub Dependency Graph** surfaces funding status via FUNDING.yml
 
-3. **Establish monitoring.** GitHub activity, maintainer communications, and funding announcements provide early warning. Add key project blogs to your RSS reader.
+For a quick CLI check of your top dependencies:
 
-### Strategic Considerations
+```bash
+# Check a project's health score (0-10)
+scorecard --repo=github.com/tailwindlabs/tailwindcss --format=short
+```
 
-**Sponsor critical dependencies.** If your business depends on a Tier 2 project, sponsorship isn't charity. It's risk mitigation. The cost of a $500/month sponsorship is trivial compared to emergency migration.
+### Prioritize Tier 2 Projects
 
-**Evaluate acquisition exposure.** What happens if your dependency gets acquired by a competitor's AI vendor? Bun joining Anthropic is benign for most users. But imagine your ORM acquired by a company building competing infrastructure.
+Focus audit effort on indie and VC-backed dependencies in your critical path. Foundation-backed projects (CNCF, Apache) have lower urgency.
 
-**Diversify where practical.** Single-maintainer dependencies in production paths deserve scrutiny. Sometimes the stability of a less-elegant, better-funded alternative is worth the trade-off.
+### Sponsor or Fork
+
+If a Tier 2 project scores poorly and has no clear funding path, you have two options: sponsor it (risk mitigation, not charity) or maintain an internal fork.
 
 ## What Is the Uncomfortable Truth?
 
