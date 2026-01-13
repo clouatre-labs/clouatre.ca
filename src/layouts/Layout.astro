@@ -78,6 +78,37 @@ const personSchema = {
   name: `${author}`,
   url: `${SITE.website}`,
   sameAs: SITE.sameAs,
+  jobTitle: "Director, Platform Engineering",
+  worksFor: {
+    "@type": "Organization",
+    name: "Slalom",
+    url: "https://www.slalom.com",
+  },
+  affiliation: {
+    "@type": "EducationalOrganization",
+    name: "HEC Montreal",
+    url: "https://www.hec.ca",
+  },
+  alumniOf: [
+    {
+      "@type": "EducationalOrganization",
+      name: "HEC Montreal",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "University of Montreal",
+    },
+  ],
+  knowsAbout: [
+    "AI",
+    "Cloud Architecture",
+    "Platform Engineering",
+    "Kubernetes",
+    "Supply Chain Security",
+    "DevOps",
+    "AWS",
+    "Generative AI",
+  ],
 };
 ---
 
