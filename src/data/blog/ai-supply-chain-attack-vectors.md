@@ -139,6 +139,8 @@ Your existing tools catch CVEs. Add tools that catch maintainer health:
 - **deps.dev** provides dependency graphs with contributor data
 - **Socket.dev** detects supply chain attacks including slopsquatting patterns
 
+Scorecard and Socket integrate directly into [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd/) via GitHub Actions, flagging risky dependencies before merge.
+
 For a quick CLI check:
 
 ```bash
@@ -155,6 +157,8 @@ If your teams use AI coding assistants, add a validation step:
 3. Check download counts and maintainer history
 4. Consider allowlisting approved packages
 
+For teams using AI agents extensively, consider [subagent architectures](/posts/orchestrating-ai-agents-subagent-architecture/) where a dedicated validation agent checks every dependency against registries and health signals before acceptance.
+
 ### Sponsor Strategically
 
 Sponsorship isn't charity. It's risk mitigation. If a Tier 2 project in your critical path shows stress signals, $500/month buys you a relationship with the maintainer and early warning on sustainability issues.
@@ -169,7 +173,7 @@ Experimental protocols like AICP (AI Consumption Protocol) and x402 attempt to l
 
 The two-tier ecosystem is crystallizing. Foundation-backed projects will remain stable. Indie projects will face consolidation pressure. Some will be acquired. Some will be abandoned. Some will find new models. Others are relicensing. HashiCorp moved Terraform to BSL in 2023. Redis followed months later. Sentry, MariaDB, Elastic. The pattern is clear. When sponsorships fail and AI eats documentation revenue, restrictive licenses become the survival strategy. For enterprises, this means dependencies you assumed were permissively licensed may not stay that way.
 
-For CTOs, the action is clear: extend your supply chain monitoring beyond CVEs. Track maintainer health. Score AI exposure. Validate AI-suggested packages.
+For CTOs, the action is clear: extend your supply chain monitoring beyond CVEs. Track maintainer health. Score AI exposure. And remember that [AI accelerates implementation, but humans must retain judgment](/posts/ai-assisted-development-judgment-over-implementation/), especially when validating what AI suggests you install.
 
 But start with one question: open your `package.json` or `requirements.txt`. How many of those maintainers have you actually supported this year? The answer tells you how much risk you're carrying for free. And how much you're betting that someone else will keep paying the maintenance cost.
 
