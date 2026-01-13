@@ -17,6 +17,8 @@ Basic code assistants show roughly 10% productivity gains. But companies pairing
 
 This post documents a production workflow using [Goose](https://github.com/block/goose), an open-source AI assistant. The architecture separates planning, building, and validation into distinct phases, each with a different model optimized for the task.
 
+## Table of contents
+
 ## Why Do Single-Agent AI Coding Workflows Hit a Ceiling?
 
 A single AI model handling an entire coding task accumulates context with every interaction. By implementation time, the model carries baggage from analysis, research, and planning phases. This creates three problems.
