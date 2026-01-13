@@ -18,7 +18,8 @@
   },
   "simple-git-hooks": {
     "pre-commit": "bunx lint-staged",
-    "pre-push": "bun run build"
+    "pre-push": "bun run build",
+    "commit-msg": "LC_ALL=C grep -q '[^[:print:][:space:]]' \"$1\" && echo 'Non-ASCII in commit message' && exit 1 || true"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro,json,md}": [
