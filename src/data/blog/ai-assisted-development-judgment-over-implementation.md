@@ -2,7 +2,12 @@
 title: "AI-Assisted Development: From Implementation to Judgment"
 pubDatetime: 2025-11-07T12:00:00Z
 description: "Flip the ratio: 20% reviewing code, 80% strategy. AI-assisted development with 70-80% time savings on infrastructure tasks. Real metrics from production."
-tags: ["ai", "goose", "productivity", "devops", "engineering-leadership", "automation", "cicd"]
+tags:
+  - ai
+  - automation
+  - devops
+  - goose
+  - productivity
 featured: true
 ---
 
