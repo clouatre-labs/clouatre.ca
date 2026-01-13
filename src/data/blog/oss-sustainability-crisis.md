@@ -1,6 +1,6 @@
 ---
 title: "When AI Eats Its Own: The OSS Crisis CTOs Can't Ignore"
-pubDatetime: 2026-01-13T09:00:00Z
+pubDatetime: 2026-01-13T07:00:00Z
 description: "Tailwind laid off 75% of engineering after AI cut docs traffic 40%. A 5-signal framework to assess which dependencies face similar supply chain risk."
 tags:
   - open-source
