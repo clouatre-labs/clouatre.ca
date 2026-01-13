@@ -48,8 +48,10 @@ const structuredData = isBlogPost
       author: [
         {
           "@type": "Person",
+          "@id": `${SITE.website}/#author`,
           name: `${author}`,
           ...(profile && { url: profile }),
+          sameAs: SITE.sameAs,
         },
       ],
     }
@@ -61,10 +63,22 @@ const structuredData = isBlogPost
       description: `${description}`,
       author: {
         "@type": "Person",
+        "@id": `${SITE.website}/#author`,
         name: `${author}`,
         ...(profile && { url: profile }),
+        sameAs: SITE.sameAs,
       },
     };
+
+// Standalone Person schema for entity linking
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE.website}/#author`,
+  name: `${author}`,
+  url: `${SITE.website}`,
+  sameAs: SITE.sameAs,
+};
 ---
 
 <!doctype html>
@@ -123,6 +137,13 @@ const structuredData = isBlogPost
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(structuredData)}
+    />
+
+    <!-- Standalone Person schema for entity linking -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(personSchema)}
     />
 
     <!-- Enable RSS feed auto-discovery  -->
