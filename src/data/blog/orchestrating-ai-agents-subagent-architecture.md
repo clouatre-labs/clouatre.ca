@@ -17,7 +17,7 @@ Basic code assistants show roughly 10% productivity gains. But companies pairing
 
 This post documents a production workflow using [Goose](https://github.com/block/goose), an open-source AI assistant. The architecture separates planning, building, and validation into distinct phases, each with a different model optimized for the task.
 
-## The Single-Agent Ceiling
+## Why Do Single-Agent AI Coding Workflows Hit a Ceiling?
 
 A single AI model handling an entire coding task accumulates context with every interaction. By implementation time, the model carries baggage from analysis, research, and planning phases. This creates three problems.
 
@@ -29,7 +29,7 @@ A single AI model handling an entire coding task accumulates context with every 
 
 The business impact is measurable. Longer sessions correlate with more rework. Complex refactors that should take hours stretch into days of back-and-forth correction.
 
-## The Subagent Solution
+## How Does Subagent Architecture Solve Context Problems?
 
 The fix: spawn specialized subagents for each phase. An orchestrator handles high-level coordination and human interaction. Subagents handle execution with fresh context.
 
@@ -133,7 +133,7 @@ Why files instead of memory? Three reasons:
 
 The recipe defines each phase with model-specific settings: Opus for orchestration, Haiku for building, Sonnet for validation. The full recipe (200+ lines) is available as a [GitHub Gist](https://gist.github.com/clouatre/22d4451725f3c64dabe680297bbd35d7).
 
-## Human Gates: Where Judgment Stays
+## Where Should Human Judgment Stay in AI Workflows?
 
 Not every phase needs human approval. The workflow distinguishes between decisions (require judgment) and execution (follow the plan).
 

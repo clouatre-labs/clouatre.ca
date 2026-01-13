@@ -17,7 +17,7 @@ Traditional constraint: Exploring multiple solutions costs 3x the implementation
 
 ## Table of contents
 
-## The Solution
+## How Does AI-Assisted Development Flip the 80/20 Ratio?
 
 AI assistants flip the ratio: 20% reviewing code, 80% applying judgment.
 
@@ -81,7 +81,7 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 
 **Source:** [PR #52 - Add modern CI workflow](https://github.com/clouatre-labs/math-mcp-learning-server/pull/52)
 
-## Quantifiable Business Value
+## What Business Value Does AI-Assisted Development Deliver?
 
 ### Decision Quality
 - **Alternatives evaluated:** 2-3 per decision (vs. 1 traditional)
@@ -118,7 +118,7 @@ At 10 infrastructure tasks per month, this recovers ~60 hours per year per engin
 
 *Table 2: Strategic outcomes and business value comparison between traditional and AI-assisted workflows*
 
-## The Recipe Model: Codifying Judgment
+## How Do Recipes Codify Engineering Judgment?
 
 Goose uses "recipes" (YAML workflow definitions) that codify your judgment and process:
 

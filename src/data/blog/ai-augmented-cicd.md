@@ -15,7 +15,7 @@ Code reviews are a bottleneck. Engineering teams lose significant velocity waiti
 
 AI in CI/CD isn't about replacing humans. It's about giving your pipeline the intelligence to catch problems before humans see them. Do this in seconds, not hours.
 
-## The Real Cost of Manual Review
+## What Is the Real Cost of Manual Code Review?
 
 Your development team runs at the speed of your slowest code review. Code review bottlenecks are well-documented across engineering teams. Feedback loops stretch from hours to days while developers context-switch or wait on reviewers. Research from Forsgren et al. (2024) shows context-switching during code review significantly reduces developer productivity and satisfaction.
 
@@ -35,7 +35,7 @@ The solution is defensive architecture: build your CI/CD so AI never analyzes un
 
 This requires thinking in tiers. Not all systems have the same threat model. A private repo with a trusted five-person team can tolerate different risk than open-source accepting external contributors. We built three patterns that match different threat models and deliver the speed gains you need.
 
-## Tier 1: Maximum Security Pattern
+## How Do You Integrate AI into CI/CD Without Prompt Injection Risk?
 
 Tier 1 is immune to prompt injection. Your linter runs first, produces JSON output, and the AI analyzes only that structured data. The AI never sees the raw code, never processes user input, never runs in the context of potentially malicious diffs.
 
@@ -201,7 +201,7 @@ The naive approach is to feed AI your code diff directly and let it comment on t
 
 The shift is architectural, not just operational. You're moving from "AI sees everything and decides" to "AI sees what's safe and humans decide what matters." That distinction is where security and speed both win.
 
-## Real Outcomes: Velocity, Quality, Confidence
+## What Outcomes Can You Expect from AI-Augmented CI/CD?
 
 Typical first-review latency drops from 4–22 hours (Octoverse 2024) to under 5 minutes, a 50–250× reduction. Developers iterate faster because they see feedback immediately. CI/CD pipelines don't stall waiting for human review availability. Your smartest engineers spend less time waiting and more time building.
 
