@@ -11,7 +11,7 @@ tags:
 featured: true
 ---
 
-Your CI pipeline trusts 400 packages. Last week, one of them laid off 75% of its engineering team. Nearly two years ago, another nearly shipped a backdoor to every major Linux distribution. Last month, attackers started registering package names that only exist because an AI hallucinated them.
+Your CI pipeline trusts 400 packages. Last week, one of them laid off 75% of its engineering team. Nearly two years ago, another nearly shipped a backdoor to every major Linux distribution. Attackers are now registering package names that only exist because an AI hallucinated them.
 
 Three incidents. Three attack vectors. One common thread: AI is reshaping software supply chain risk faster than most security programs can adapt.
 
@@ -47,7 +47,7 @@ Two years later, the technique has evolved. Attackers now use LLMs to maintain t
 
 ### Vector 3: Slopsquatting (AI-Native)
 
-This attack vector didn't exist before LLMs. [Slopsquatting](https://snyk.io/articles/slopsquatting-mitigation-strategies/) exploits a specific AI behavior: hallucinating package names that don't exist.
+This attack vector didn't exist before LLMs. [Slopsquatting](https://snyk.io/articles/slopsquatting-mitigation-strategies/) exploits models that confidently recommend nonexistent packages. One in five AI suggestions points to a package that was never published (Spracklen et al., 2025).
 
 The attack flow:
 1. Researchers run popular LLMs and collect hallucinated package names
@@ -182,4 +182,5 @@ But start with one question: open your `package.json` or `requirements.txt`. How
 - CrowdStrike, "CVE-2024-3094 and XZ Upstream Supply Chain Attack" (2024) — https://www.crowdstrike.com/en-us/blog/cve-2024-3094-xz-upstream-supply-chain-attack/
 - Sonatype, "10th Annual State of the Software Supply Chain" (2024) — https://www.sonatype.com/state-of-the-software-supply-chain/introduction
 - Snyk, "Slopsquatting: New AI Hallucination Threats" (2025) — https://snyk.io/articles/slopsquatting-mitigation-strategies/
+- Spracklen, Joseph et al., "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs" (arXiv, 2025) — https://arxiv.org/abs/2406.10279
 - Verizon, "2025 Data Breach Investigations Report" — https://www.verizon.com/business/resources/reports/dbir/
