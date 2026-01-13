@@ -21,15 +21,11 @@ Tailwind is the first OSS project to publicly share these numbers. They won't be
 
 ## What Pattern Are We Seeing?
 
-On January 6, 2026, Tailwind Labs reduced their engineering team from four to two. Adam Wathan, the founder, [was direct about the cause](https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957) (Wathan, 2026):
-
-> "75% of the people on our engineering team lost their jobs here yesterday because of the brutal impact AI has had on our business."
-
-The numbers tell the story. Documentation traffic dropped 40% since early 2023. Revenue collapsed 80%. Yet Tailwind CSS downloads and usage continue climbing.
+On January 6, 2026, Tailwind Labs reduced their engineering team from four to two. Adam Wathan, the founder, attributed the layoffs directly to [AI's brutal impact on their business](https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957). Documentation traffic dropped 40% since early 2023. Revenue collapsed 80%. Yet Tailwind CSS downloads and usage continue climbing.
 
 This isn't a failing product. It's a failing business model.
 
-A month earlier, Bun's creator Jarred Sumner [announced a different path](https://bun.sh/blog/bun-joins-anthropic) (Sumner, 2025). After acknowledging that "Bun makes $0 in revenue," he sold the project to Anthropic. His reasoning was pragmatic: rather than "put users through 'Bun, the VC-backed startup tries to figure out monetization,'" he chose stability over independence.
+A month earlier, Bun's creator Jarred Sumner [sold the project to Anthropic](https://bun.sh/blog/bun-joins-anthropic) after acknowledging the runtime generated zero revenue. Rather than force users through a monetization experiment, he chose stability over independence.
 
 Two projects. Two responses. One underlying problem: the economics that sustained open-source software are breaking.
 
@@ -174,6 +170,6 @@ AICP and x402 are experiments worth watching. Acquisition consolidation is accel
 
 ## References
 
-- Wathan, A., "GitHub comment on Tailwind layoffs" (2026) — https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957
-- Sumner, J., "Bun is joining Anthropic" (2025) — https://bun.sh/blog/bun-joins-anthropic
-- AICP Proposal, "AI Consumption Protocol for OSS documentation" (2026) — https://github.com/tailwindlabs/tailwindcss.com/issues/2421
+- Wathan, Adam, "GitHub comment on Tailwind layoffs" (2026) — https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957
+- Sumner, Jarred, "Bun is joining Anthropic" (2025) — https://bun.sh/blog/bun-joins-anthropic
+- Tailwind Labs, "AI Consumption Protocol for OSS documentation" (2026) — https://github.com/tailwindlabs/tailwindcss.com/issues/2421
