@@ -1,13 +1,13 @@
 ---
 title: "Orchestrating AI Agents: A Subagent Architecture for Code"
 pubDatetime: 2025-12-24T12:00:00Z
-description: Cut AI coding costs 50% with multi-agent architecture. Assign planning, building, and validation to specialized models for better output at lower spend.
+description: "Cut AI coding costs 50% with multi-agent architecture. Assign planning, building, and validation to specialized models for better output at lower spend."
 tags:
-  - AI
-  - LLM
-  - Architecture
-  - Productivity
-  - Goose
+  - ai
+  - architecture
+  - goose
+  - llm
+  - productivity
 featured: true
 ---
 
