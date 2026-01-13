@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph tier1["Tier 1: Foundation-Backed"]
+        F1[Corporate membership dues]
+        F2[Distributed governance]
+        F3[Employed maintainers]
+        F1 --> F2 --> F3
+    end
+
+    subgraph tier2["Tier 2: Indie / VC-Backed"]
+        I1[Sponsorships or VC runway]
+        I2[Solo or small team]
+        I3[Docs-driven revenue]
+        I1 --> I2 --> I3
+    end
+
+    tier1 -->|Low AI exposure| S1[Stable funding]
+    tier2 -->|High AI exposure| S2[At risk]
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#282728
+    classDef warning fill:#f59e0b,stroke:#282728,stroke-width:2px,color:#fff
+
+    class F1,F2,F3 secondary
+    class I1,I2,I3 secondary
+    class S1 primary
+    class S2 warning
