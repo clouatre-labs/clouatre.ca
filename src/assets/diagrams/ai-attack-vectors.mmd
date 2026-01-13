@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph vectors["AI-Driven Attack Vectors"]
+        direction TB
+        V1["<b>Maintainer Collapse</b><br/>AI kills docs revenue<br/>→ layoffs, abandonment"]
+        V2["<b>Social Engineering</b><br/>Burned-out solo maintainer<br/>→ malicious handoff"]
+        V3["<b>Slopsquatting</b><br/>AI hallucinates packages<br/>→ attackers register them"]
+    end
+
+    DEP["Your Dependencies"]
+    RISK["Supply Chain<br/>Compromise"]
+
+    DEP --> V1
+    DEP --> V2
+    DEP --> V3
+    V1 --> RISK
+    V2 --> RISK
+    V3 --> RISK
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+
+    class DEP,RISK primary
+    class V1,V2,V3 accent
