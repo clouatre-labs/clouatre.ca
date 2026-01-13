@@ -3,11 +3,11 @@ title: "AI Is Creating New Supply Chain Attack Vectors in Your Dependencies"
 pubDatetime: 2026-01-13T07:00:00Z
 description: "XZ Utils nearly backdoored Linux. Tailwind laid off 75% after AI killed revenue. Slopsquatting weaponizes hallucinations. A framework to assess exposure."
 tags:
-  - open-source
   - ai
+  - security
   - supply-chain
-  - risk-management
-  - cto
+  - open-source
+  - slopsquatting
 featured: true
 ---
 
