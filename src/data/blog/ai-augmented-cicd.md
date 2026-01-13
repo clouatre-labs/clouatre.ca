@@ -15,6 +15,8 @@ Code reviews are a bottleneck. Engineering teams lose significant velocity waiti
 
 AI in CI/CD isn't about replacing humans. It's about giving your pipeline the intelligence to catch problems before humans see them. Do this in seconds, not hours.
 
+## Table of contents
+
 ## What Is the Real Cost of Manual Code Review?
 
 Your development team runs at the speed of your slowest code review. Code review bottlenecks are well-documented across engineering teams. Feedback loops stretch from hours to days while developers context-switch or wait on reviewers. Research from Forsgren et al. (2024) shows context-switching during code review significantly reduces developer productivity and satisfaction.
