@@ -3,6 +3,7 @@ import IconBrandX from "@/assets/icons/IconBrandX.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
+import IconMastodon from "@/assets/icons/IconMastodon.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
@@ -28,6 +29,12 @@ export const SOCIALS: Social[] = [
     href: "https://www.linkedin.com/in/huguesclouatre/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
+  },
+  {
+    name: "Fediverse",
+    href: "https://fed.brid.gy/web/clouatre.ca",
+    linkTitle: `${SITE.title} on the Fediverse`,
+    icon: IconMastodon,
   },
   {
     name: "RSS",
