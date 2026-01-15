@@ -1,5 +1,5 @@
 # Base stage for building the static files
-FROM node:lts@sha256:0ab63cafa05b4c1db52959b40b7ea1f52753fe65f27a1b84f3991c296b1c16e6 AS base
+FROM node:lts@sha256:b2b2184ba9b78c022e1d6a7924ec6fba577adf28f15c9d9c457730cc4ad3807a AS base
 WORKDIR /app
 
 # Install pnpm
