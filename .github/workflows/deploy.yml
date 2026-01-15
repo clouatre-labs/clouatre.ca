@@ -35,6 +35,7 @@ jobs:
         run: bun run build
         env:
           NODE_ENV: production
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
