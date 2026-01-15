@@ -85,6 +85,10 @@ These projects built the modern web. They're also most exposed to all three atta
 
 Your stack almost certainly spans both tiers. Kubernetes (Tier 1) might orchestrate containers running applications built with Tailwind (Tier 2). The risk profiles differ, and your monitoring should reflect that.
 
+![Two-tier open source ecosystem: Foundation-backed vs docs-driven projects](@/assets/images/two-tier-ecosystem.png)
+
+*Figure 2: Two-tier ecosystem with different AI exposure levels.*
+
 ## How Should You Assess AI Exposure Risk?
 
 Traditional dependency scanning catches CVEs. It doesn't catch maintainer burnout, revenue collapse, or AI-hallucinated packages. You need additional signals.
@@ -125,7 +129,7 @@ Consider a fintech platform with 400 npm dependencies. Traditional scanning surf
 | Infrastructure | 45 | 1 | Lower priority |
 | Utility libraries | 335 | 23 | Automate monitoring |
 
-*Table 2: AI exposure audit across dependency categories.*
+*Table 2: Example AI exposure audit for a mid-size fintech stack.*
 
 The 23 high-exposure utility libraries aren't all equal. Prioritize by criticality: is this in the authentication path? The payment flow? The deployment pipeline?
 
