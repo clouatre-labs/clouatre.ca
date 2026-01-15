@@ -25,17 +25,20 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
+    <section id="hero" class="pt-8 pb-6 h-card">
+      <img src="/favicon.svg" alt="" class="u-photo sr-only" />
+      <img src="/hugues-og.jpg" alt="" class="u-featured sr-only" />
+      
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Welcome
+        <a href={SITE.website} class="u-url">Welcome</a>
       </h1>
 
-      <p>
+      <p class="p-note">
         I'm Hugues Clouâtre, a world-class executive leader with extensive
         experience at AWS, Oracle, and Slalom. I specialize in digital
         transformation, cloud architecture, and building high-performing teams.
       </p>
-      <p class="mt-2">
+      <p class="mt-2 p-note">
         This is where I share insights on technology leadership, advanced AI
         workflows, cloud architecture, and emerging technologies. Check out my
         <LinkButton
