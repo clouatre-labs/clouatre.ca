@@ -6,6 +6,7 @@ import {
 } from "@shikijs/transformers";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
+import indexnow from "astro-indexnow";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { SITE } from "./src/config";
@@ -17,6 +18,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
+    }),
+    indexnow({
+      key: process.env.INDEXNOW_KEY,
+      enabled: !!process.env.INDEXNOW_KEY,
     }),
   ],
   markdown: {
