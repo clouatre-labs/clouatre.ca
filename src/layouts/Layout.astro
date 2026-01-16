@@ -4,6 +4,19 @@ import { ClientRouter } from "astro:transitions";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
+interface FAQPageSchema {
+  "@context": "https://schema.org";
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
+}
+
 export interface Props {
   title?: string;
   author?: string;
@@ -14,6 +27,7 @@ export interface Props {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
+  faqSchema?: FAQPageSchema;
 }
 
 const {
@@ -26,6 +40,7 @@ const {
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
+  faqSchema,
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.url);
@@ -178,6 +193,17 @@ const personSchema = {
       is:inline
       set:html={JSON.stringify(personSchema)}
     />
+
+    <!-- FAQPage schema (if available) -->
+    {
+      faqSchema && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(faqSchema)}
+        />
+      )
+    }
 
     <!-- Enable RSS feed auto-discovery  -->
     <!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery -->

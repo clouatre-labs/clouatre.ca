@@ -10,6 +10,7 @@ import indexnow from "astro-indexnow";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { SITE } from "./src/config";
+import remarkFaqSchema from "./src/utils/remark-faq-schema";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 
 // https://astro.build/config
@@ -27,6 +28,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       [remarkToc, { maxDepth: 3 }],
+      remarkFaqSchema,
       [remarkCollapse, { test: "Table of contents", summary: "Contents" }],
     ],
     shikiConfig: {
