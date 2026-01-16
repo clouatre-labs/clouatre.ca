@@ -4,7 +4,7 @@ import { SITE } from "@/config";
 
 export const BLOG_PATH = "src/data/blog";
 
-const faqPageSchema = z.object({
+export const faqPageSchema = z.object({
   "@context": z.literal("https://schema.org"),
   "@type": z.literal("FAQPage"),
   mainEntity: z.array(
@@ -18,6 +18,8 @@ const faqPageSchema = z.object({
     }),
   ),
 });
+
+export type FAQPageSchema = z.infer<typeof faqPageSchema>;
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),

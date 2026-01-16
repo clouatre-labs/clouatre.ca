@@ -3,6 +3,13 @@
 
 import type { Root } from "mdast";
 import { visit } from "unist-util-visit";
+import type { FAQPageSchema } from "@/content.config";
+
+declare module "vfile" {
+  interface DataMap {
+    faqSchema?: FAQPageSchema;
+  }
+}
 
 interface Question {
   "@type": "Question";
@@ -11,12 +18,6 @@ interface Question {
     "@type": "Answer";
     text: string;
   };
-}
-
-interface FAQPageSchema {
-  "@context": "https://schema.org";
-  "@type": "FAQPage";
-  mainEntity: Question[];
 }
 
 interface AstroNode {
@@ -30,6 +31,7 @@ interface AstroFile {
     astro?: {
       frontmatter?: Record<string, unknown>;
     };
+    faqSchema?: FAQPageSchema;
   };
 }
 
@@ -67,7 +69,7 @@ export default function remarkFaqSchema() {
         return;
       }
 
-      // Find the next paragraph node
+      // Find and aggregate following content until next heading
       if (!parent || !Array.isArray(parent.children) || index === undefined) {
         return;
       }
@@ -77,15 +79,35 @@ export default function remarkFaqSchema() {
         return;
       }
 
-      const nextNode = parent.children[nextIndex];
+      // Collect all content blocks until next heading
+      const answerParts: string[] = [];
+      let currentIdx = nextIndex;
 
-      // Check if next node is a paragraph
-      if (nextNode.type !== "paragraph") {
-        return;
+      while (currentIdx < parent.children.length) {
+        const node = parent.children[currentIdx];
+
+        // Stop at next heading
+        if (node.type === "heading") {
+          break;
+        }
+
+        // Include paragraphs, lists, code blocks, etc.
+        if (
+          node.type === "paragraph" ||
+          node.type === "list" ||
+          node.type === "code" ||
+          node.type === "blockquote"
+        ) {
+          const text = extractText(node);
+          if (text.trim()) {
+            answerParts.push(text.trim());
+          }
+        }
+
+        currentIdx++;
       }
 
-      // Extract paragraph text as answer
-      const answerText = extractText(nextNode);
+      const answerText = answerParts.join(" ");
 
       if (answerText.trim()) {
         questions.push({
@@ -107,15 +129,8 @@ export default function remarkFaqSchema() {
         mainEntity: questions,
       };
 
-      // Inject into frontmatter
-      if (!file.data.astro) {
-        file.data.astro = {};
-      }
-      if (!file.data.astro.frontmatter) {
-        file.data.astro.frontmatter = {};
-      }
-
-      file.data.astro.frontmatter.faqSchema = faqSchema;
+      // Inject into file.data (Astro Content Layer will pick this up)
+      file.data.faqSchema = faqSchema;
     }
   };
 }
