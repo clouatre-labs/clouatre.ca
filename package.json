@@ -63,6 +63,6 @@
     "simple-git-hooks": "2.13.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.0",
-    "wrangler": "4.59.0"
+    "wrangler": "4.59.1"
   }
 }
