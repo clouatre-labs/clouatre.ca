@@ -23,5 +23,6 @@ export const SITE = {
   sameAs: [
     "https://github.com/clouatre",
     "https://www.linkedin.com/in/huguesclouatre/",
+    "https://www.credly.com/users/hugues-clouatre/",
   ],
 } as const;

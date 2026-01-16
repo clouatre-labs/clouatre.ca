@@ -57,5 +57,7 @@ internal/
 *~
 
 # pagefind
-
 public/pagefind
+
+# Astro cache artifacts
+.astro-indexnow-cache.json
