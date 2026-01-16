@@ -200,7 +200,7 @@ const personSchema = {
         <script
           type="application/ld+json"
           is:inline
-          set:html={JSON.stringify(faqSchema)}
+          set:html={JSON.stringify(faqSchema).replace(/</g, "\\u003c")}
         />
       )
     }
