@@ -4,6 +4,23 @@ import { SITE } from "@/config";
 
 export const BLOG_PATH = "src/data/blog";
 
+export const faqPageSchema = z.object({
+  "@context": z.literal("https://schema.org"),
+  "@type": z.literal("FAQPage"),
+  mainEntity: z.array(
+    z.object({
+      "@type": z.literal("Question"),
+      name: z.string(),
+      acceptedAnswer: z.object({
+        "@type": z.literal("Answer"),
+        text: z.string(),
+      }),
+    }),
+  ),
+});
+
+export type FAQPageSchema = z.infer<typeof faqPageSchema>;
+
 const blog = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
   schema: ({ image }) =>
@@ -20,6 +37,7 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      faqSchema: faqPageSchema.optional(),
     }),
 });
 
