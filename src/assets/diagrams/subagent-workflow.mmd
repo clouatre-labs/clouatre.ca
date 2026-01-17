@@ -1,12 +1,9 @@
 flowchart TD
     START(["Recipe Triggered"])
     
-    P1["<b>ANALYZE</b><br/>Understand scope"]
-    G1{"GATE 1<br/>Human Review"}
-    P2["<b>RESEARCH</b><br/>Explore options"]
-    G2{"GATE 2<br/>Human Decision"}
-    P3["<b>PLAN</b><br/>Design solution"]
-    G3{"GATE 3<br/>Human Approval"}
+    P1["<b>RESEARCH</b><br/>Explore options"]
+    G1{"GATE 1<br/>Human Decision"}
+    P2["<b>PLAN</b><br/>Design solution"]
     
     B1["<b>BUILDER SUBAGENT</b><br/>Implement code<br/>Fresh context"]
     V1["<b>VALIDATOR SUBAGENT</b><br/>Tests + Lint<br/>Fresh context"]
@@ -17,12 +14,7 @@ flowchart TD
     P1 --> G1
     G1 -->|Approve| P2
     G1 -.->|Reject| P1
-    P2 --> G2
-    G2 -->|Approve| P3
-    G2 -.->|Reject| P2
-    P3 --> G3
-    G3 -->|02-plan.json| B1
-    G3 -.->|Reject| P3
+    P2 -->|02-plan.json| B1
     B1 -->|03-build.json| V1
     V1 -->|Pass| END
     V1 -.->|04-validation.json| B1
@@ -33,6 +25,6 @@ flowchart TD
     classDef subagent fill:#0e7490,stroke:#282728,stroke-width:2px,color:#fff
 
     class START,END primary
-    class P1,P2,P3 accent
+    class P1,P2 accent
     class B1,V1 subagent
-    class G1,G2,G3 muted
+    class G1 muted
