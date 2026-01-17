@@ -35,7 +35,7 @@ The business impact is measurable. Longer sessions correlate with more rework. C
 
 The fix: spawn specialized subagents for each phase. An orchestrator handles high-level coordination and human interaction. Subagents handle execution with fresh context.
 
-![Subagent workflow diagram showing Orchestrator with ANALYZE, RESEARCH, PLAN phases flowing to Builder (BUILD) and Validator (CHECK)](@/assets/images/recipe-workflow.png)
+![Subagent workflow diagram showing Orchestrator with ANALYZE, RESEARCH, PLAN phases flowing to Builder (BUILD) and Validator (CHECK)](@/assets/images/subagent-workflow.png)
 
 *Figure 1: Subagent workflow. Orchestrator handles planning with human gates. Builder and Validator run as separate subagents with fresh context.*
 
