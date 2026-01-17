@@ -145,7 +145,7 @@ For a quick CLI check:
 
 ```bash
 # Check a project's health score (0-10)
-scorecard --repo=github.com/tailwindlabs/tailwindcss --format=short
+scorecard --repo=tailwindlabs/tailwindcss
 ```
 
 ### Validate AI-Generated Dependencies
