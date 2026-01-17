@@ -177,7 +177,7 @@ instructions: |
 
 The recipe enforces branch hygiene (never push to main), conventional commits, test requirements, and approval workflow. Updated after premature upstream contribution attempt. Now requires thorough local testing before any OSS contribution.
 
-## When This Approach Works
+## When Does This Approach Work?
 
 **Works for:**
 - Experienced engineers who can evaluate proposals
