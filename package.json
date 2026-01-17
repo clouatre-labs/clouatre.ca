@@ -8,10 +8,12 @@
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
-    "check": "biome check . --files-ignore-unknown=true --diagnostic-level=error",
+    "check": "biome check . --files-ignore-unknown=true --diagnostic-level=error && bun run validate:headings",
     "check:fix": "biome check --write . --files-ignore-unknown=true",
     "format": "biome format --write .",
     "lint": "biome lint . --files-ignore-unknown=true",
+    "validate:headings": "markdownlint-cli2 'src/data/blog/**/*.md'",
+    "validate:headings:fix": "markdownlint-cli2 --fix 'src/data/blog/**/*.md'",
     "test:local": "bun run build",
     "test:dev": "astro dev --open",
     "prepare": "simple-git-hooks"
@@ -23,6 +25,9 @@
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro,json,md}": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+    ],
+    "src/data/blog/**/*.md": [
+      "markdownlint-cli2"
     ]
   },
   "overrides": {
@@ -56,6 +61,7 @@
     "eslint-plugin-astro": "1.5.0",
     "globals": "17.0.0",
     "lint-staged": "16.2.7",
+    "markdownlint-cli2": "^0.20.0",
     "pagefind": "1.4.0",
     "prettier": "3.7.4",
     "prettier-plugin-astro": "0.14.1",

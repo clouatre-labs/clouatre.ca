@@ -37,7 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
-      - name: Lint and format check
+      - name: Lint, format, and heading hierarchy check
         run: bun run check
 
       - name: Build site
