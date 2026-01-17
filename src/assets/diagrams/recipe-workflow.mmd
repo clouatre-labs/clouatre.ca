@@ -1,0 +1,44 @@
+flowchart TD
+    START(["Recipe Triggered"])
+    
+    P1["<b>PHASE 1: ANALYZE</b><br/>Understand codebase<br/>Identify problem scope"]
+    G1{"STOP GATE 1<br/>Human Review"}
+    
+    P2["<b>PHASE 2: RESEARCH</b><br/>Explore 2-3 solutions<br/>Present trade-offs"]
+    G2{"STOP GATE 2<br/>Human Decision"}
+    
+    P3["<b>PHASE 3: PLAN</b><br/>Detailed implementation<br/>Files and steps"]
+    G3{"STOP GATE 3<br/>Human Approval"}
+    
+    P4["<b>PHASE 4: IMPLEMENT</b><br/>Code + Tests + Docs<br/>Verify locally"]
+    G4{"STOP GATE 4<br/>Human Review"}
+    
+    P5["<b>PHASE 5: PREPARE</b><br/>Create PR<br/>Push to branch"]
+    G5{"STOP GATE 5<br/>Final Approval"}
+    
+    END(["PR Ready for Merge"])
+
+    START --> P1
+    P1 --> G1
+    G1 -->|Approve| P2
+    G1 -.->|Reject| P1
+    P2 --> G2
+    G2 -->|Approve| P3
+    G2 -.->|Reject| P2
+    P3 --> G3
+    G3 -->|Approve| P4
+    G3 -.->|Reject| P3
+    P4 --> G4
+    G4 -->|Approve| P5
+    G4 -.->|Reject| P4
+    P5 --> G5
+    G5 -->|Approve| END
+    G5 -.->|Reject| P5
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#e6e6e6,stroke:#282728,stroke-width:1px,color:#282728
+
+    class START,END primary
+    class P1,P2,P3,P4,P5 accent
+    class G1,G2,G3,G4,G5 muted
