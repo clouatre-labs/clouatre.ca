@@ -37,9 +37,9 @@ The fix: spawn specialized subagents for each phase. An orchestrator handles hig
 
 ![Subagent workflow diagram showing Orchestrator with RESEARCH, PLAN phases flowing to Builder and Validator subagents](@/assets/images/subagent-workflow.png)
 
-*Figure 1: Core subagent workflow. Orchestrator handles RESEARCH (with human gate) and PLAN. Builder and Validator run as separate subagents with fresh context. Handoff files (02-plan.json, 03-build.json, 04-validation.json) enable structured communication. SETUP and COMMIT/PR phases omitted for clarity.*
+*Figure 1: Core subagent workflow. Orchestrator handles RESEARCH (with human gate) and PLAN. Builder and Validator run as separate subagents with fresh context. SETUP and COMMIT/PR phases omitted for clarity.*
 
-The orchestrator (Claude Opus 4.5) handles RESEARCH and PLAN phases. RESEARCH requires human judgment at a single gate to decide the approach. After plan completion, it spawns a BUILD subagent (Claude Haiku 4.5) that receives only the plan via `02-plan.json` handoff file, not accumulated history. The builder writes code, runs tests, then hands off to a CHECK subagent (Claude Sonnet 4.5) via `03-build.json` for validation.
+The orchestrator (Claude Opus 4.5) handles RESEARCH and PLAN phases. RESEARCH requires human judgment at a single gate to decide the approach. After plan completion, it spawns a BUILD subagent (Claude Haiku 4.5) that receives only the plan, not accumulated history. The builder writes code, runs tests, then hands off to a CHECK subagent (Claude Sonnet 4.5) for validation.
 
 Each subagent starts with clean context. The builder knows what to build, not how we decided to build it. The validator knows what was built, not what alternatives we considered. This isolation prevents context pollution.
 
