@@ -150,9 +150,9 @@ Not every phase needs human approval. The workflow distinguishes between decisio
 - CHECK (on PASS): Validation passed, proceed to commit
 - COMMIT/PR: Push validated changes
 
-This separation preserves governance without creating bottlenecks. Humans make one strategic decision at RESEARCH. AI executes the rest. If validation fails, the system loops back to BUILD with specific feedback or allows proceeding with noted issues.
+This separation preserves governance without creating bottlenecks. Humans make strategic decisions. AI executes. If validation fails, the system loops back to BUILD with specific feedback. No human intervention for mechanical fixes.
 
-The gates create natural documentation points. RESEARCH captures the strategic decision. CHECK gates document quality trade-offs when issues are found.
+The gates also create natural documentation points. Each approval is a checkpoint in the decision record.
 
 ## Results
 
