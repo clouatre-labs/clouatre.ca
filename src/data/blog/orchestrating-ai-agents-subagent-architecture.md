@@ -137,7 +137,7 @@ The recipe defines each phase with model-specific settings: Opus for orchestrati
 
 ## Where Should Human Judgment Stay in AI Workflows?
 
-Not every phase needs human approval. The workflow uses one mandatory gate at RESEARCH and conditional gates at CHECK when issues arise.
+Not every phase needs human approval. The workflow distinguishes between decisions (require judgment) and execution (follow the plan).
 
 **Phases with gates (human approval required):**
 - RESEARCH: "Which of these approaches should we take?"
