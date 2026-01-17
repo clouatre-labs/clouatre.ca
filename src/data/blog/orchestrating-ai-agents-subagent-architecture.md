@@ -182,7 +182,7 @@ Research on multi-agent frameworks for code generation shows they [consistently 
 
 *Table 4: Design targets based on context isolation and structured handoffs.*
 
-## When This Works (and When It Doesn't)
+## When Does This Work (and When Doesn't It)?
 
 **Works well for:**
 - Multi-file refactors where context isolation prevents confusion

@@ -242,7 +242,7 @@ We knew every record worked before switching. No deployment anxiety, no weekend 
 
 **The proof:** This blog post was reviewed at a preview URL before going live—using the same automation we're describing. The system documents itself.
 
-## When This Approach Applies
+## When Does This Approach Apply?
 
 **Ideal for:**
 - Infrastructure migrations (DNS, hosting, CI/CD platforms)
