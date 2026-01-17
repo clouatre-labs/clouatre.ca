@@ -144,8 +144,8 @@ Scorecard and Socket integrate directly into [AI-augmented CI/CD pipelines](/pos
 For a quick CLI check:
 
 ```bash
-# Check a project's health score (0-10)
-scorecard --repo=github.com/tailwindlabs/tailwindcss --format=short
+# Check a project's health score (0-10, requires GITHUB_TOKEN)
+scorecard --repo=tailwindlabs/tailwindcss
 ```
 
 ### Validate AI-Generated Dependencies
