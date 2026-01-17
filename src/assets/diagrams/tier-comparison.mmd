@@ -1,0 +1,21 @@
+flowchart TD
+    subgraph T1[Tier 1: Public]
+        T1In[Tool JSON] --> T1Out[Artifact]
+    end
+    
+    subgraph T2[Tier 2: Private]
+        T2In[File Stats] --> T2Gate{Gate} --> T2Out[Comment]
+    end
+    
+    subgraph T3[Tier 3: Trusted]
+        T3In[Code Diff] --> T3Def[Defense] --> T3Out[Artifact]
+    end
+    
+    T1 --> T2 --> T3
+    
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    
+    class T1In,T1Out,T2In,T2Out,T3In,T3Def,T3Out secondary
+    class T2Gate accent
