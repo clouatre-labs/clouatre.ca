@@ -43,7 +43,9 @@ The orchestrator (Claude Opus 4.5) handles RESEARCH and PLAN phases. RESEARCH re
 
 Each subagent starts with clean context. The builder knows what to build, not how we decided to build it. The validator knows what was built, not what alternatives we considered. This isolation prevents context pollution.
 
-The pattern has broader validation: [Anthropic's Research feature](https://www.anthropic.com/engineering/multi-agent-research-system) uses similar orchestration, a LeadResearcher coordinating parallel subagents with fresh context. The principle scales across domains.
+Anthropic's research on multi-agent systems confirms the impact of context management: **"Token usage by itself explains 80% of the variance"** in performance, with tool calls and model choice as secondary factors. Anthropic recommends an **"architecture that distributes work across agents with separate context windows"** ([Anthropic Engineering, 2025](https://www.anthropic.com/engineering/multi-agent-research-system)). The data supports what we observe in practice: context management is the primary optimization target.
+
+The pattern has broader validation: Anthropic's Research feature uses similar orchestration, a LeadResearcher coordinating specialized subagents with fresh context. The principle scales across domains.
 
 ## Model Selection Strategy
 
