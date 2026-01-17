@@ -1,31 +1,18 @@
-flowchart LR
-    subgraph before[Executive Summary Approach]
-        B1[Pull Request] --> B2[Generate Diff]
-        B2 --> B3[AI Analyzes Diff]
-        B3 --> B4[Post Results]
-        Risk1[High Risk] -.-> B3
-    end
+flowchart TD
+    PR[Pull Request] --> Tier{Select Tier}
     
-    subgraph after[Improved 3-Tier Model]
-        A1[Pull Request] --> A2{Choose<br/>Tier}
-        A2 -->|Public| A3[Tool Output]
-        A2 -->|Private| A4[Stats + Gate]
-        A2 -->|Trusted| A5[Diff + Defense]
-        A3 --> A6[Results]
-        A4 --> A6
-        A5 --> A6
-        Risk2[Risk Controlled] -.-> A6
-    end
+    Tier -->|Public| T1[Tool Output Only]
+    Tier -->|Private| T2[Stats + Quality Gate]
+    Tier -->|Trusted| T3[Diff + Defense Prompt]
     
-    before -.Evolution.-> after
+    T1 --> Safe[Risk-Controlled Results]
+    T2 --> Safe
+    T3 --> Safe
     
     classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
     classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
-    classDef warning fill:#fee2e2,stroke:#fca5a5,stroke-width:2px,color:#282728
     classDef safe fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#282728
     
-    class B3 warning
-    class A2 primary
-    class A3,A4,A5 secondary
-    class Risk1 warning
-    class Risk2 safe
+    class Tier primary
+    class T1,T2,T3 secondary
+    class Safe safe
