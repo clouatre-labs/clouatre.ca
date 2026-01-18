@@ -16,7 +16,8 @@
     "validate:headings:fix": "markdownlint-cli2 --fix 'src/data/blog/**/*.md'",
     "test:local": "bun run build",
     "test:dev": "astro dev --open",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "mermaid": "./scripts/mermaid.sh"
   },
   "simple-git-hooks": {
     "pre-commit": "bunx lint-staged",
