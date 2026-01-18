@@ -101,7 +101,7 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 ### Measured Time Savings
 - **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
 - **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
-- **DNS migration:** 2 hours total (vs. 4-6 hours typical manual process) - **~60% savings**
+- **DNS migration:** [2 hours total](/posts/zero-downtime-dns-migration/) (vs. 4-6 hours typical manual process) - **~60% savings**
 
 **Average: 70-80% time savings on infrastructure and DevOps tasks**
 
