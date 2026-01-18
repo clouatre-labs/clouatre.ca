@@ -1,13 +1,13 @@
 ---
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T12:00:00Z
-description: "Complete infrastructure migration in 2 hours with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with pre-validated testing. Real metrics."
+description: "Migrate to Cloudflare Pages with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with pre-validated testing. Real metrics."
 tags:
-  - ai
   - automation
+  - cloudflare
   - devops
   - goose
-  - infrastructure
+  - migration
 featured: true
 ---
 
@@ -90,7 +90,7 @@ We didn't need to specify:
 
 **Critical:** We reviewed every decision. The AI proposed, we approved. The combination of automation + human judgment enabled confidence.
 
-![Migration workflow diagram showing approval gates and validation steps](@/assets/images/migration-workflow.png)
+![Cloudflare migration workflow diagram showing approval gates and validation steps](@/assets/images/migration-workflow.png)
 *Figure 1: AI-assisted migration workflow with two human approval gates ensuring governance and confidence*
 
 ## What Got Automated
@@ -133,7 +133,7 @@ Creating a Cloudflare API token (2 minutes):
 
 Everything else: automated.
 
-![Infrastructure comparison showing before and after architecture](@/assets/images/infrastructure-comparison.png)
+![Cloudflare infrastructure comparison showing before and after architecture](@/assets/images/infrastructure-comparison.png)
 *Figure 2: Infrastructure transformation - from fragmented AWS/GitHub setup to unified Cloudflare platform*
 
 ## Results
