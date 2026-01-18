@@ -1,0 +1,18 @@
+{
+  // AIO (AI Optimization) heading hierarchy rules
+  // See CONTRIBUTING.md for rationale
+
+  // Only enable heading-related rules for AIO compliance
+  "default": false,
+
+  // Heading levels should increment by one (no skipping H2 -> H4)
+  "MD001": true,
+
+  // Enforce ATX-style headings (## Heading) for consistent machine parsing
+  "MD003": { "style": "atx" },
+
+  // No multiple H1s - title comes from frontmatter
+  "MD025": {
+    "front_matter_title": "title"
+  }
+}
