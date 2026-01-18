@@ -8,6 +8,7 @@ const MIN_LENGTH = 50;
 const MAX_LENGTH = 160;
 
 interface FrontmatterData {
+  title: string | null;
   description: string | null;
   isDraft: boolean;
 }
@@ -24,14 +25,21 @@ function extractFrontmatter(
 ): FrontmatterData & { parseError?: string } {
   try {
     const { data } = matter(content);
+    const title = data.title;
     const desc = data.description;
     return {
+      title: typeof title === "string" && title.trim() ? title.trim() : null,
       description: typeof desc === "string" && desc.trim() ? desc.trim() : null,
       isDraft: data.draft === true,
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    return { description: null, isDraft: false, parseError: message };
+    return {
+      title: null,
+      description: null,
+      isDraft: false,
+      parseError: message,
+    };
   }
 }
 
@@ -73,7 +81,8 @@ async function validateBlogPosts(): Promise<void> {
 
   // Process results
   for (const { file, content } of fileContents) {
-    const { description, isDraft, parseError } = extractFrontmatter(content);
+    const { title, description, isDraft, parseError } =
+      extractFrontmatter(content);
 
     // Report parse errors as validation errors
     if (parseError) {
@@ -104,6 +113,11 @@ async function validateBlogPosts(): Promise<void> {
       }
       if (length > MAX_LENGTH) {
         errors.push(`Too long (${length} chars, maximum ${MAX_LENGTH})`);
+      }
+
+      // Check if description just repeats the title (SEO anti-pattern)
+      if (title && description.toLowerCase() === title.toLowerCase()) {
+        errors.push("Description should not repeat the title");
       }
 
       // Track duplicates
