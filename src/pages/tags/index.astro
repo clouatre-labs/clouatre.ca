@@ -13,7 +13,7 @@ const posts = await getCollection("blog");
 const tags = getUniqueTags(posts);
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
+<Layout title={`Tags | ${SITE.title}`} description="Browse all tags used across blog posts.">
   <Header />
   <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
     <ul>
