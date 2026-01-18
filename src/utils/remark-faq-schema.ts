@@ -5,12 +5,6 @@ import type { Root } from "mdast";
 import { visit } from "unist-util-visit";
 import type { FAQPageSchema } from "@/content.config";
 
-declare module "vfile" {
-  interface DataMap {
-    faqSchema?: FAQPageSchema;
-  }
-}
-
 interface Question {
   "@type": "Question";
   name: string;
@@ -31,7 +25,6 @@ interface AstroFile {
     astro?: {
       frontmatter?: Record<string, unknown>;
     };
-    faqSchema?: FAQPageSchema;
   };
 }
 
@@ -129,8 +122,16 @@ export default function remarkFaqSchema() {
         mainEntity: questions,
       };
 
-      // Inject into file.data (Astro Content Layer will pick this up)
-      file.data.faqSchema = faqSchema;
+      // Initialize file.data.astro.frontmatter if not exists
+      if (!file.data.astro) {
+        file.data.astro = { frontmatter: {} };
+      }
+      if (!file.data.astro.frontmatter) {
+        file.data.astro.frontmatter = {};
+      }
+
+      // Inject into file.data.astro.frontmatter (Astro render will return this as remarkPluginFrontmatter)
+      file.data.astro.frontmatter.faqSchema = faqSchema;
     }
   };
 }

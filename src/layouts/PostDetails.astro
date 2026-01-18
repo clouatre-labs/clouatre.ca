@@ -37,7 +37,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 // Calculate reading time (average 200 words per minute)
 const readingTime = Math.ceil((post.body || "").split(/\s+/).length / 200);
@@ -70,7 +70,7 @@ const layoutProps = {
   canonicalURL,
   ogImage,
   scrollSmooth: true,
-  faqSchema: post.data.faqSchema,
+  faqSchema: remarkPluginFrontmatter?.faqSchema,
 };
 
 /* ========== Prev/Next Posts ========== */
