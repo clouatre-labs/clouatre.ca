@@ -12,7 +12,7 @@ tags:
   - roi
 ---
 
-Legacy systems aren't blocking AI adoption. They're the fastest path to ROI. Mid-market companies layer AI agents over existing infrastructure and [capture 30-80% productivity gains](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) (PwC AI Agent Survey, 2025) in 3-6 months. No modernization required. The question isn't whether to modernize first. It's why wait when you can prove value now and fund upgrades later.
+Your competitors are waiting for modernization budgets. You're shipping AI agents next quarter. Mid-market companies layer AI agents over existing infrastructure and [capture 30-80% productivity gains](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) (PwC AI Agent Survey, 2025) in 3-6 months—no modernization required. The question isn't whether to modernize first. It's why wait when you can prove value now and fund upgrades later.
 
 ## Table of contents
 
@@ -40,7 +40,7 @@ The risk profile is completely different. Modernization is a binary bet: succeed
 
 ## How Do AI Agents Actually Integrate with Legacy Systems?
 
-Integration is where most projects fail. Agents need access to data and business logic buried in legacy systems. You have three main patterns. Each has tradeoffs.
+But integration is where most projects fail. Agents need access to data and business logic buried in legacy systems. You have three main patterns. Each has tradeoffs.
 
 ### API Mediation Layer
 
