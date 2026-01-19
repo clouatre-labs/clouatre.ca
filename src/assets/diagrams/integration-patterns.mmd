@@ -1,21 +1,24 @@
-graph TD
-    subgraph API["API Mediation"]
+graph TB
+    subgraph API["1. API Mediation Pattern"]
+        direction LR
         A1["Agent"] -->|REST/GraphQL| A2["Facade Layer"]
-        A2 -->|Transform<br/>Auth<br/>Rate Limit| A3["Legacy API"]
-        A4["✓ Quick Wins<br/>✓ Tight Control<br/>✗ Latency"]
+        A2 -->|Transform + Auth| A3["Legacy API"]
     end
     
-    subgraph EVENT["Event-Driven"]
-        B1["Agent"] -->|Subscribe| B2["Message Bus<br/>Kafka/Azure"]
-        B3["Legacy System"] -->|Publish Events| B2
-        B4["✓ Real-Time<br/>✓ Scalable<br/>✗ Complexity"]
+    subgraph EVENT["2. Event-Driven Pattern"]
+        direction LR
+        B1["Agent"] -->|Subscribe| B2["Message Bus"]
+        B3["Legacy System"] -->|Publish| B2
     end
     
-    subgraph MCP["Model Context Protocol"]
-        C1["Agent"] -->|Standardized<br/>Interface| C2["MCP Server"]
-        C2 -->|Multi-Agent<br/>Coordination| C3["Data Sources"]
-        C4["✓ Standardized<br/>✓ Multi-Agent<br/>✗ New Tooling"]
+    subgraph MCP["3. Model Context Protocol"]
+        direction LR
+        C1["Agent"] -->|Standard Interface| C2["MCP Server"]
+        C2 -->|Query| C3["Data Sources"]
     end
+    
+    API -.->|"Quick wins, tight control"| EVENT
+    EVENT -.->|"Real-time, scalable"| MCP
     
     classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
     classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
