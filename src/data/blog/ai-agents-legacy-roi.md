@@ -111,14 +111,6 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 
 Projects fail when teams skip fundamentals.
 
-**No Clear Business Objectives.** Agents need specific KPIs. "Reduce response time by 30%" is clear. "Handle customer issues better" is not.
-
-**Insufficient Data Quality.** Duplicate records and inconsistent formats cause hallucinations. Clean data before deploying agents.
-
-**Inadequate Monitoring.** Agents degrade over time. Model updates change behavior. Without continuous monitoring and retraining, agents drift from objectives.
-
-**Isolated Task Automation.** Automating individual steps shifts bottlenecks. You need end-to-end process redesign. Agents should eliminate steps, not just speed them up.
-
 **Multi-Agent Coordination.** [Coordination tax grows exponentially](/posts/orchestrating-ai-agents-subagent-architecture). Five agents need ten interaction paths. If each agent is 95% reliable, a three-agent chain is only 77% reliable. Start with single-agent workflows.
 
 **Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
