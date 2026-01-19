@@ -1,6 +1,6 @@
 ---
 title: "AI Agents in Legacy Systems: ROI Without Modernization"
-pubDatetime: 2026-01-19T14:30:00Z
+pubDatetime: 2026-01-21T13:00:00Z
 description: "Mid-market CTOs achieve 30-80% productivity gains by layering AI agents over legacy systems. No modernization required. Proven patterns and ROI."
 featured: true
 draft: false
