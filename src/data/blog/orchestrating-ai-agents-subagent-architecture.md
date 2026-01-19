@@ -15,6 +15,8 @@ Single-agent AI coding hits a ceiling. Context windows fill up. Role confusion c
 
 Basic code assistants show roughly 10% productivity gains. But companies pairing AI with end-to-end process transformation report [25-30% improvements](https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/) (Bain, 2025). The difference isn't the model. It's the architecture.
 
+Anthropic's research on multi-agent systems confirms what we observe: architecture matters more than model choice. Their finding that ["token usage explains 80% of the variance"](https://www.anthropic.com/engineering/multi-agent-research-system) reflects the impact of isolation: focused context rather than accumulated conversation history.
+
 This post documents a production workflow using [Goose](https://github.com/block/goose), an open-source AI assistant. The architecture separates planning, building, and validation into distinct phases, each with a different model optimized for the task.
 
 ## Table of contents
@@ -41,11 +43,7 @@ The fix: spawn specialized subagents for each phase. An orchestrator handles hig
 
 The orchestrator (Claude Opus 4.5) handles RESEARCH and PLAN phases. RESEARCH requires human judgment at a single gate to decide the approach. After plan completion, it spawns a BUILD subagent (Claude Haiku 4.5) that receives only the plan, not accumulated history. The builder writes code, runs tests, then hands off to a CHECK subagent (Claude Sonnet 4.5) for validation.
 
-Each subagent starts with clean context. The builder knows what to build, not how we decided to build it. The validator knows what was built, not what alternatives we considered. This isolation prevents context pollution.
-
-Anthropic's research on multi-agent systems confirms the impact of context management: **"Token usage by itself explains 80% of the variance"** in performance, with tool calls and model choice as secondary factors. Anthropic recommends an **"architecture that distributes work across agents with separate context windows"** ([Anthropic Engineering, 2025](https://www.anthropic.com/engineering/multi-agent-research-system)). The data supports what we observe in practice: context management is the primary optimization target.
-
-The pattern has broader validation: Anthropic's Research feature uses similar orchestration, a LeadResearcher coordinating specialized subagents with fresh context. The principle scales across domains.
+Each subagent starts with clean context. The builder knows what to build, not how we decided to build it. The validator knows what was built, not what alternatives we considered. This isolation prevents context pollution and drives the performance gains research attributes to architecture over model selection (Anthropic Engineering, 2025).
 
 ## Model Selection Strategy
 
