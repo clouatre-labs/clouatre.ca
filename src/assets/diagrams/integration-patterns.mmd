@@ -1,0 +1,28 @@
+graph TD
+    subgraph API["API Mediation"]
+        A1["Agent"] -->|REST/GraphQL| A2["Facade Layer"]
+        A2 -->|Transform<br/>Auth<br/>Rate Limit| A3["Legacy API"]
+        A4["✓ Quick Wins<br/>✓ Tight Control<br/>✗ Latency"]
+    end
+    
+    subgraph EVENT["Event-Driven"]
+        B1["Agent"] -->|Subscribe| B2["Message Bus<br/>Kafka/Azure"]
+        B3["Legacy System"] -->|Publish Events| B2
+        B4["✓ Real-Time<br/>✓ Scalable<br/>✗ Complexity"]
+    end
+    
+    subgraph MCP["Model Context Protocol"]
+        C1["Agent"] -->|Standardized<br/>Interface| C2["MCP Server"]
+        C2 -->|Multi-Agent<br/>Coordination| C3["Data Sources"]
+        C4["✓ Standardized<br/>✓ Multi-Agent<br/>✗ New Tooling"]
+    end
+    
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+    
+    class A1,B1,C1 accent
+    class A2,B2,C2 primary
+    class A3,B3,C3 secondary
+    class A4,B4,C4 muted
