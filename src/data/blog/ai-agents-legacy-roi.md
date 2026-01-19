@@ -12,7 +12,11 @@ tags:
   - roi
 ---
 
-Your competitors are waiting for modernization budgets. You're shipping AI agents next quarter. Mid-market companies layer AI agents over existing infrastructure and [capture 30-80% productivity gains](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) (PwC AI Agent Survey, 2025) in 3-6 months—no modernization required. Expect the first gains to show up as cycle-time reduction in a narrow workflow; enterprise-wide productivity takes longer and depends on process redesign. The question isn't whether to modernize first. It's why wait when you can prove value now and fund upgrades later.
+You run a mid-market company with SAP, mainframe, or AS400 systems that work but won't win awards. The board wants AI. Your team wants modernization budgets. You're stuck in the middle.
+
+Every AI agent case study assumes clean APIs, cloud-native apps, and real-time data. Your world is batch jobs, COBOL, and integration layers built in 2003. The conventional answer is "modernize first, then AI." That's a 2-5 year, $5M-$50M bet before you prove a single dollar of AI value.
+
+This post shows where AI agents make economic sense *on top of* legacy systems, how to measure ROI without enterprise-wide transformation, and which integration patterns work when your data lives in places LLMs have never heard of. You'll walk away with a decision framework for identifying agent use cases that pay back in quarters, not years.
 
 ## Table of contents
 
