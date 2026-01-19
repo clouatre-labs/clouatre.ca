@@ -11,7 +11,7 @@ tags:
 featured: true
 ---
 
-We migrated complete website infrastructure from Amazon Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. This included hosting, DNS, and CI/CD. Zero downtime. Zero manual commands.
+We migrated website infrastructure from Amazon Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. This included hosting, DNS, and CI/CD. Zero downtime. Zero manual commands.
 
 **The entire migration:** One prompt. Then review and approve AI-proposed changes.
 
