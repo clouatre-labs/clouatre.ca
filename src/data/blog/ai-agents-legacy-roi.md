@@ -70,6 +70,8 @@ Anthropic's open standard for agent-to-data connections. You write one MCP serve
 | Event-Driven | 1,000+ transactions/hour, sub-second response | 4-8 weeks |
 | MCP | 3+ agents, standardization priority | 3-6 weeks |
 
+*Table 1: Integration pattern selection guide*
+
 ## Why Observability Infrastructure Is Non-Negotiable
 
 Whatever integration pattern you choose, log everything. Every integration call. Every agent decision. Every error. This isn't optional.
@@ -99,7 +101,7 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 | Bank of America | API Mediation | IT Service Desk Calls | 50% reduction |
 | Insurance Industry | Event-Driven | Claims Processing Time | 67% reduction (9.6 -> 3.2 days) |
 
-*Table 1: ROI examples across integration patterns (note: API Mediation dominates early wins due to faster implementation)*
+*Table 2: ROI examples across integration patterns (note: API Mediation dominates early wins due to faster implementation)*
 
 ## Why Do 40% of AI Agent Projects Still Fail?
 
