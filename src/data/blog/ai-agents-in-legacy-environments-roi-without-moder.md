@@ -89,7 +89,7 @@ For mid-market companies, the gains are similar. Atera's 60% improvement in sale
 | Atera | API Mediation | Sales Response Time | 60% reduction |
 | Armis | API Mediation | RFP Response Capacity | 73% increase |
 | Bank of America | API Mediation | IT Service Desk Calls | 50% reduction |
-| Insurance Industry | Event-Driven | Claims Processing Time | 67% reduction (9.6 → 3.2 days) |
+| Insurance Industry | Event-Driven | Claims Processing Time | 67% reduction (9.6 -> 3.2 days) |
 | Sure | MCP | Quote-to-Bind Time | 95% reduction |
 | Insurance Industry | Event-Driven | Data Accuracy | 37% improvement |
 
