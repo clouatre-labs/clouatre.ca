@@ -1,7 +1,7 @@
 ---
-title: "AI Agents in Legacy Environments: ROI Without Modernization"
+title: "AI Agents in Legacy Systems: ROI Without Modernization"
 pubDatetime: 2026-01-19T14:30:00Z
-description: "Mid-market companies layer AI agents over legacy systems to achieve 30-80% productivity gains in months, not years. Learn proven integration patterns."
+description: "Mid-market CTOs achieve 30-80% productivity gains by layering AI agents over legacy systems—no modernization required. Proven integration patterns."
 draft: true
 tags:
   - ai
@@ -15,7 +15,7 @@ Your legacy systems aren't blocking AI—they're your fastest path to ROI. While
 
 ## Why Legacy Systems Became the #1 AI Adoption Obstacle
 
-[Deloitte identifies legacy systems as the #1 obstacle to AI adoption](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). But here's the catch: full modernization costs $5M to $50M and takes 2-5 years. Mid-market CTOs face an impossible choice. The board wants AI. The budget says no. Vendors insist you modernize first, but that's advice for companies with enterprise budgets.
+[Deloitte identifies legacy systems as the #1 obstacle to AI adoption](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). But here's the catch: full modernization costs $5M to $50M and takes 2-5 years. Mid-market CTOs face an impossible choice. The board wants AI. The budget says no. Vendors insist you modernize first. That's advice for companies with enterprise budgets, not mid-market reality.
 
 [Gartner predicts 40% of agentic AI projects will be canceled by 2027](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026) due to escalating costs, unclear business value, and inadequate risk controls. The failure isn't about the technology. It's about integration. Most AI guidance targets enterprise giants like JPMorgan and Bank of America. Mid-market companies under $1B revenue get generic advice that doesn't fit their constraints.
 
@@ -36,6 +36,8 @@ Reverse modernization solves three problems at once. First, it avoids business d
 The risk profile is completely different. Modernization is a binary bet: succeed or lose years of investment. Agent layering is incremental. You prove value, fund upgrades, and repeat.
 
 ![@/assets/images/reverse-modernization-flow.png]
+
+*Figure 1: Reverse modernization flow - agents first, infrastructure later*
 
 ## How Do AI Agents Actually Integrate with Legacy Systems?
 
@@ -62,6 +64,8 @@ MCP is elegant because it standardizes how agents access data. You write one MCP
 Whatever pattern you choose, log everything. Every integration call. Every agent decision. Every error. Integrate with Prometheus, ELK, Splunk, or Datadog for production-grade monitoring. This isn't optional. Compliance audits require audit trails. Debugging requires logs. Continuous improvement requires metrics.
 
 ![@/assets/images/integration-patterns.png]
+
+*Figure 2: Three integration patterns for legacy systems*
 
 ## What ROI Can Mid-Market Companies Actually Expect?
 
@@ -120,15 +124,11 @@ You've read the patterns. You've seen the ROI. Now how do you actually begin?
 
 **Step 6: Plan Selective Modernization Using Agent ROI** — Use the productivity gains to fund infrastructure upgrades. Modernize the systems that agents interact with most. The ROI from agents pays for the modernization.
 
-## The Business Case: Why Your Board Should Fund This Now
+## Why Should Your Board Fund This Now?
 
-30-80% productivity gains in 3-6 months versus 2-5 year modernization timelines. Your competitors wait for budgets. You're capturing market share with agents layered over existing systems.
+30-80% productivity gains in 3-6 months versus 2-5 year modernization timelines. Measurable ROI before major infrastructure investment—your board sees results next quarter, not in three years.
 
-Measurable ROI before major infrastructure investment. Your board sees results next quarter, not in three years. Infrastructure upgrades become investments in proven productivity gains, not cost centers.
-
-Competitive advantage: sales teams respond 60% faster, RFP teams handle 73% more business, service desks handle 50% more calls. While competitors wait, you're winning deals.
-
-Risk mitigation: agents layer over existing systems with no business disruption. If something fails, turn off the agent. Your legacy system keeps running.
+Competitive advantage: sales teams respond 60% faster, RFP teams handle 73% more business, service desks handle 50% more calls. While competitors wait for budgets, you're winning deals. Risk mitigation: agents layer over existing systems with no business disruption.
 
 ---
 
