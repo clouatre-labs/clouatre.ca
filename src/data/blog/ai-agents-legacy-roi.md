@@ -115,14 +115,14 @@ Projects fail when teams skip fundamentals.
 
 **Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
 
-> **Security Checklist**
-> - Tool allowlisting (no arbitrary network/file access)
-> - Schema validation on tool inputs/outputs
-> - Output sanitization (no untrusted content forwarded)
-> - Secrets isolation (no secrets in prompts; short-lived tokens)
-> - Rate limiting + anomaly detection
-> - Approval gates for high-impact actions
-> - Audit logs (immutable, centralized)
+**Security Checklist:**
+- Tool allowlisting (no arbitrary network/file access)
+- Schema validation on tool inputs/outputs
+- Output sanitization (no untrusted content forwarded)
+- Secrets isolation (no secrets in prompts; short-lived tokens)
+- Rate limiting + anomaly detection
+- Approval gates for high-impact actions
+- Audit logs (immutable, centralized)
 
 A compromised agent can make thousands of requests per minute. For deeper coverage, see [AI supply chain security risks](/posts/ai-supply-chain-attack-vectors).
 
