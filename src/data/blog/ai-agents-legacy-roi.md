@@ -114,8 +114,6 @@ Projects fail when teams skip fundamentals.
 **Multi-Agent Coordination.** [Coordination tax grows exponentially](/posts/orchestrating-ai-agents-subagent-architecture). Five agents need ten interaction paths. If each agent is 95% reliable, a three-agent chain is only 77% reliable. Start with single-agent workflows.
 
 **Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
-
-**Security Checklist:**
 - Tool allowlisting (no arbitrary network/file access)
 - Schema validation on tool inputs/outputs
 - Output sanitization (no untrusted content forwarded)
