@@ -12,7 +12,7 @@ tags:
   - roi
 ---
 
-Your competitors are waiting for modernization budgets. You're shipping AI agents next quarter. Mid-market companies layer AI agents over existing infrastructure and [capture 30-80% productivity gains](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) (PwC AI Agent Survey, 2025) in 3-6 months—no modernization required. The question isn't whether to modernize first. It's why wait when you can prove value now and fund upgrades later.
+Your competitors are waiting for modernization budgets. You're shipping AI agents next quarter. Mid-market companies layer AI agents over existing infrastructure and [capture 30-80% productivity gains](https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html) (PwC AI Agent Survey, 2025) in 3-6 months—no modernization required. Expect the first gains to show up as cycle-time reduction in a narrow workflow; enterprise-wide productivity takes longer and depends on process redesign. The question isn't whether to modernize first. It's why wait when you can prove value now and fund upgrades later.
 
 ## Table of contents
 
@@ -117,7 +117,18 @@ Projects fail when teams skip fundamentals.
 
 **Multi-Agent Coordination.** [Coordination tax grows exponentially](/posts/orchestrating-ai-agents-subagent-architecture). Five agents need ten interaction paths. If each agent is 95% reliable, a three-agent chain is only 77% reliable. Start with single-agent workflows.
 
-**Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts: least privilege access, input validation, output sanitization, and audit logging. A compromised agent can make thousands of requests per minute. For deeper coverage, see my analysis of [AI supply chain security risks](/posts/ai-supply-chain-attack-vectors).
+**Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
+
+> **Security Checklist**
+> - Tool allowlisting (no arbitrary network/file access)
+> - Schema validation on tool inputs/outputs
+> - Output sanitization (no untrusted content forwarded)
+> - Secrets isolation (no secrets in prompts; short-lived tokens)
+> - Rate limiting + anomaly detection
+> - Approval gates for high-impact actions
+> - Audit logs (immutable, centralized)
+
+A compromised agent can make thousands of requests per minute. For deeper coverage, see [AI supply chain security risks](/posts/ai-supply-chain-attack-vectors).
 
 **Governance Retrofitting.** Adding compliance controls after deployment requires painful redesigns. Plan audit trails, role-based access, and compliance testing from the start.
 
@@ -129,9 +140,9 @@ Projects fail when teams skip fundamentals.
 
 **Step 3: Choose Your Integration Pattern.** API mediation for stable APIs and 1-2 agents (2-4 weeks). Event-driven for 1,000+ transactions/hour (4-8 weeks). MCP for 3+ agents or standardization priority (3-6 weeks).
 
-**Step 4: Build Observability from Day One.** Track integration health (latency, error rates), agent performance (completion rate, accuracy), and business impact (your target KPI). Set alerts for error rates above 5%.
+**Step 4: Build Observability from Day One.** Track integration health (latency, error rates), agent performance (completion rate, accuracy), and business impact (your target KPI). Set alerts for error rates above 5%, latency p95 spikes, and approval override surges.
 
-**Step 5: Start with Single-Agent Workflows.** Run your first agent in shadow mode for 2-4 weeks. Compare agent decisions against human decisions. Switch to production when accuracy exceeds 90%.
+**Step 5: Start with Single-Agent Workflows.** Run your first agent in shadow mode for 2-4 weeks. Compare agent decisions against human decisions. **Exit criteria:** Switch to production when accuracy exceeds 90%. **Production gate:** Error rate below 5% and manual override rate trending down. **Expansion gate:** KPI sustained for 4 weeks with no Sev-1 incidents.
 
 **Step 6: Fund Modernization with Agent ROI.** Track which legacy systems create the most integration friction. If agents generate $200K annual savings, allocate 30-50% to infrastructure upgrades. This creates a self-funding cycle.
 
