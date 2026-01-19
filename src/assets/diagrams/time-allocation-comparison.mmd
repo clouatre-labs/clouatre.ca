@@ -1,0 +1,24 @@
+graph LR
+    subgraph traditional["TRADITIONAL APPROACH"]
+        direction TB
+        seq["<b>Sequential Exploration</b><br/>Most time spent on:<br/>• Implement to evaluate<br/>• Discover limitations<br/>• Repeat cycle"]
+        strat1["<b>Limited Strategy Time</b><br/>• Architecture<br/>• Decision-making<br/>• Trade-off analysis"]
+        seq -.->|"Little time for"| strat1
+    end
+    
+    subgraph ai["AI-ASSISTED APPROACH"]
+        direction TB
+        review["<b>Review & Approval</b><br/>Minimal time on:<br/>• Evaluate proposals<br/>• Apply business context<br/>• Approve at gates"]
+        strat2["<b>Parallel Exploration</b><br/>Most time on:<br/>• Evaluate alternatives<br/>• Explore trade-offs<br/>• Strategic decisions"]
+        review -.->|"Frees time for"| strat2
+    end
+    
+    traditional -->|"AI SHIFT"| ai
+    
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#282728,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+    
+    class seq,review secondary
+    class strat1,strat2 primary
