@@ -30,36 +30,6 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 ![Time allocation comparison: traditional vs AI-assisted development](@/assets/images/time-allocation-comparison.png)
 *Figure 1: Traditional approach focuses on implementation overhead, AI-assisted approach maximizes strategic thinking*
 
-## Real Example: Dependency Management
-
-**Problem:** Need automated dependency updates. Bun package manager is new. Dependabot doesn't support `bun.lock` files.
-
-**Traditional approach:**
-- Research Dependabot documentation (1 hour)
-- Implement configuration (30 minutes)
-- Ship it
-- Discover limitations in production
-
-**AI-assisted approach:**
-- Goose explores **Dependabot AND Renovate** in parallel
-- Presents trade-offs with context:
-  - **Dependabot:** Simple configuration, GitHub-native, manual lockfile updates (20% of PRs)
-  - **Renovate:** Complex configuration (100+ lines), full automation, third-party app
-- I provide business context: Solo maintainer, ~10 updates/month, simplicity over automation
-- Decision: Dependabot
-- Goose iterates: "Can automate lockfile updates with GitHub Actions"
-- Result: Simple configuration plus full automation (best of both)
-
-**Outcome:**
-- **Time:** 15 minutes (vs. 1.5+ hours manual research and implementation)
-- **Explored:** 2 alternatives with complete trade-off analysis
-- **Implemented:** Configuration, documentation, automation workflow
-- **Result:** Optimal solution with documented rationale
-
-**Key insight:** AI cannot know your scale, team size, or priorities. You apply business context to technical options.
-
-**Source:** [PR #32 - Add Dependabot for automated dependency updates](https://github.com/clouatre-labs/clouatre.ca/pull/32)
-
 ## Real Example: CI Modernization
 
 **Problem:** `math-mcp-learning-server` had no CI workflow. Legacy tooling (mypy) was slow and unused.
@@ -103,7 +73,6 @@ Example: [Goose](https://github.com/block/goose) (open-source AI assistant) hand
 This transformation aligns with research on AI-assisted development: [GitHub studies found](https://resources.github.com/learn/pathways/copilot/essentials/measuring-the-impact-of-github-copilot/) 60-75% of developers report increased job fulfillment and 87% preserve mental effort on repetitive tasks when using AI coding assistants, validating the shift from implementation overhead to strategic focus.
 
 ### Measured Time Savings
-- **Dependency setup:** 15 minutes (vs. 1.5+ hours) - **83% savings**
 - **CI modernization:** ~20 minutes (vs. 3-4 hours typical) - **~90% savings**
 - **DNS migration:** [2 hours total](/posts/zero-downtime-dns-migration/) (vs. 4-6 hours typical manual process) - **~60% savings**
 
