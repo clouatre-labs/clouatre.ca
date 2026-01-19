@@ -34,6 +34,12 @@ Reverse modernization solves three problems at once. First, it avoids business d
 
 The risk profile is completely different. Modernization is a binary bet: succeed or lose years of investment. Agent layering is incremental. You prove value, fund upgrades, and repeat.
 
+### When Reverse Modernization Doesn't Apply
+
+Three scenarios require modernization first. **End-of-life systems** without vendor support expose you to [compliance violations and security breaches](https://cybersnowden.com/difference-between-end-of-life-and-legacy-cyber-security/) (Cyber Snowden, 2026). Agent integration can't fix missing security patches. **Regulatory mandates** that explicitly require infrastructure upgrades (e.g., PCI-DSS 4.0, GDPR data residency) make layering non-compliant. **Systems scheduled for decommissioning** within 12 months don't justify integration investment. In these cases, accelerate modernization or sunset the system entirely.
+
+For everything else, reverse modernization applies.
+
 ![Reverse modernization flow showing AI agents layered first, generating ROI, then funding selective infrastructure upgrades](@/assets/images/reverse-modernization-flow.png)
 
 *Figure 1: Reverse modernization flow (agents first, infrastructure later)*
@@ -70,7 +76,7 @@ Whatever integration pattern you choose, log everything. Every integration call.
 
 Compliance audits require audit trails. When regulators ask "why did your agent approve this transaction?", you need logs that show the decision path. Debugging requires visibility. When an agent fails, you need to know which integration call failed, what data it received, and why it made the wrong decision. Continuous improvement requires metrics. You can't optimize what you don't measure.
 
-Integrate with Prometheus, ELK, Splunk, or Datadog for production-grade monitoring. Track three categories of metrics: **integration health** (API latency, error rates, timeout frequency), **agent performance** (task completion rate, decision accuracy, user satisfaction), and **business impact** (response time reduction, throughput increase, cost savings). These metrics prove ROI and guide your next investments.
+Integrate with Prometheus, ELK, Splunk, or Datadog for production-grade monitoring. Track three categories of metrics: **integration health** (API latency, error rates, timeout frequency), **agent performance** (task completion rate, decision accuracy, user satisfaction), and **business impact** (response time reduction, throughput increase, cost savings). These metrics prove ROI and guide your next investments. For deeper coverage of observability infrastructure in AI workflows, see [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd).
 
 ![Three integration patterns: API Mediation Layer (facade pattern), Event-Driven Architecture (message bus), and Model Context Protocol (MCP servers)](@/assets/images/integration-patterns.png)
 
@@ -93,7 +99,7 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 | Bank of America | API Mediation | IT Service Desk Calls | 50% reduction |
 | Insurance Industry | Event-Driven | Claims Processing Time | 67% reduction (9.6 -> 3.2 days) |
 
-*Table 1: ROI examples across integration patterns*
+*Table 1: ROI examples across integration patterns (note: API Mediation dominates early wins due to faster implementation)*
 
 ## Why Do 40% of AI Agent Projects Still Fail?
 
@@ -146,3 +152,4 @@ Explore how [subagent architectures can orchestrate multiple AI agents without c
 - AutoRFP, "RFP AI Agents: Revolutionizing How Companies Win More Deals in Less Time" (2026) — https://autorfp.ai/blog/rfp-ai-agents-revolutionizing-how-companies-win-more-deals-in-less-time
 - Bank of America, "A Decade of AI Innovation: Erica Surpasses Milestones" (2025) — https://newsroom.bankofamerica.com/content/newsroom/press-releases/2025/08/a-decade-of-ai-innovation--bofa-s-virtual-assistant-erica-surpas.html
 - BCG, "Agentic AI Power Core Insurance AI Modernization" (2026) — https://www.bcg.com/publications/2026/agentic-ai-power-core-insurance-ai-modernization
+- Cyber Snowden, "Difference Between End of Life and Legacy Cyber Security" (2026) — https://cybersnowden.com/difference-between-end-of-life-and-legacy-cyber-security/
