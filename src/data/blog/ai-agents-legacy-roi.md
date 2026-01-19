@@ -111,7 +111,7 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 
 Projects fail when teams skip fundamentals.
 
-**Multi-Agent Coordination.** [Coordination tax grows exponentially](/posts/orchestrating-ai-agents-subagent-architecture). Five agents need ten interaction paths. If each agent is 95% reliable, a three-agent chain is only 77% reliable. Start with single-agent workflows.
+**Unclear Business Value.** [Gartner predicts over 40% of agentic AI projects will be canceled by 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) due to escalating costs, unclear business value, and inadequate risk controls. Launching with vague goals like "improve productivity" makes it impossible to measure success. Define exact metrics before development: "Reduce invoice processing time from 8 days to 2 days while maintaining 99.5% accuracy" is measurable; "handle invoices better" is not.
 
 **Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
 - Tool allowlisting (no arbitrary network/file access)
@@ -152,6 +152,7 @@ Explore how [subagent architectures can orchestrate multiple AI agents without c
 
 ## References
 
+- Gartner, "Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027" (2025) — https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027
 - PwC, "AI Agent Survey" (2025) — https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html
 - CodeAura, "The ROI of Modernization: How Enterprises Are Turning $5M Upfront Into $45M Annual Savings" (2025) — https://codeaura.ai/the-roi-of-modernization-how-enterprises-are-turning-5m-upfront-into-45m-annual-savings/
 - Deloitte, "Tech Trends 2026: Agentic AI Strategy" (2026) — https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html
