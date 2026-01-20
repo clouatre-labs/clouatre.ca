@@ -209,6 +209,8 @@ Typical first-review latency drops from 4–22 hours (Octoverse 2024) to under 5
 
 Quality improves because AI catches patterns humans miss at 2 AM or during context-switching. Linting issues get flagged automatically. Security tool outputs get analyzed for severity and context. Fewer critical issues reach production because they're caught earlier in the workflow.
 
+For broader observability patterns in AI agent workflows, including legacy system integration, see [AI agents in legacy systems](/posts/ai-agents-legacy-roi).
+
 Developer satisfaction increases when velocity and quality both improve. Engineers don't feel blocked by the review process. They get comprehensive feedback without waiting. They trust the pipeline because it combines deterministic tools with AI insight and human judgment. That combination (automated speed plus human accountability) is what modern CI/CD needs.
 
 The business outcome is measurable. Deployment frequency increases, mean time to resolution decreases, and security incidents reduce. The engineering team ships faster without sacrificing safety. That's the value proposition of AI-augmented CI/CD done right.
