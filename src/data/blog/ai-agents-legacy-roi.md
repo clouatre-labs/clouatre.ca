@@ -16,7 +16,7 @@ You run a mid-market company with SAP, mainframe, or AS400 systems that work but
 
 Every AI agent case study assumes clean APIs, cloud-native apps, and real-time data. Your world is batch jobs, COBOL, and integration layers built in 2003. The conventional answer is "modernize first, then AI." That's a 2-5 year, $5M-$50M bet before you prove a single dollar of AI value.
 
-This post shows where AI agents make economic sense *on top of* legacy systems, how to measure ROI without enterprise-wide transformation, and which integration patterns work when your data lives in places LLMs have never heard of. You'll walk away with a decision framework for identifying agent use cases that pay back in quarters, not years.
+This post shows where AI agents make economic sense *on top of* legacy systems, how to measure ROI without enterprise-wide transformation, and which integrations work when your data lives in places LLMs have never heard of. You'll walk away with a decision framework for identifying agent use cases that pay back in quarters, not years.
 
 ## Table of contents
 
@@ -28,13 +28,13 @@ The real bottleneck isn't legacy systems. It's the false choice between "moderni
 
 ## The Reverse Modernization Strategy: Layer AI First, Upgrade Later
 
-Flip the conventional wisdom. Instead of modernizing first, layer AI agents over your existing systems. Capture measurable ROI in months. Then use that ROI to fund selective modernization. This is reverse modernization: prove the value before you invest in infrastructure.
+Flip the conventional wisdom. Instead of modernizing first, layer AI agents over your existing systems. Capture ROI in months. Then use that ROI to fund selective modernization. This is reverse modernization: prove the value before you invest in infrastructure.
 
 [Atera reduced sales response times by 60%](https://www.weforum.org/stories/2026/01/ai-mid-market-business-growth/) (World Economic Forum, 2026) by integrating AI agents with their existing CRM and ticketing systems. They didn't rebuild their infrastructure. They built a layer on top. [Armis accelerated RFP response capacity by 73%](https://autorfp.ai/blog/rfp-ai-agents-revolutionizing-how-companies-win-more-deals-in-less-time) (AutoRFP, 2026) without adding headcount. Both companies proved the business case before investing in modernization.
 
 ### Why This Works for Mid-Market Companies
 
-Reverse modernization solves three problems at once. First, it avoids business disruption. Your legacy systems keep running while agents handle new work. Second, it generates measurable ROI: 30-80% productivity gains in 3-6 months. Third, it lets you start small. One workflow. One team. One agent. Then expand based on what works.
+Reverse modernization solves three problems at once. First, it avoids business disruption. Your legacy systems keep running while agents handle new work. Second, it delivers 30-80% productivity gains in 3-6 months. Third, it lets you start small. One workflow. One team. One agent. Then expand based on what works.
 
 The risk profile is completely different. Modernization is a binary bet: succeed or lose years of investment. Agent layering is incremental. You prove value, fund upgrades, and repeat.
 
@@ -50,7 +50,7 @@ For everything else, reverse modernization applies.
 
 ## How Do AI Agents Actually Integrate with Legacy Systems?
 
-But integration is where most projects fail. Agents need access to data and business logic buried in legacy systems. You have three main patterns. Each has tradeoffs.
+But integration is where most projects fail. Agents need access to data and business logic buried in legacy systems. You have three options. Each has tradeoffs.
 
 ### API Mediation Layer
 
@@ -82,7 +82,7 @@ Whatever integration pattern you choose, log everything. Every integration call.
 
 Compliance audits require audit trails. When regulators ask "why did your agent approve this transaction?", you need logs that show the decision path. Debugging requires visibility. When an agent fails, you need to know which integration call failed, what data it received, and why it made the wrong decision. Continuous improvement requires metrics. You can't optimize what you don't measure.
 
-Integrate with Prometheus, ELK, Splunk, or Datadog for production-grade monitoring. Track three categories of metrics: **integration health** (API latency, error rates, timeout frequency), **agent performance** (task completion rate, decision accuracy, user satisfaction), and **business impact** (response time reduction, throughput increase, cost savings). These metrics prove ROI and guide your next investments. For deeper coverage of observability infrastructure in AI workflows, see [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd).
+Integrate with Prometheus, ELK, Splunk, or Datadog for production monitoring. Track three categories of metrics: **integration health** (API latency, error rates, timeout frequency), **agent performance** (task completion rate, decision accuracy, user satisfaction), and **business impact** (response time reduction, throughput increase, cost savings). These metrics prove ROI and guide your next investments. For deeper coverage of observability infrastructure in AI workflows, see [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd).
 
 ![Three integration patterns: API Mediation Layer (facade pattern), Event-Driven Architecture (message bus), and Model Context Protocol (MCP servers)](@/assets/images/integration-patterns.png)
 
@@ -111,7 +111,7 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 
 Projects fail when teams skip fundamentals.
 
-**Unclear Business Value.** [Gartner predicts over 40% of agentic AI projects will be canceled by 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) due to escalating costs, unclear business value, and inadequate risk controls. Launching with vague goals like "improve productivity" makes it impossible to measure success. Define exact metrics before development: "Reduce invoice processing time from 8 days to 2 days while maintaining 99.5% accuracy" is measurable; "handle invoices better" is not.
+**Unclear Business Value.** [Gartner predicts over 40% of agentic AI projects will be canceled by 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) due to escalating costs, unclear value, and inadequate risk controls. Launching with vague goals like "improve productivity" makes it impossible to measure success. Define exact metrics before development: "Reduce invoice processing time from 8 days to 2 days while maintaining 99.5% accuracy" is measurable; "handle invoices better" is not.
 
 **Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
 - Tool allowlisting (no arbitrary network/file access)
@@ -128,7 +128,7 @@ A compromised agent can make thousands of requests per minute. For deeper covera
 
 ## How to Start: A Practical Implementation Framework
 
-**Step 1: Define Measurable Business Objectives.** Pick one workflow with high volume, predictable patterns, clear success metrics, and low regulatory risk. Good first candidates: customer support routing, RFP response compilation, IT service desk triage, or invoice processing.
+**Step 1: Set Specific Targets.** Pick one workflow with high volume, predictable, with success metrics, and low regulatory risk. Good first candidates: customer support routing, RFP response compilation, IT service desk triage, or invoice processing.
 
 **Step 2: Audit Data Quality.** Check for duplicates, format inconsistencies, missing values, and access permissions. Fix the top three issues. Aim for 80% clean data, not perfection.
 
@@ -142,7 +142,7 @@ A compromised agent can make thousands of requests per minute. For deeper covera
 
 ## Why Should Your Board Fund This Now?
 
-Measurable gains in quarters, not years. Measurable ROI before major infrastructure investment: your board sees results next quarter, not in three years.
+ROI before major infrastructure investment: your board sees results next quarter, not in three years.
 
 Competitive advantage: sales teams respond 60% faster, RFP teams handle 73% more business, service desks handle 50% more calls. While competitors wait for budgets, you're winning deals. Risk mitigation: agents layer over existing systems with no business disruption.
 
