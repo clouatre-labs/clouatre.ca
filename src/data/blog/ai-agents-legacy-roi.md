@@ -153,11 +153,10 @@ Explore how [subagent architectures can orchestrate multiple AI agents without c
 ## References
 
 - Gartner, "Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027" (2025) — https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027
-- PwC, "AI Agent Survey" (2025) — https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-agent-survey.html
-- CodeAura, "The ROI of Modernization: How Enterprises Are Turning $5M Upfront Into $45M Annual Savings" (2025) — https://codeaura.ai/the-roi-of-modernization-how-enterprises-are-turning-5m-upfront-into-45m-annual-savings/
 - Deloitte, "Tech Trends 2026: Agentic AI Strategy" (2026) — https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html
 - World Economic Forum, "AI Mid-Market Business Growth" (2026) — https://www.weforum.org/stories/2026/01/ai-mid-market-business-growth/
 - AutoRFP, "RFP AI Agents: Revolutionizing How Companies Win More Deals in Less Time" (2026) — https://autorfp.ai/blog/rfp-ai-agents-revolutionizing-how-companies-win-more-deals-in-less-time
 - Bank of America, "A Decade of AI Innovation: Erica Surpasses Milestones" (2025) — https://newsroom.bankofamerica.com/content/newsroom/press-releases/2025/08/a-decade-of-ai-innovation--bofa-s-virtual-assistant-erica-surpas.html
+- Superhuman, "AI Agent Useful Case Studies" (2026) — https://blog.superhuman.com/ai-agent-useful-case-studies/
 - BCG, "Agentic AI Power Core Insurance AI Modernization" (2026) — https://www.bcg.com/publications/2026/agentic-ai-power-core-insurance-ai-modernization
 - Cyber Snowden, "Difference Between End of Life and Legacy Cyber Security" (2026) — https://cybersnowden.com/difference-between-end-of-life-and-legacy-cyber-security/
