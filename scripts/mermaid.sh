@@ -12,4 +12,4 @@ esac
 PUPPETEER_EXECUTABLE_PATH="$CHROME" mmdc \
   -i "src/assets/diagrams/${NAME}.mmd" \
   -o "src/assets/images/${NAME}.png" \
-  -b transparent -s 2 -t neutral
+  -b transparent -s 1.5 -t neutral
