@@ -193,6 +193,8 @@ Research on multi-agent frameworks for code generation shows they [consistently 
 - Legacy systems without clear patterns (builder lacks context)
 - Exploratory work where plans change during implementation
 
+For teams integrating AI agents with legacy systems, see [AI agents in legacy environments](/posts/ai-agents-legacy-roi) for integration patterns that work when your data lives in mainframes and AS400 systems.
+
 The overhead of spawning subagents and writing handoff files adds 2-3 minutes per task. For a 10-minute fix, that's significant. For a 2-hour refactor, it's negligible, and the quality improvement justifies it.
 
 ## Takeaways
