@@ -54,7 +54,7 @@ But integration is where most projects fail. Agents need access to data and busi
 
 ### API Mediation Layer
 
-Build a facade that abstracts legacy complexity. Agents interact with clean, modern interfaces while the mediation layer handles authentication, data transformation, and error handling. When the legacy system changes, you update the facade, not the agents. You also get a single point for logging, monitoring, and compliance audits.
+Build a facade that abstracts legacy complexity. Agents interact with clean, modern interfaces while the mediation layer handles authentication, data translation (EBCDIC to UTF-8, fixed-width to JSON), and error handling. When the legacy system changes, you update the facade, not the agents. You also get a single point for logging, monitoring, and compliance audits.
 
 ### Event-Driven Architecture
 
@@ -142,7 +142,7 @@ A compromised agent can make thousands of requests per minute. For deeper covera
 
 ## Why Should Your Board Fund This Now?
 
-30-80% productivity gains in 3-6 months versus 2-5 year modernization timelines. Measurable ROI before major infrastructure investment: your board sees results next quarter, not in three years.
+Measurable gains in quarters, not years. Measurable ROI before major infrastructure investment: your board sees results next quarter, not in three years.
 
 Competitive advantage: sales teams respond 60% faster, RFP teams handle 73% more business, service desks handle 50% more calls. While competitors wait for budgets, you're winning deals. Risk mitigation: agents layer over existing systems with no business disruption.
 
