@@ -67,9 +67,10 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 **What we told Goose ([open-source AI assistant](https://github.com/block/goose)):**
 
 ```text file="Initial_Prompt"
-I want to migrate from GitHub Pages to Cloudflare Pages. The domain 
-clouatre.ca is registered at Squarespace. I need zero downtime - email 
-and Google Workspace cannot break. Use a risk-adverse approach.
+I want to migrate from GitHub Pages to Cloudflare Pages.
+The domain clouatre.ca is registered at Squarespace.
+I need zero downtime - email and Google Workspace cannot break.
+Use a risk-adverse approach.
 ```
 
 *This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.*
