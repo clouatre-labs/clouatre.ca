@@ -114,7 +114,7 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
     >
       {title}
     </h1>
-    <div class="my-2 flex items-center gap-2 text-sm">
+    <div class="my-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span aria-hidden="true">•</span>
       <span class="text-foreground/75">{readingTime} min read</span>
