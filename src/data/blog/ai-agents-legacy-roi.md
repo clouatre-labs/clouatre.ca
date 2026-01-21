@@ -22,7 +22,7 @@ This post shows where AI agents make economic sense *on top of* legacy systems, 
 
 ## Why Legacy Systems Became the #1 AI Adoption Obstacle
 
-Legacy systems top the list of AI adoption obstacles, but the conventional fix is worse than the problem. Full modernization runs $5M-$50M and takes 2-5 years. No wonder [40% of agentic AI projects will be canceled by 2027](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026) due to escalating costs and unclear business value.
+Legacy systems top the list of AI adoption obstacles, but the conventional fix is worse than the problem. Traditional modernization projects require multi-year timelines and eight-figure budgets before proving a single dollar of AI value. No wonder [40% of agentic AI projects will be canceled by 2027](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026) due to escalating costs and unclear business value.
 
 The real bottleneck isn't legacy systems. It's the false choice between "modernize everything" and "do nothing." You need integration patterns that work with what you have.
 
@@ -58,7 +58,7 @@ Build a facade that abstracts legacy complexity. Agents interact with clean, mod
 
 ### Event-Driven Architecture
 
-Legacy systems publish state changes to message buses like Kafka or Azure Event Hub. Agents subscribe to relevant topics and react in near real-time. This pattern scales better than API mediation for high-volume scenarios: the system pushes updates when they matter instead of agents polling constantly.
+Legacy systems publish state changes through **Dapr**, which supports Kafka, Azure Event Hub, and others. Agents subscribe and react in near real-time. This pattern scales better than API mediation: the system pushes updates when they matter instead of agents polling constantly. **Dapr's abstraction avoids vendor lock-in.**
 
 The tradeoff: you need to instrument the legacy system to publish events, which isn't trivial if the system is old and undocumented.
 
@@ -70,9 +70,9 @@ Anthropic's open standard for agent-to-data connections. You write one MCP serve
 
 | Pattern | Best When | Timeline |
 |---------|-----------|----------|
-| API Mediation | Stable APIs, 1-2 agents, tight control needed | 2-4 weeks |
-| Event-Driven | 1,000+ transactions/hour, sub-second response | 4-8 weeks |
-| MCP | 3+ agents, standardization priority | 3-6 weeks |
+| API Mediation | Stable APIs, 1-2 agents, tight control needed | 4-8 weeks |
+| Event-Driven | 1,000+ transactions/hour, sub-second response | 8-12 weeks |
+| MCP | 3+ agents, standardization priority | 6-12 weeks |
 
 *Table 1: Integration pattern selection guide*
 
@@ -132,11 +132,11 @@ A compromised agent can make thousands of requests per minute. For deeper covera
 
 **Step 2: Audit Data Quality.** Check for duplicates, format inconsistencies, missing values, and access permissions. Fix the top three issues. Aim for 80% clean data, not perfection.
 
-**Step 3: Choose Your Integration Pattern.** API mediation for stable APIs and 1-2 agents (2-4 weeks). Event-driven for 1,000+ transactions/hour (4-8 weeks). MCP for 3+ agents or standardization priority (3-6 weeks).
+**Step 3: Choose Your Integration Pattern.** API mediation for stable APIs and 1-2 agents (4-8 weeks). Event-driven for 1,000+ transactions/hour (8-12 weeks). MCP for 3+ agents or standardization priority (6-12 weeks).
 
 **Step 4: Build Observability from Day One.** Track integration health (latency, error rates), agent performance (completion rate, accuracy), and business impact (your target KPI). Set alerts for error rates above 5%, latency p95 spikes, and approval override surges.
 
-**Step 5: Start with Single-Agent Workflows.** Run your first agent in shadow mode for 2-4 weeks. Compare agent decisions against human decisions. **Exit criteria:** Switch to production when accuracy exceeds 90%. **Production gate:** Error rate below 5% and manual override rate trending down. **Expansion gate:** KPI sustained for 4 weeks with no Sev-1 incidents.
+**Step 5: Start with Single-Agent Workflows.** Run your first agent in shadow mode for 2-4 weeks (longer for complex workflows). Compare agent decisions against human decisions. **Exit criteria:** Switch to production when accuracy exceeds 95% (adjust based on cost-of-failure analysis). **Production gate:** Error rate below 5% and manual override rate trending down. **Expansion gate:** KPI sustained for 4 weeks with no Sev-1 incidents.
 
 **Step 6: Fund Modernization with Agent ROI.** Track which legacy systems create the most integration friction. If agents generate $200K annual savings, allocate 30-50% to infrastructure upgrades. This creates a self-funding cycle.
 
