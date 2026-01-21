@@ -1,6 +1,7 @@
 ---
 title: "Orchestrating AI Agents: A Subagent Architecture for Code"
 pubDatetime: 2025-12-24T12:00:00Z
+modDatetime: 2026-01-20T12:02:58Z
 description: "Cut AI coding costs 50% with multi-agent architecture. Assign planning, building, and validation to specialized models for better output at lower spend."
 tags:
   - ai

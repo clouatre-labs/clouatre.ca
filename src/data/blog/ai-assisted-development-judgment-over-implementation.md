@@ -1,6 +1,7 @@
 ---
 title: "AI-Assisted Development: From Implementation to Judgment"
 pubDatetime: 2025-11-07T12:00:00Z
+modDatetime: 2026-01-19T03:48:39Z
 description: "AI shifts engineering focus from implementation to judgment. 70-80% time savings on infrastructure tasks. Real metrics from production."
 tags:
   - ai
