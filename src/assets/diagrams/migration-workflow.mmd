@@ -1,0 +1,38 @@
+flowchart TD
+    START(["Initial Prompt"])
+    
+    DISCOVER["<b>Goose Discovers Infrastructure</b>"]
+    ANALYZE["<b>Analyze DNS Records</b><br/>20+ found, 15 critical"]
+    
+    G1{"Human Approval<br/>Gate 1"}
+    
+    IMPORT["<b>Import to Cloudflare via API</b>"]
+    VALIDATE["<b>Pre-Validate ALL Records</b><br/>Test against Cloudflare nameservers"]
+    REPORT["<b>Generate Validation Report</b><br/>MX, TXT, CNAME verified"]
+    
+    G2{"Human Approval<br/>Gate 2"}
+    
+    SWITCH["<b>Switch Nameservers</b>"]
+    END(["Zero Downtime<br/>Migration Complete"])
+
+    START --> DISCOVER
+    DISCOVER --> ANALYZE
+    ANALYZE --> G1
+    G1 -->|Approve| IMPORT
+    G1 -.->|Reject| ANALYZE
+    IMPORT --> VALIDATE
+    VALIDATE --> REPORT
+    REPORT --> G2
+    G2 -->|Approve| SWITCH
+    G2 -.->|Reject| ANALYZE
+    SWITCH --> END
+
+    linkStyle default stroke-width:3px
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#e6e6e6,stroke:#282728,stroke-width:1px,color:#282728
+
+    class START,END primary
+    class DISCOVER,ANALYZE,IMPORT,VALIDATE,REPORT,SWITCH accent
+    class G1,G2 muted
