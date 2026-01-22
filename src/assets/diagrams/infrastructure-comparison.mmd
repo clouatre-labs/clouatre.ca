@@ -1,0 +1,39 @@
+flowchart LR
+    subgraph BEFORE["<b>BEFORE: Fragmented Infrastructure</b>"]
+        direction LR
+        B1["<b>Squarespace</b><br/>Domain Registrar"]
+        B2["<b>Amazon Route53</b><br/>DNS Hosting<br/>$12/year"]
+        B3["<b>GitHub Pages</b><br/>Static Hosting<br/>5-8 min deploys"]
+        B4["<b>GitHub Actions</b>"]
+        B5["<b>No Preview Deployments</b>"]
+        
+        B1 -->|Points to| B2
+        B2 -->|Routes to| B3
+        B4 -->|Deploys to| B3
+        B3 -.-> B5
+    end
+    
+    subgraph AFTER["<b>AFTER: Unified Platform</b>"]
+        direction LR
+        A1["<b>Squarespace</b><br/>Domain Registrar"]
+        A2["<b>Cloudflare</b><br/>DNS + Hosting<br/>Free"]
+        A3["<b>Cloudflare Pages</b><br/>38 sec deploys<br/>88% faster"]
+        A4["<b>GitHub Actions</b>"]
+        A5["<b>Preview per PR</b><br/>Auto cleanup"]
+        
+        A1 -->|Points to| A2
+        A2 -->|Routes to| A3
+        A4 -->|Deploys to| A3
+        A3 -->|Generates| A5
+    end
+
+    linkStyle default stroke-width:3px
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#e6e6e6,stroke:#282728,stroke-width:1px,color:#282728
+    classDef warning fill:#dc2626,stroke:#282728,stroke-width:2px,color:#fff
+
+    class B1,B2,B3,B4,A1,A2,A3,A4 accent
+    class B5 warning
+    class A5 primary
