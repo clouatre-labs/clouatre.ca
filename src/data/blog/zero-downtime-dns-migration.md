@@ -1,8 +1,8 @@
 ---
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T12:00:00Z
-modDatetime: 2026-01-21T19:49:00Z
-description: "Migrate to Cloudflare Pages with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with pre-validated testing. Real metrics."
+modDatetime: 2026-01-21T20:21:00Z
+description: "GitHub Pages to Cloudflare Pages in 2 hours with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with validation and real metrics."
 tags:
   - automation
   - cloudflare
