@@ -1,7 +1,7 @@
 ---
 title: "AI-Assisted Development: From Implementation to Judgment"
 pubDatetime: 2025-11-07T12:00:00Z
-modDatetime: 2026-01-19T03:48:39Z
+modDatetime: 2026-01-22T19:35:00Z
 description: "AI shifts engineering focus from implementation to judgment. 70-80% time savings on infrastructure tasks. Real metrics from production."
 tags:
   - ai
@@ -12,9 +12,11 @@ tags:
 featured: true
 ---
 
-[Developers spend less than 10% of time actually coding](https://drpicox.medium.com/developers-spend-less-than-10-of-time-coding-51c36c73a93b), yet traditional workflows treat implementation as the bottleneck. The real constraint isn't typing speed. It's decision quality. Senior engineers waste time on implementation overhead instead of strategic thinking. Your judgment is valuable. Your typing is not.
+Software developers spend roughly equal time on meetings (12%) and coding (11%), with the remaining time distributed across debugging, architecture, reviews, and operational tasks. This fragmentation correlates with decreased productivity and satisfaction when it creates a gap between actual and ideal time allocation (Kumar et al., 2025).
 
-Traditional constraint: Exploring multiple solutions is expensive. [Large-scale projects face 50+ key decisions](https://www.emilbacklund.com/p/a-cost-based-decision-framework-for) where "it's simply infeasible to thoroughly research every single decision" before implementation. Result: Ship first working approach, not best approach.
+Traditional workflows treat implementation as the bottleneck, forcing a costly trade-off: explore multiple solutions (expensive) or ship the first working approach (fast but suboptimal). Large-scale projects face 50+ key decisions where ["it's simply infeasible to thoroughly research every single decision"](https://www.emilbacklund.com/p/a-cost-based-decision-framework-for) before implementation (Backlund, 2024). The real constraint isn't typing speed. It's decision quality under fragmented time.
+
+AI-assisted development breaks this trade-off. Implementation becomes a review task. Expert judgment focuses on strategic decisions.
 
 ## Table of contents
 
@@ -191,5 +193,5 @@ For technical leaders: This amplifies your most expensive resource. Expert judgm
 - GitHub, "Research: Quantifying GitHub Copilot's impact on developer productivity and happiness" (2024) — https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/
 - GitHub Resources, "Measuring the Impact of GitHub Copilot" (2024) — https://resources.github.com/learn/pathways/copilot/essentials/measuring-the-impact-of-github-copilot/
 - IEEE Computer Society, "Software Engineering Economics and Declining Budgets" (2024) — https://www.computer.org/resources/software-engineering-economics
+- Kumar et al., "Time Warp: The Gap Between Developers' Ideal vs Actual Workweeks in an AI-Driven Era" (2025) — https://arxiv.org/abs/2502.15287
 - Pandey et al., "Evaluating the Efficiency and Challenges of GitHub Copilot in Real-World Projects" (2024) — https://arxiv.org/abs/2406.17910
-- Rodenas, David PhD, "Developers Spend Less Than 10% of Time Coding" (2023) — https://drpicox.medium.com/developers-spend-less-than-10-of-time-coding-51c36c73a93b
