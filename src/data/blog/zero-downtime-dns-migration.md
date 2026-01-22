@@ -1,7 +1,7 @@
 ---
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T12:00:00Z
-modDatetime: 2026-01-21T19:27:00Z
+modDatetime: 2026-01-21T19:49:00Z
 description: "Migrate to Cloudflare Pages with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with pre-validated testing. Real metrics."
 tags:
   - automation
@@ -70,6 +70,7 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 I want to migrate from GitHub Pages to Cloudflare Pages.
 The domain clouatre.ca is registered at Squarespace.
 I need zero downtime - email and Google Workspace cannot break.
+Check if DNSSEC is enabled and handle it appropriately.
 Use a risk-adverse approach.
 ```
 
@@ -103,11 +104,13 @@ Goose handled five critical phases:
 - Analyzed 20+ Route53 records
 - Identified 15 critical (email, Google Workspace, SSL)
 - Flagged 5 obsolete (old servers, expired validations)
+- Verified DNSSEC was not enabled (no migration blocker)
 
 **Pre-Migration Validation**
 - Exported Route53 → imported to Cloudflare via APIs
-- Tested all records against Cloudflare nameservers BEFORE switching
-- Verified email servers, SPF, DKIM, DMARC, CNAMEs
+- Tested all records against Cloudflare nameservers BEFORE switching (`dig @nameserver` for each record type)
+- Verified email servers (MX priorities), SPF, DKIM, DMARC (exact TXT values), CNAMEs (Google Workspace)
+- Compared TTL values between source and target
 - Generated validation report: 100% match confirmed
 
 **CI/CD Reconfiguration**
@@ -290,7 +293,7 @@ Cloudflare Pages free tier (500 builds/month, unlimited bandwidth) serves most b
 
 ---
 
-**Want to try this approach?**
-- [Goose AI assistant](https://github.com/block/goose) (open source)
-- [Cloudflare Pages docs](https://developers.cloudflare.com/pages/)
-- Our workflow: [GitHub repository](https://github.com/clouatre-labs/clouatre.ca)
+## References
+
+- Cloudflare, "Change your nameservers (Full setup)" (2026) — https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
+- Cloudflare, "DNSSEC" (2026) — https://developers.cloudflare.com/dns/dnssec/
