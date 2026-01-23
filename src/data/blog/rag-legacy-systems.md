@@ -20,7 +20,7 @@ Here's the production architecture, the multi-model validation data, and why you
 
 ## Why RAG, Not Fine-Tuning?
 
-Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning costs $500-5,000 upfront, requires retraining for every update, and hallucinates without citations. RAG costs under $100 to set up, updates instantly by re-indexing, and cites sources for every claim.
+Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning costs $500-5,000 upfront, requires retraining for every update, and bakes knowledge into model weights (making provenance verification difficult). RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
 
 The decision framework depends on query volume and knowledge stability. Use RAG when query volume is low-to-moderate, sources need citations for compliance, or knowledge evolves frequently. Use fine-tuning when knowledge is stable (annual updates or less), query volume is extremely high, and you can self-host models.
 
