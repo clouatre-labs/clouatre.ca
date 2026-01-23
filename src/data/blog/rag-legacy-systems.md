@@ -143,9 +143,9 @@ Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latenc
 
 Manual search through 7,432 pages takes 15-30 minutes (median: 25 min). You open PDFs, use Ctrl+F, read context, cross-reference sections. RAG reduces this to 3-5 seconds.
 
-The math is straightforward. Assume 10 queries per day during a 6-month migration project. Labor cost: $100/hour (mid-market technical consultant). Time saved: 25 minutes per query.
+The math is straightforward. Assume 10 queries per day during a 6-month migration project. Labor cost: $100/hour (mid-market technical consultant). Time saved: 25 minutes per query. Success rate: 85% (accounting for the 10-15% of queries that need human review).
 
-Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) = **$417/day**
+Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) × 85% success rate = **$354/day**
 
 Setup cost: 170 seconds of compute time plus $0 for local embeddings. Query cost: $0.01-0.05 on Amazon Bedrock. Break-even happens in one day.
 
