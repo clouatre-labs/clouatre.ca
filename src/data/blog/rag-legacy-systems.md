@@ -2,6 +2,7 @@
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
 pubDatetime: 2026-01-22T23:02:00Z
 description: "Turn 20-year-old PDFs into queryable knowledge with production RAG. Real metrics, multi-model validation, and ROI from enterprise implementation."
+featured: true
 draft: false
 tags:
   - ai
