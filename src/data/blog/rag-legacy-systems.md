@@ -116,7 +116,7 @@ The key is transparency. Users see which documents were retrieved, can verify cl
 
 We started on OpenRouter's free tier. Model: Devstral-2512. Cost: $0. Limits: rate-limited, no compliance guarantees. Good enough for testing with 20-30 queries to validate quality.
 
-Migration to Amazon Bedrock took 2 hours. Code changes were minimal (swap API endpoint, update authentication). Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
+Migration to Amazon Bedrock took under 30 minutes. Code changes were minimal: swap dependencies (langchain-openai to langchain-aws), replace ChatOpenAI with ChatBedrock, update authentication to use AWS credentials instead of API keys. Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
 
 The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to manual search. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
 
