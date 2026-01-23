@@ -43,7 +43,7 @@ Reranking adds negligible latency while improving retrieval quality by 6-8%.
 | Qwen | 32B | +25.1ms |
 | **Mean** | - | **+27.2ms (±3.7ms)** |
 
-Cross-provider comparison (AWS Bedrock vs OpenRouter): 4.1ms difference, confirming model-agnostic behavior.
+Cross-provider comparison (Amazon Bedrock vs OpenRouter): 4.1ms difference, confirming model-agnostic behavior.
 
 ## System Configuration
 
