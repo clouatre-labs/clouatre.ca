@@ -16,7 +16,7 @@ Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDF
 
 This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 420 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 3.7ms regardless of which LLM you use.
 
-Here's what we learned building it, the numbers that matter, and why multi-model validation proves RAG is infrastructure, not configuration.
+Here's what we learned building it, the numbers that matter, and why you can switch LLMs without re-tuning.
 
 ## Why RAG, Not Fine-Tuning?
 
