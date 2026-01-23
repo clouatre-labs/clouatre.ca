@@ -14,9 +14,9 @@ tags:
 
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
 
-This isn't a prototype. It's production RAG running on Amazon Bedrock, serving a legacy system migration with real tribal knowledge at stake. The implementation handles two distinct workloads: technical documentation (14 PDFs, 94 MB) and meeting notes (94+ markdown files). Both use the same architecture. Both deliver sub-5-second responses.
+This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 420 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 3.7ms regardless of which LLM you use.
 
-Here's what we learned building it, the numbers that matter, and when RAG beats fine-tuning for legacy systems.
+Here's what we learned building it, the numbers that matter, and why multi-model validation proves RAG is infrastructure, not configuration.
 
 ## Why RAG, Not Fine-Tuning?
 
@@ -40,24 +40,7 @@ The 2026 upgrade added reranking. Hybrid retrieval returns 16 candidate chunks. 
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
-## What Are the Real Performance Numbers?
-
-We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction (120s), chunking (20s), embedding (25s), and indexing (5s). Cached runs skip extraction and take 2.2 seconds. Query response time averages 3-5 seconds: retrieval (80ms), LLM generation (4s), overhead (200ms).
-
-Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
-
-*Table 1: Performance Metrics*
-
-| Metric | System A (Docs) | System B (Notes) |
-|--------|-----------------|------------------|
-| Documents | 14 PDFs (7,432 pages) | 94 markdown files |
-| Chunks | 20,679 | Auto-chunked |
-| First run | 170s | 40s |
-| Cached run | 2.2s | 2s |
-| Query time | 3-5s | 3-5s |
-| Cost/query | $0.01-0.05 | $0.01-0.05 |
-
-Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The accuracy gain (10-30% from industry benchmarks) justifies the overhead.
+The architecture is model-agnostic by design. We proved this with multi-model validation.
 
 ## Does Reranking Work Across Different Models?
 
@@ -77,6 +60,27 @@ Result: reranking overhead is model-agnostic. Mean overhead across all models wa
 Cross-provider consistency held too. Amazon Bedrock vs OpenRouter showed only 4.1ms difference. The overhead is dominated by the cross-encoder model (FlashRank), not the LLM. This means you can implement reranking once and switch LLM providers without re-tuning.
 
 The practical takeaway: reranking is infrastructure, not model-specific configuration. Build it into your retrieval pipeline and forget about it.
+
+## What Are the Real Performance Numbers?
+
+With model-agnostic reranking validated, here are the production metrics.
+
+We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction (120s), chunking (20s), embedding (25s), and indexing (5s). Cached runs skip extraction and take 2.2 seconds. Query response time averages 3-5 seconds: retrieval (80ms), LLM generation (4s), overhead (200ms).
+
+Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
+
+*Table 1: Performance Metrics*
+
+| Metric | System A (Docs) | System B (Notes) |
+|--------|-----------------|------------------|
+| Documents | 14 PDFs (7,432 pages) | 94 markdown files |
+| Chunks | 20,679 | Auto-chunked |
+| First run | 170s | 40s |
+| Cached run | 2.2s | 2s |
+| Query time | 3-5s | 3-5s |
+| Cost/query | $0.01-0.05 | $0.01-0.05 |
+
+Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The accuracy gain (10-30% from industry benchmarks) justifies the overhead.
 
 ## What's the ROI Without Modernization?
 
