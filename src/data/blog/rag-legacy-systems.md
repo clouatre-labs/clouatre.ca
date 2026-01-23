@@ -14,7 +14,7 @@ tags:
 
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
 
-This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 480 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 4.6ms regardless of which LLM you use.
+This isn't a prototype. It's Retrieval-Augmented Generation (RAG) on Amazon Bedrock, a system that retrieves relevant documentation and uses an LLM to generate answers without retraining models. Validated across 4 LLM families with 480 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 4.6ms regardless of which LLM you use.
 
 Here's the production architecture, the multi-model validation data, and why you can switch providers without re-tuning.
 
