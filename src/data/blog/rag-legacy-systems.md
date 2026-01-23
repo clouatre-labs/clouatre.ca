@@ -30,7 +30,7 @@ We evaluated both approaches for this use case. Fine-tuning a 7B model with QLoR
 
 ## How Does RAG Turn PDFs Into Answers?
 
-The pipeline has five stages. Extract text from PDFs using PyMuPDF. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
+The pipeline has six stages. Extract text from PDFs using PyMuPDF. Convert to Markdown with heading detection and cleanup. Load Markdown files. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
 
 ```python file="src/ingest.py"
 import fitz  # pymupdf
@@ -39,11 +39,19 @@ doc = fitz.open(pdf_path)
 for page_num in range(len(doc)):
     page = doc[page_num]
     text = page.get_text()  # [!code highlight]
-    # Clean and process text...
+    
+    # Detect chapter headings (e.g., "Chapter 1. Title")
+    if line.startswith("Chapter ") and ". " in line:
+        cleaned_lines.append(f"\n## {line}\n")  # [!code highlight]
+    # Detect section headings
+    elif len(line) < 80 and line[0].isupper():
+        cleaned_lines.append(f"\n### {line}\n")  # [!code highlight]
 doc.close()
 ```
 
-*Code Snippet 1: PyMuPDF extracts text locally without API calls, processing 44 pages/second.*
+*Code Snippet 1: PyMuPDF extracts text and converts to Markdown with heading detection, processing 44 pages/second.*
+
+The pipeline converts PDFs to Markdown before chunking. This preserves document structure (chapters, sections, headings) and enables Markdown-aware chunking that respects semantic boundaries. Chunks split at heading boundaries (`## `, `### `) instead of mid-paragraph, keeping related content together. The Markdown files are cached, so subsequent runs skip PDF extraction and complete in 2 seconds instead of 170 seconds.
 
 Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) gives 10-20% better accuracy than either alone.
 
