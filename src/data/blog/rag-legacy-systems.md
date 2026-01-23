@@ -77,11 +77,11 @@ The architecture is model-agnostic by design. We use Amazon Bedrock, but the sam
 
 ## Does Reranking Work Across Different Models?
 
-We tested reranking across four LLM families to validate portability: Anthropic (Claude Haiku 4.5), Mistral (Devstral-2512), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B). The question: does the LLM choice affect reranking performance?
+We tested across four LLM families to validate portability: Anthropic (Claude Haiku 4.5), Mistral (Devstral-2512), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B). The question: does the LLM choice affect performance?
 
-No. Mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-value of 0.09 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
+No impact: mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-value of 0.09 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
 
-*Table 1: Reranking latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
+*Table 1: Latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
 
 | Model | Family | Size | Latency | Provider |
 |-------|--------|------|---------|----------|
@@ -90,7 +90,7 @@ No. Mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-value of 0
 | Llama 3.3 Instruct | Meta | 70B | +24.1ms | OpenRouter |
 | Qwen 2.5 Coder | Alibaba | 32B | +25.1ms | OpenRouter |
 
-The latency is dominated by FlashRank's cross-encoder, not the LLM. This means you implement reranking once and switch providers without re-tuning.
+The latency is dominated by FlashRank's cross-encoder, not the LLM. This means you implement once and switch providers without re-tuning.
 
 ```python file="src/rag.py"
 from flashrank import Ranker, RerankRequest
