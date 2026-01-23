@@ -22,7 +22,7 @@ Here's the production architecture, the multi-model validation data, and why you
 
 Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning bakes knowledge into model weights (making provenance verification difficult), requires retraining for every update, and costs $3-15 per run with modern QLoRA on cloud GPUs. RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
 
-The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs [$0.78-1.74/hour](https://www.runpod.io/articles/alternatives/lambda-labs) (RunPod, Thunder Compute). A 7B model trains in 2-8 hours, totaling $1.60-$13.92 per run. With quarterly updates, that's $6.40-$55.68 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 16-140 queries per day.
+The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs $0.66-0.78/hour on GPU clouds like Thunder Compute, or $3-4/hour on AWS/GCP/Azure. For bursty fine-tuning workloads, specialized providers are 80% cheaper. A 7B model trains in 2-8 hours, totaling $1.32-6.24 per run on specialized clouds. With quarterly updates, that's $5.28-24.96 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 13-57 queries per day on specialized clouds.
 
 For legacy systems, RAG wins on operational factors, not economics. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance.
 
@@ -193,6 +193,6 @@ For legacy systems, RAG delivers ROI without modernization. No need to rewrite d
 - Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
 - de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
 - Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023) — https://arxiv.org/abs/2305.14314
-- RunPod, "8 Best Lambda Labs Alternatives That Have GPUs in Stock" (2025) — https://www.runpod.io/articles/alternatives/lambda-labs
+- Thunder Compute, "AI GPU Rental Market Trends December 2025: Complete Industry Analysis" (2025) — https://www.thundercompute.com/blog/ai-gpu-rental-market-trends
 - Braintrust, "RAG Evaluation Metrics: How to Evaluate Your RAG Pipeline" (2025) — https://www.braintrust.dev/articles/rag-evaluation-metrics
 - LangChain Documentation, "Contextual Compression and Reranking" (2025) — https://python.langchain.com/docs/how_to/contextual_compression/
