@@ -25,7 +25,7 @@ export async function GET() {
           pubDate: new Date(post.data.modDatetime ?? post.data.pubDatetime),
           author: SITE.author,
           content,
-          categories: post.data.tags,
+          categories: post.data.tags ?? [],
         };
       } catch {
         // Fallback if post fails to render - include item without full content
@@ -35,7 +35,7 @@ export async function GET() {
           description: post.data.description,
           pubDate: new Date(post.data.modDatetime ?? post.data.pubDatetime),
           author: SITE.author,
-          categories: post.data.tags,
+          categories: post.data.tags ?? [],
         };
       }
     }),
