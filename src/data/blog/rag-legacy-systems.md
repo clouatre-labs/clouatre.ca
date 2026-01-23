@@ -74,6 +74,22 @@ for rank, idx in enumerate(bm25_top_indices[:retrieve_k]):
 
 Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) scores each query-document pair and returns the top 8. This fixes the precision problem: high recall from hybrid search, high precision from reranking.
 
+### Example: Error Lookup in 3.4 Seconds
+
+**User query:** "What is error 1006030 and how do I fix it?"
+
+**Generated answer:**
+> Error 1006030: "Failed to bring a data file page into cache. Data file cache is too small."
+>
+> **Cause:** Essbase cannot store the data file page in the data file cache.
+>
+> **Solution:** Increase the data file cache size. After fixing, check for database corruption (Error Message Reference, p. 126).
+
+**Timing:** 3.4s total (retrieval: 80ms, reranking: 31ms, generation: 3.3s)
+**Retrieved from:** Error Message Reference v11.1.1 (ranked 3rd of 8 after reranking)
+
+The system found the exact error code across 7,432 pages and synthesized an actionable answer. Manual search would require opening the 1,200-page Error Message Reference PDF and using Ctrl+F.
+
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
 *Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for [6-8% accuracy gain](https://arxiv.org/abs/2601.03258)) (George, 2025)*
@@ -151,7 +167,7 @@ Setup cost: 170 seconds of compute time plus $0 for local embeddings. Query cost
 
 The hidden benefit: onboarding time drops from weeks to days. New team members query the system instead of reading everything. They learn by asking questions. Usage patterns reveal which documentation sections matter most.
 
-Expert dependency drops too. Before RAG, tribal knowledge lived in people's heads. Bus factor was high. After RAG, we measured 85-90% autonomous resolution in our technical documentation system. Experts focus on the edge cases that need human judgment.
+Expert dependency drops too. Before RAG, tribal knowledge lived in people's heads. After RAG, we measured 85-90% autonomous resolution (queries where users accepted the answer without escalation) in our technical documentation system. Experts focus on the edge cases that need human judgment.
 
 ## When Does RAG Fail?
 
