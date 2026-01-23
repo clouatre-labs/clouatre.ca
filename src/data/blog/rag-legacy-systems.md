@@ -40,12 +40,13 @@ for page_num in range(len(doc)):
     page = doc[page_num]
     text = page.get_text()  # [!code highlight]
     
-    # Detect chapter headings (e.g., "Chapter 1. Title")
-    if line.startswith("Chapter ") and ". " in line:
-        cleaned_lines.append(f"\n## {line}\n")  # [!code highlight]
-    # Detect section headings
-    elif len(line) < 80 and line[0].isupper():
-        cleaned_lines.append(f"\n### {line}\n")  # [!code highlight]
+    for line in text.split("\n"):  # [!code highlight]
+        # Detect chapter headings (e.g., "Chapter 1. Title")
+        if line.startswith("Chapter ") and ". " in line:
+            cleaned_lines.append(f"\n## {line}\n")  # [!code highlight]
+        # Detect section headings
+        elif len(line) < 80 and line[0].isupper():
+            cleaned_lines.append(f"\n### {line}\n")  # [!code highlight]
 doc.close()
 ```
 
