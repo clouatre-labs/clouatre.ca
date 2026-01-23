@@ -76,7 +76,7 @@ Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) 
 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
-*Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for [6-8% accuracy gain](https://arxiv.org/abs/2601.03258)) (FlashRank Research Team, 2026)*
+*Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for [6-8% accuracy gain](https://arxiv.org/abs/2601.03258)) (George, 2025)*
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
@@ -88,14 +88,14 @@ We tested across four LLM families to validate portability: Anthropic (Claude Ha
 
 No impact: mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-value of 0.09 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
 
-*Table 1: Latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
-
 | Model | Family | Specialization | Latency | Provider |
 |-------|--------|----------------|---------|----------|
 | Claude Haiku 4.5 | Anthropic | Coding | +31.3ms | Amazon Bedrock |
 | Mistral Devstral-2512 | Mistral | Coding | +32.5ms | OpenRouter |
 | Llama 3.3 Instruct | Meta | General | +24.1ms | OpenRouter |
 | Qwen 2.5 Coder | Alibaba | Coding | +25.1ms | OpenRouter |
+
+*Table 1: Latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
 
 The latency is dominated by FlashRank's cross-encoder, not the LLM. This means you implement once and switch providers without re-tuning.
 
@@ -126,8 +126,6 @@ We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction 
 
 Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
 
-*Table 2: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
-
 | Metric | System A (Docs) | System B (Notes) |
 |--------|-----------------|------------------|
 | Documents | 14 PDFs (7,432 pages) | 94 markdown files |
@@ -136,6 +134,8 @@ Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retri
 | Cached run | 2.2s | 2s |
 | Query time | 3-5s | 3-5s |
 | Cost/query | $0.01-0.05 | $0.01-0.05 |
+
+*Table 2: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
 
 Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval's gains over single-method search, making the overhead negligible compared to the final quality benefit.
 
@@ -197,7 +197,7 @@ For legacy systems, RAG delivers ROI without modernization. No need to rewrite d
 
 ## References
 
-- FlashRank Research Team, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval" (2026) — https://arxiv.org/abs/2601.03258
+- George, Sherine, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval: FlashRank Reranking and Query Expansion" (2025) — https://arxiv.org/abs/2601.03258
 - Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
 - Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
 - de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
