@@ -1,4 +1,4 @@
 Contact: https://github.com/clouatre-labs/clouatre.ca/security/advisories/new
-Expires: 2028-01-22T21:22:00.000Z
+Expires: 2027-01-22T21:27:00.000Z
 Preferred-Languages: en, fr
 Canonical: https://clouatre.ca/.well-known/security.txt
