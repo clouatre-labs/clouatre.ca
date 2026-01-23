@@ -1,7 +1,7 @@
 ---
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
 pubDatetime: 2026-01-22T23:02:00Z
-description: "Turn 20-year-old PDFs into queryable knowledge with production RAG. Real metrics, multi-model validation, and ROI from enterprise implementation."
+description: "Production RAG for legacy systems: model-agnostic reranking validated across 4 LLM families. Real metrics, no vendor lock-in, 7,432 pages to 3s queries."
 featured: true
 draft: false
 tags:
@@ -16,7 +16,7 @@ Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDF
 
 This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 420 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 3.7ms regardless of which LLM you use.
 
-Here's what we learned building it, the numbers that matter, and why you can switch LLMs without re-tuning.
+Here's the production architecture, the multi-model validation data, and why reranking is model-agnostic.
 
 ## Why RAG, Not Fine-Tuning?
 
@@ -79,7 +79,7 @@ We tested reranking across four LLM families to validate portability. The questi
 
 Result: reranking overhead is model-agnostic. Mean overhead across all models was 27.2ms with a standard deviation of 3.7ms. The variance is under 10ms. ANOVA p-value of 0.09 confirms no statistically significant difference between models.
 
-*Table 2: Multi-model reranking validation across 420 measurements (ANOVA p=0.09 confirms model-agnostic overhead)*
+*Table 1: Multi-model reranking validation across 420 measurements (ANOVA p=0.09 confirms model-agnostic overhead)*
 
 | Model | Family | Size | Overhead | Provider |
 |-------|--------|------|----------|----------|
@@ -117,7 +117,7 @@ We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction 
 
 Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
 
-*Table 1: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
+*Table 2: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
 
 | Metric | System A (Docs) | System B (Notes) |
 |--------|-----------------|------------------|
