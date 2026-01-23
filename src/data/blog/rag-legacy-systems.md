@@ -136,7 +136,7 @@ Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retri
 | Query time | 3-5s | 3-5s |
 | Cost/query | $0.01-0.05 | $0.01-0.05 |
 
-Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval gains, making the overhead negligible compared to the final quality benefit.
+Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval's gains over single-method search, making the overhead negligible compared to the final quality benefit.
 
 ## What's the ROI Without Modernization?
 
