@@ -4,11 +4,11 @@ pubDatetime: 2026-01-22T23:02:00Z
 description: "Turn 20-year-old PDFs into queryable knowledge with production RAG. Real metrics, multi-model validation, and ROI from enterprise implementation."
 draft: false
 tags:
+  - ai
   - rag
   - legacy-systems
-  - amazon-bedrock
+  - llm
   - reranking
-  - case-study
 ---
 
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
