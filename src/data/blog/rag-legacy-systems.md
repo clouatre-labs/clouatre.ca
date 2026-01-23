@@ -38,6 +38,8 @@ The 2026 upgrade added reranking. Hybrid retrieval returns 16 candidate chunks. 
 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
+*Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for 10-30% accuracy gain)*
+
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
 The architecture is model-agnostic by design. We proved this with multi-model validation.
@@ -48,7 +50,7 @@ We tested reranking across four LLM families to validate portability. The questi
 
 Result: reranking overhead is model-agnostic. Mean overhead across all models was 27.2ms with a standard deviation of 3.7ms. The variance is under 10ms. ANOVA p-value of 0.09 confirms no statistically significant difference between models.
 
-*Table 2: Multi-Model Reranking Validation*
+*Table 2: Multi-model reranking validation across 420 measurements (ANOVA p=0.09 confirms model-agnostic overhead)*
 
 | Model | Family | Size | Overhead | Provider |
 |-------|--------|------|----------|----------|
@@ -69,7 +71,7 @@ We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction 
 
 Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
 
-*Table 1: Performance Metrics*
+*Table 1: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
 
 | Metric | System A (Docs) | System B (Notes) |
 |--------|-----------------|------------------|
@@ -119,6 +121,8 @@ Migration to Amazon Bedrock took 2 hours. Code changes were minimal (swap API en
 The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to manual search. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
 
 ![Migration Path](@/assets/images/migration-path.png)
+
+*Figure 2: Migration path from free tier validation to enterprise production (iterate on quality before investing in infrastructure)*
 
 Scale by building multiple RAG systems for different domains. We run two: one for technical documentation, one for meeting notes and tribal knowledge. Same architecture, different corpora. Total maintenance: under 1 hour per month.
 
