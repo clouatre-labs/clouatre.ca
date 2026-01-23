@@ -89,12 +89,12 @@ No impact: mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-val
 
 *Table 1: Latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
 
-| Model | Family | Size | Latency | Provider |
-|-------|--------|------|---------|----------|
-| Claude Haiku 4.5 | Anthropic | ~8B | +31.3ms | Amazon Bedrock |
-| Mistral Devstral-2512 | Mistral | 22B | +32.5ms | OpenRouter |
-| Llama 3.3 Instruct | Meta | 70B | +24.1ms | OpenRouter |
-| Qwen 2.5 Coder | Alibaba | 32B | +25.1ms | OpenRouter |
+| Model | Family | Specialization | Latency | Provider |
+|-------|--------|----------------|---------|----------|
+| Claude Haiku 4.5 | Anthropic | Coding | +31.3ms | Amazon Bedrock |
+| Mistral Devstral-2512 | Mistral | Coding | +32.5ms | OpenRouter |
+| Llama 3.3 Instruct | Meta | General | +24.1ms | OpenRouter |
+| Qwen 2.5 Coder | Alibaba | Coding | +25.1ms | OpenRouter |
 
 The latency is dominated by FlashRank's cross-encoder, not the LLM. This means you implement once and switch providers without re-tuning.
 
