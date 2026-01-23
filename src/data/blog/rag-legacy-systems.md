@@ -20,15 +20,13 @@ Here's the production architecture, the multi-model validation data, and why you
 
 ## Why RAG, Not Fine-Tuning?
 
-Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning costs $500-5,000 upfront, requires retraining for every update, and bakes knowledge into model weights (making provenance verification difficult). RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
+Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning bakes knowledge into model weights (making provenance verification difficult), requires retraining for every update, and costs $3-15 per run with modern QLoRA on cloud GPUs. RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
 
-The decision framework depends on query volume and knowledge stability. Use RAG when query volume is low-to-moderate, sources need citations for compliance, or knowledge evolves frequently. Use fine-tuning when knowledge is stable (annual updates or less), query volume is extremely high, and you can self-host models.
+The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs [$0.78-1.74/hour](https://www.runpod.io/articles/alternatives/lambda-labs) (RunPod, Thunder Compute). A 7B model trains in 2-8 hours, totaling $1.60-$13.92 per run. With quarterly updates, that's $6.40-$55.68 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 16-140 queries per day.
 
-The math: RAG costs ~$0.0011 per query on Amazon Bedrock (2,000 input tokens + 500 output tokens). Fine-tuning costs $2,000 upfront plus retraining costs. With quarterly updates, fine-tuning breaks even at ~14,000 queries/day. With self-hosted models, the threshold drops to ~30,000 queries/day. Below that, retraining costs make RAG cheaper.
+For legacy systems, RAG wins on operational factors, not economics. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance.
 
-For legacy systems, RAG wins decisively. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). Source citations build trust during migrations when every answer needs verification.
-
-We evaluated both approaches for this use case. Fine-tuning a 7B model would require $2,000+ and 48 hours for initial training, then repeat that cycle every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), the choice was obvious.
+We evaluated both approaches for this use case. Fine-tuning a 7B model with QLoRA would cost $3-6 and take 2-4 hours on an A100, then repeat that cycle every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), both approaches cost under $20/year. We chose RAG for agility, not savings.
 
 ## How Does RAG Turn PDFs Into Answers?
 
@@ -182,7 +180,7 @@ Use OpenRouter or local models for validation. Run 20-30 test queries. Compare R
 
 Amazon Bedrock and Azure OpenAI offer compliance, governance, and better models. Cost is $0.01-0.05 per query. For 100 queries per day, that's $1-5 daily or $30-150 monthly. Compare that to $9,000 in labor savings.
 
-The decision framework: RAG wins when documentation is scattered, query volume is low-to-moderate (under 14,000/day), and source citations matter. Fine-tuning wins when knowledge is stable (annual updates or less), volume exceeds 30,000 queries daily with self-hosting, and you can afford retraining cycles.
+The decision framework: RAG wins when documentation changes frequently, source citations matter for compliance, or you need operational agility. Fine-tuning wins when knowledge is stable, you need specialized behavior beyond retrieval, or query volume is extreme (thousands per day) with strict latency requirements.
 
 For legacy systems, RAG delivers ROI without modernization. No need to rewrite docs, migrate databases, or retrain staff. Layer RAG over existing PDFs and get 3-second answers to 20-year-old questions.
 
@@ -193,5 +191,8 @@ For legacy systems, RAG delivers ROI without modernization. No need to rewrite d
 - FlashRank Research Team, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval" (2026) — https://arxiv.org/abs/2601.03258
 - Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
 - Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
+- de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
+- Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023) — https://arxiv.org/abs/2305.14314
+- RunPod, "8 Best Lambda Labs Alternatives That Have GPUs in Stock" (2025) — https://www.runpod.io/articles/alternatives/lambda-labs
 - Braintrust, "RAG Evaluation Metrics: How to Evaluate Your RAG Pipeline" (2025) — https://www.braintrust.dev/articles/rag-evaluation-metrics
 - LangChain Documentation, "Contextual Compression and Reranking" (2025) — https://python.langchain.com/docs/how_to/contextual_compression/
