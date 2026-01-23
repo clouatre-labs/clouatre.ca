@@ -150,7 +150,7 @@ Expert dependency drops too. Before RAG, tribal knowledge lived in people's head
 
 RAG isn't magic. It fails on multi-step reasoning, ambiguous questions, and knowledge not in the docs. We've seen three failure modes in production.
 
-First: hallucination. The LLM invents answers not in the retrieved chunks. Mitigation: show source citations, add confidence scores, train the model to say "I don't know" when uncertain. We display the top 3 source documents with page numbers for every answer.
+First: hallucination. The LLM invents answers not in the retrieved chunks. Mitigation: show source citations, add confidence scores, constrain responses to retrieved context only. We display the top 3 source documents with page numbers for every answer.
 
 Second: context overflow. Complex queries need more context than fits in the LLM's window. Mitigation: break queries into sub-questions, use query expansion for domain terms, implement multi-hop retrieval for connected concepts.
 
