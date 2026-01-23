@@ -22,7 +22,7 @@ Here's the production architecture, the multi-model validation data, and why you
 
 Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning bakes knowledge into model weights (making provenance verification difficult), requires retraining for every update, and costs $3-15 per run with modern QLoRA on cloud GPUs. RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
 
-The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs $0.66-0.78/hour on GPU clouds like Thunder Compute, or $3-4/hour on AWS/GCP/Azure. For bursty fine-tuning workloads, specialized providers are 80% cheaper. A 7B model trains in 2-8 hours, totaling $1.32-6.24 per run on specialized clouds. With quarterly updates, that's $5.28-24.96 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 13-57 queries per day on specialized clouds.
+The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs [$0.66-0.78/hour on GPU clouds like Thunder Compute](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025), or $3-4/hour on AWS/GCP/Azure. For bursty fine-tuning workloads, specialized providers are 80% cheaper. A 7B model trains in 2-8 hours, totaling $1.32-6.24 per run on specialized clouds. With quarterly updates, that's $5.28-24.96 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 13-57 queries per day on specialized clouds.
 
 For legacy systems, RAG wins on operational factors, not economics. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance.
 
@@ -53,7 +53,7 @@ doc.close()
 
 The pipeline converts PDFs to Markdown before chunking. This preserves document structure (chapters, sections, headings) and enables Markdown-aware chunking that respects semantic boundaries. Chunks split at heading boundaries (`## `, `### `) instead of mid-paragraph, keeping related content together. The Markdown files are cached, so subsequent runs skip PDF extraction and complete in 2 seconds instead of 170 seconds.
 
-Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) gives 10-20% better accuracy than either alone.
+Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) [consistently outperforms either method alone](https://arxiv.org/abs/2401.04055) (Mandikal & Mooney, 2024).
 
 ```python file="src/rag.py"
 # Reciprocal Rank Fusion (RRF) combines BM25 + vector scores
@@ -75,7 +75,7 @@ Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) 
 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
-*Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for 10-30% accuracy gain)*
+*Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for [6-8% accuracy gain](https://arxiv.org/abs/2601.03258)) (FlashRank Research Team, 2026)*
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
@@ -136,7 +136,7 @@ Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retri
 | Query time | 3-5s | 3-5s |
 | Cost/query | $0.01-0.05 | $0.01-0.05 |
 
-Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The accuracy gain (10-30% from industry benchmarks) justifies the overhead.
+Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval gains, making the overhead negligible compared to the final quality benefit.
 
 ## What's the ROI Without Modernization?
 
@@ -200,6 +200,7 @@ For legacy systems, RAG delivers ROI without modernization. No need to rewrite d
 - Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
 - Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
 - de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
+- Mandikal & Mooney, "Sparse Meets Dense: A Hybrid Approach to Enhance Scientific Document Retrieval" (2024) — https://arxiv.org/abs/2401.04055
 - Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023) — https://arxiv.org/abs/2305.14314
 - Thunder Compute, "AI GPU Rental Market Trends December 2025: Complete Industry Analysis" (2025) — https://www.thundercompute.com/blog/ai-gpu-rental-market-trends
 - Braintrust, "RAG Evaluation Metrics: How to Evaluate Your RAG Pipeline" (2025) — https://www.braintrust.dev/articles/rag-evaluation-metrics
