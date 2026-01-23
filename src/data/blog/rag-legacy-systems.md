@@ -22,11 +22,13 @@ Here's the production architecture, the multi-model validation data, and why you
 
 Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning costs $500-5,000 upfront, requires retraining for every update, and hallucinates without citations. RAG costs under $100 to set up, updates instantly by re-indexing, and cites sources for every claim.
 
-The decision framework is straightforward. Use RAG when documentation changes frequently, when you need source citations for compliance, or when setup cost matters. Use fine-tuning when the knowledge is stable, query volume exceeds 10,000/day, and you can afford retraining cycles.
+The decision framework depends on query volume and knowledge stability. Use RAG when query volume is low-to-moderate, sources need citations for compliance, or knowledge evolves frequently. Use fine-tuning when knowledge is stable (annual updates or less), query volume is extremely high, and you can self-host models.
 
-For legacy systems, RAG wins. Documentation is scattered but static. Query volume is low but critical. Source citations build trust during migrations when every answer needs verification.
+The math: RAG costs ~$0.0011 per query on Amazon Bedrock (2,000 input tokens + 500 output tokens). Fine-tuning costs $2,000 upfront plus retraining costs. With quarterly updates, fine-tuning breaks even at ~14,000 queries/day. With self-hosted models, the threshold drops to ~30,000 queries/day. Below that, retraining costs make RAG cheaper.
 
-We tested both approaches. Fine-tuning a 7B model on legacy docs would cost $2,000+ and take 48 hours. RAG setup took 170 seconds and cost $0 (local embeddings). Updates take 2 seconds. The choice was obvious.
+For legacy systems, RAG wins decisively. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). Source citations build trust during migrations when every answer needs verification.
+
+We evaluated both approaches for this use case. Fine-tuning a 7B model would require $2,000+ and 48 hours for initial training, then repeat that cycle every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), the choice was obvious.
 
 ## How Does RAG Turn PDFs Into Answers?
 
@@ -180,7 +182,7 @@ Use OpenRouter or local models for validation. Run 20-30 test queries. Compare R
 
 Amazon Bedrock and Azure OpenAI offer compliance, governance, and better models. Cost is $0.01-0.05 per query. For 100 queries per day, that's $1-5 daily or $30-150 monthly. Compare that to $9,000 in labor savings.
 
-The decision framework: RAG wins when documentation is scattered but static, query volume is low but critical, and source citations matter. Fine-tuning wins when knowledge is stable, volume exceeds 10,000 queries daily, and you can afford retraining.
+The decision framework: RAG wins when documentation is scattered, query volume is low-to-moderate (under 14,000/day), and source citations matter. Fine-tuning wins when knowledge is stable (annual updates or less), volume exceeds 30,000 queries daily with self-hosting, and you can afford retraining cycles.
 
 For legacy systems, RAG delivers ROI without modernization. No need to rewrite docs, migrate databases, or retrain staff. Layer RAG over existing PDFs and get 3-second answers to 20-year-old questions.
 
