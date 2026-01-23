@@ -1,0 +1,17 @@
+graph LR
+    A[Free Tier<br/>OpenRouter] --> B{Validate<br/>20-30 queries}
+    B -->|Quality OK| C[Enterprise<br/>AWS Bedrock]
+    B -->|Issues| D[Iterate<br/>Tune & Fix]
+    D --> B
+    C --> E[Scale<br/>Multiple Systems]
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+
+    class A,C,E primary
+    class B accent
+    class D secondary
+
+    linkStyle default stroke-width:3px
