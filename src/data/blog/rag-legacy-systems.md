@@ -20,13 +20,9 @@ Here's the production architecture, the multi-model validation data, and why you
 
 ## Why RAG, Not Fine-Tuning?
 
-Fine-tuning sounds appealing. Train a model on your docs, get perfect answers. The reality is messier. Fine-tuning bakes knowledge into model weights (making provenance verification difficult), requires retraining for every update, and costs $3-15 per run with modern QLoRA on cloud GPUs. RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward).
+Fine-tuning trains a model on your docs for perfect answers. Fine-tuning bakes knowledge into model weights (making provenance verification difficult). It requires retraining for every update and costs $1.32-6.24 per run (2-8 hours on A100 at [$0.66-0.78/hour on GPU clouds like Thunder Compute](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025)). RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward). RAG costs $0.0011 per query on Amazon Bedrock.
 
-The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 costs [$0.66-0.78/hour on GPU clouds like Thunder Compute](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025), or $3-4/hour on AWS/GCP/Azure. For bursty fine-tuning workloads, specialized providers are 80% cheaper. A 7B model trains in 2-8 hours, totaling $1.32-6.24 per run on specialized clouds. With quarterly updates, that's $5.28-24.96 annually. RAG costs $0.0011 per query on Amazon Bedrock. Fine-tuning breaks even at just 13-57 queries per day on specialized clouds.
-
-For legacy systems, RAG wins on operational factors, not economics. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance.
-
-We evaluated both approaches for this use case. Fine-tuning would require retraining every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), both approaches cost under $20/year. We chose RAG for agility, not savings.
+For legacy systems, choose RAG for operational factors, not economics. Documentation is scattered across wikis and PDFs. It changes when reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance. We chose RAG for agility: 170s setup, 2s updates, under $20/year at our query volume.
 
 ## How Does RAG Turn PDFs Into Answers?
 
@@ -88,7 +84,7 @@ Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) 
 **Timing:** 3.4s total (retrieval: 80ms, reranking: 31ms, generation: 3.3s)
 **Retrieved from:** Error Message Reference v11.1.1 (ranked 3rd of 8 after reranking)
 
-The system found the exact error code across 7,432 pages and synthesized an actionable answer. Manual search would require opening the 1,200-page Error Message Reference PDF and using Ctrl+F.
+The system retrieved error 1006030 from the Error Message Reference (ranked 3rd of 8 after reranking) and synthesized an actionable answer. Manual search would require opening the 1,200-page Error Message Reference PDF and using Ctrl+F.
 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
@@ -96,7 +92,7 @@ The system found the exact error code across 7,432 pages and synthesized an acti
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
-The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We proved this with multi-model validation.
+The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We validated this across 4 LLM families with 420 measurements.
 
 ## Does Reranking Work Across Different Models?
 
@@ -132,7 +128,7 @@ def _rerank(self, query: str, docs: list[Document]) -> list[Document]:
 
 *Code Snippet 3: FlashRank reranks 16 candidates in 31ms using cross-encoder scoring.*
 
-The practical takeaway: reranking is infrastructure, not model-specific configuration. Build it into your retrieval pipeline and forget about it.
+Reranking is infrastructure, not model-specific configuration. Build it into your retrieval pipeline and forget about it.
 
 ## What Are the Real Performance Numbers?
 
@@ -171,7 +167,7 @@ Expert dependency drops too. Before RAG, tribal knowledge lived in people's head
 
 ## When Does RAG Fail?
 
-RAG isn't magic. It fails on multi-step reasoning, ambiguous questions, and knowledge not in the docs. We've seen three failure modes in production.
+RAG fails on multi-step reasoning, ambiguous questions, and knowledge not in the docs. We've seen three failure modes in production.
 
 First: hallucination. The LLM invents answers not in the retrieved chunks. Mitigation: show source citations, add confidence scores, constrain responses to retrieved context only. We display the top 3 source documents with page numbers for every answer.
 
@@ -179,15 +175,15 @@ Second: context overflow. Complex queries need more context than fits in the LLM
 
 Third: stale data. Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
 
-Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. That's acceptable. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
+Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
 
 The key is transparency. Users see which documents were retrieved, can verify claims, and know when to escalate. Trust comes from citations, not blind faith in LLM outputs.
 
 ## How Do You Migrate from Prototype to Production?
 
-We started on OpenRouter's free tier. Model: Devstral-2512. Cost: $0. Limits: rate-limited, no compliance guarantees. Good enough for testing with 20-30 queries to validate quality.
+We started on OpenRouter's free tier. Model: Devstral-2512. Cost: $0. Limits: rate-limited, no compliance guarantees. We validated quality with 20-30 test queries.
 
-Migration to Amazon Bedrock took under 30 minutes. Code changes were minimal: swap dependencies (langchain-openai to langchain-aws), replace ChatOpenAI with ChatBedrock, update authentication to use AWS credentials instead of API keys. Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
+Migration to Amazon Bedrock took under 30 minutes. Code changes: swap dependencies (langchain-openai to langchain-aws), replace ChatOpenAI with ChatBedrock, update authentication to use AWS credentials instead of API keys. Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
 
 The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to ground truth from source documents. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
 
