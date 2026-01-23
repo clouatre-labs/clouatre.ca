@@ -84,19 +84,13 @@ Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latenc
 
 ## What's the ROI Without Modernization?
 
-Manual search through 7,432 pages takes 15-30 minutes. You open PDFs, use Ctrl+F, read context, cross-reference sections. Expert time costs $100/hour (conservative for mid-market). RAG reduces search time to 3-5 seconds.
+Manual search through 7,432 pages takes 15-30 minutes (median: 25 min). You open PDFs, use Ctrl+F, read context, cross-reference sections. RAG reduces this to 3-5 seconds.
 
-The math: 10 queries per day, 25 minutes saved per query, $100/hour labor cost. Daily savings: $417. Monthly savings: $9,000. Setup cost: 170 seconds plus $0.01-0.05 per query. Break-even happens in one day.
+The math is straightforward. Assume 10 queries per day during a 6-month migration project. Labor cost: $100/hour (mid-market technical consultant). Time saved: 25 minutes per query.
 
-*Table 3: ROI Calculation*
+Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) = **$417/day**
 
-| Metric | Before (Manual) | After (RAG) | Savings |
-|--------|-----------------|-------------|---------|
-| Time per query | 15-30 min | 3-5 sec | 25 min avg |
-| Queries per day | 10 | 10 | - |
-| Daily time saved | - | - | 250 min (4.2 hrs) |
-| Cost savings (at $100/hr) | - | - | $417/day |
-| Monthly savings | - | - | ~$9,000 |
+Setup cost: 170 seconds of compute time plus $0 for local embeddings. Query cost: $0.01-0.05 on Amazon Bedrock. Break-even happens in one day.
 
 The hidden benefit: onboarding time drops from weeks to days. New team members query the system instead of reading everything. They learn by asking questions. The knowledge graph builds itself through usage patterns.
 
