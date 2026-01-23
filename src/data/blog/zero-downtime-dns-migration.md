@@ -9,7 +9,6 @@ tags:
   - devops
   - goose
   - migration
-featured: true
 ---
 
 We migrated website infrastructure from Amazon Route53 + GitHub Pages to Cloudflare **in 2 hours, during business hours**. This included hosting, DNS, and CI/CD. Zero downtime. Zero manual commands.

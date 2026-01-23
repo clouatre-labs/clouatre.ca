@@ -9,7 +9,6 @@ tags:
   - devops
   - goose
   - productivity
-featured: true
 ---
 
 Software developers spend roughly equal time on meetings (12%) and coding (11%), with the remaining time distributed across debugging, architecture, reviews, and operational tasks. This fragmentation correlates with decreased productivity and satisfaction when it creates a gap between actual and ideal time allocation (Kumar et al., 2025).

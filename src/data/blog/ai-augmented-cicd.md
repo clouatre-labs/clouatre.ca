@@ -9,7 +9,6 @@ tags:
   - devops
   - github-actions
   - security
-featured: true
 ---
 
 Code reviews are a bottleneck. Engineering teams lose significant velocity waiting for feedback—time that compounds when security vulnerabilities escalate. Fixing a defect in production costs 30-100× more than fixing it during design (Boehm, IBM System Science Institute). The economics are unavoidable: shift left or absorb exponential costs downstream.
