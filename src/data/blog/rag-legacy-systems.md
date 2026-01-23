@@ -32,7 +32,38 @@ We tested both approaches. Fine-tuning a 7B model on legacy docs would cost $2,0
 
 The pipeline has five stages. Extract text from PDFs using PyMuPDF. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
 
+```python
+# file="src/ingest.py"
+import fitz  # pymupdf
+
+doc = fitz.open(pdf_path)
+for page_num in range(len(doc)):
+    page = doc[page_num]
+    text = page.get_text()  # [!code highlight]
+    # Clean and process text...
+doc.close()
+```
+
+*Code Snippet 1: PyMuPDF extracts text locally without API calls, processing 44 pages/second.*
+
 Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) gives 10-20% better accuracy than either alone.
+
+```python
+# file="src/rag.py"
+# Reciprocal Rank Fusion (RRF) combines BM25 + vector scores
+doc_scores: dict[str, tuple[Document, float]] = {}
+
+for rank, idx in enumerate(bm25_top_indices[:retrieve_k]):
+    doc = chunks[idx]
+    doc_id = doc.metadata.get("source", "") + str(hash(doc.page_content[:100]))
+    rrf_score = 1 / (rank + 60)  # RRF with k=60 // [!code highlight]
+    if doc_id in doc_scores:
+        doc_scores[doc_id] = (doc, doc_scores[doc_id][1] + rrf_score)
+    else:
+        doc_scores[doc_id] = (doc, rrf_score)
+```
+
+*Code Snippet 2: RRF formula combines keyword and semantic search scores with k=60 constant.*
 
 The 2026 upgrade added reranking. Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) scores each query-document pair and returns the top 8. This fixes the precision problem: high recall from hybrid search, high precision from reranking.
 
@@ -60,6 +91,24 @@ Result: reranking overhead is model-agnostic. Mean overhead across all models wa
 | Qwen 2.5 Coder | Alibaba | 32B | +25.1ms | OpenRouter |
 
 Cross-provider consistency held too. Amazon Bedrock vs OpenRouter showed only 4.1ms difference. The overhead is dominated by the cross-encoder model (FlashRank), not the LLM. This means you can implement reranking once and switch LLM providers without re-tuning.
+
+```python
+# file="src/rag.py"
+from flashrank import Ranker, RerankRequest
+
+def _rerank(self, query: str, docs: list[Document]) -> list[Document]:
+    passages = [
+        {"id": i, "text": doc.page_content, "meta": doc.metadata}
+        for i, doc in enumerate(docs)
+    ]
+    
+    rerank_request = RerankRequest(query=query, passages=passages)  # [!code highlight]
+    results = self.ranker.rerank(rerank_request)  # [!code highlight]
+    
+    return [docs[result["id"]] for result in results[:RERANK_TOP_N]]
+```
+
+*Code Snippet 3: FlashRank reranks 16 candidates in 31ms using cross-encoder scoring.*
 
 The practical takeaway: reranking is infrastructure, not model-specific configuration. Build it into your retrieval pipeline and forget about it.
 
