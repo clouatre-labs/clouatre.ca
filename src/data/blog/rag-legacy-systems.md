@@ -32,8 +32,7 @@ We tested both approaches. Fine-tuning a 7B model on legacy docs would cost $2,0
 
 The pipeline has five stages. Extract text from PDFs using PyMuPDF. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
 
-```python
-# file="src/ingest.py"
+```python file="src/ingest.py"
 import fitz  # pymupdf
 
 doc = fitz.open(pdf_path)
@@ -48,8 +47,7 @@ doc.close()
 
 Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) gives 10-20% better accuracy than either alone.
 
-```python
-# file="src/rag.py"
+```python file="src/rag.py"
 # Reciprocal Rank Fusion (RRF) combines BM25 + vector scores
 doc_scores: dict[str, tuple[Document, float]] = {}
 
@@ -92,8 +90,7 @@ Result: reranking overhead is model-agnostic. Mean overhead across all models wa
 
 Cross-provider consistency held too. Amazon Bedrock vs OpenRouter showed only 4.1ms difference. The overhead is dominated by the cross-encoder model (FlashRank), not the LLM. This means you can implement reranking once and switch LLM providers without re-tuning.
 
-```python
-# file="src/rag.py"
+```python file="src/rag.py"
 from flashrank import Ranker, RerankRequest
 
 def _rerank(self, query: str, docs: list[Document]) -> list[Document]:
