@@ -18,7 +18,8 @@
     "measurements": {
       "num_queries": 20,
       "runs_per_query": 3,
-      "total_measurements": 60
+      "conditions": 2,
+      "total_measurements": 120
     },
     "results": {
       "with_reranking": {
@@ -47,19 +48,19 @@
     "description": "Cross-model validation using OpenRouter free tier",
     "models": [
       {
-        "name": "Mistral Devstral",
+        "name": "Mistral Devstral-2512",
         "family": "Mistral",
         "size": "22B",
         "overhead_ms": 32.5
       },
       {
-        "name": "Llama 3.3 Instruct",
+        "name": "Llama 3.3 70B Instruct",
         "family": "Meta",
         "size": "70B",
         "overhead_ms": 24.1
       },
       {
-        "name": "Qwen 2.5 Coder",
+        "name": "Qwen 2.5 Coder 32B",
         "family": "Alibaba",
         "size": "32B",
         "overhead_ms": 25.1
@@ -73,15 +74,15 @@
     },
     "cross_model_stats": {
       "mean_overhead_ms": 27.2,
-      "std_dev_ms": 3.7,
+      "std_dev_ms": 4.6,
       "min_overhead_ms": 24.1,
       "max_overhead_ms": 32.5
     },
     "statistical_tests": {
       "test": "One-way ANOVA",
       "null_hypothesis": "Overhead varies significantly across models",
-      "f_statistic": 4.76,
-      "p_value": 0.09,
+      "f_statistic": 1.1,
+      "p_value": 0.34,
       "conclusion": "No significant difference (p > 0.05)"
     },
     "cross_provider_comparison": {
@@ -93,7 +94,7 @@
   },
   "key_findings": [
     "Reranking adds +31ms mean overhead (0.3% of total query time)",
-    "Overhead is model-agnostic: 3.7ms std dev across 3 LLM families",
+    "Overhead is model-agnostic: 4.6ms std dev across 3 LLM families",
     "Cross-provider consistent: 4.1ms difference between Amazon Bedrock and OpenRouter",
     "CPU-only inference sufficient (no GPU required)",
     "FlashRank ms-marco-MiniLM-L-12-v2 outperforms industry benchmarks (31ms vs 50-100ms typical)"

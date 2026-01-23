@@ -14,7 +14,7 @@ tags:
 
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
 
-This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 420 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 3.7ms regardless of which LLM you use.
+This isn't a prototype. It's production RAG on Amazon Bedrock, validated across 4 LLM families with 480 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 4.6ms regardless of which LLM you use.
 
 Here's the production architecture, the multi-model validation data, and why you can switch providers without re-tuning.
 
@@ -93,13 +93,13 @@ The system retrieved error 1006030 from the Error Message Reference (ranked 3rd 
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
-The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We validated this across 4 LLM families with 420 measurements.
+The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We validated this across 4 LLM families with 480 measurements.
 
 ## Does Reranking Work Across Different Models?
 
 We tested across four LLM families to validate portability: Anthropic (Claude Haiku 4.5), Mistral (Devstral-2512), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B). The question: does the LLM choice affect performance?
 
-No impact: mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-value of 0.09 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
+No impact: mean latency was 27.2ms ± 4.6ms across 480 measurements. ANOVA p-value of 0.34 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
 
 | Model | Family | Specialization | Latency | Provider |
 |-------|--------|----------------|---------|----------|
@@ -108,7 +108,7 @@ No impact: mean latency was 27.2ms ± 3.7ms across 420 measurements. ANOVA p-val
 | Llama 3.3 Instruct | Meta | General | +24.1ms | OpenRouter |
 | Qwen 2.5 Coder | Alibaba | Coding | +25.1ms | OpenRouter |
 
-*Table 1: Latency is consistent across models and providers (420 measurements, ANOVA p=0.09)*
+*Table 1: Latency is consistent across models and providers (480 measurements, ANOVA p=0.34)*
 
 The latency is dominated by FlashRank's cross-encoder, not the LLM. This means you implement once and switch providers without re-tuning.
 

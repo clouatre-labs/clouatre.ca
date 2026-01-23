@@ -10,7 +10,7 @@ Supplementary materials for [Making Legacy Knowledge Searchable with RAG](https:
 |--------|-------|
 | Mean overhead | +31ms |
 | Overhead as % of total query time | 0.3% |
-| Cross-model variance | 3.7ms |
+| Cross-model std | 4.6ms |
 
 Reranking adds negligible latency while improving retrieval quality by 6-8%.
 
@@ -22,6 +22,8 @@ Reranking adds negligible latency while improving retrieval quality by 6-8%.
 | `METHODOLOGY.md` | Detailed measurement approach |
 | `benchmark_retrieval.py` | Reproducible benchmark script (template) |
 | `results_summary.json` | Aggregate timing data |
+| `data/raw_timings.csv` | Anonymized raw timing data (480 measurements) |
+| `scripts/stats_analysis.py` | Statistical analysis script (ANOVA, 95% CI) |
 
 ## Quick Results
 
@@ -41,7 +43,7 @@ Reranking adds negligible latency while improving retrieval quality by 6-8%.
 | Mistral | 22B | +32.5ms |
 | Llama | 70B | +24.1ms |
 | Qwen | 32B | +25.1ms |
-| **Mean** | - | **+27.2ms (±3.7ms)** |
+| **Mean** | - | **+27.2ms (+/-4.6ms)** |
 
 Cross-provider comparison (Amazon Bedrock vs OpenRouter): 4.1ms difference, confirming model-agnostic behavior.
 
