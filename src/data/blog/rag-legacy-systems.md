@@ -1,6 +1,6 @@
 ---
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
-pubDatetime: 2026-01-22T23:02:00Z
+pubDatetime: 2026-01-23T12:31:00Z
 description: "Production RAG for legacy systems: model-agnostic reranking validated across 4 LLM families. Real metrics, no vendor lock-in, 7,432 pages to 3s queries."
 featured: true
 draft: false
