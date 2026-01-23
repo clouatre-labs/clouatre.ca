@@ -18,6 +18,8 @@ This isn't a prototype. It's Retrieval-Augmented Generation (RAG) on Amazon Bedr
 
 Here's the production architecture, the multi-model validation data, and why you can switch providers without re-tuning.
 
+## Table of contents
+
 ## Why RAG, Not Fine-Tuning?
 
 Fine-tuning trains a model on your docs. It bakes knowledge into weights (making provenance verification difficult), requires retraining for every update, and costs [$1.32-6.24 per run on A100 GPUs](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025). RAG costs $0 setup with local embeddings, $0.0011 per query on Bedrock, updates in 2 seconds, and keeps sources verifiable.
