@@ -150,7 +150,7 @@ Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retri
 
 *Table 2: Performance metrics across two production RAG systems (System A handles technical docs, System B processes meeting notes)*
 
-Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval's gains over single-method search, making the overhead negligible compared to the final quality benefit.
+Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latency but only 0.3% of total query time. Users don't notice 31ms in a 9-second end-to-end response. The 6-8% accuracy improvement compounds with hybrid retrieval's gains over single-method search, making the overhead negligible compared to the final quality benefit. For detailed methodology and raw data, see [Supplementary Materials](https://github.com/clouatre-labs/clouatre.ca/tree/main/research/rag-reranking-benchmarks).
 
 ## What's the ROI Without Modernization?
 
@@ -214,6 +214,7 @@ For broader integration patterns and ROI frameworks, see [AI Agents in Legacy Sy
 
 ## References
 
+- Clouatre, H., "RAG Reranking Benchmarks: Supplementary Materials" (2026) — https://github.com/clouatre-labs/clouatre.ca/tree/main/research/rag-reranking-benchmarks
 - George, Sherine, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval: FlashRank Reranking and Query Expansion" (2025) — https://arxiv.org/abs/2601.03258
 - Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
 - Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
