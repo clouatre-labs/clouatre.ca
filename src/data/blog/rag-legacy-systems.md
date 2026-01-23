@@ -65,7 +65,7 @@ for rank, idx in enumerate(bm25_top_indices[:retrieve_k]):
 
 *Code Snippet 2: RRF formula combines keyword and semantic search scores with k=60 constant.*
 
-The 2026 upgrade added reranking. Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) scores each query-document pair and returns the top 8. This fixes the precision problem: high recall from hybrid search, high precision from reranking.
+Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) scores each query-document pair and returns the top 8. This fixes the precision problem: high recall from hybrid search, high precision from reranking.
 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
