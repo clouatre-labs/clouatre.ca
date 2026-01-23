@@ -156,7 +156,7 @@ Second: context overflow. Complex queries need more context than fits in the LLM
 
 Third: stale data. Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
 
-Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. That's acceptable. The alternative is 100% manual search. As measured above, RAG handles the straightforward 85-90% autonomously, while experts focus on edge cases.
+Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. That's acceptable. The alternative is searching 7,432 pages manually. As measured above, RAG handles the straightforward 85-90% autonomously, while experts focus on edge cases.
 
 The key is transparency. Users see which documents were retrieved, can verify claims, and know when to escalate. Trust comes from citations, not blind faith in LLM outputs.
 
@@ -166,7 +166,7 @@ We started on OpenRouter's free tier. Model: Devstral-2512. Cost: $0. Limits: ra
 
 Migration to Amazon Bedrock took under 30 minutes. Code changes were minimal: swap dependencies (langchain-openai to langchain-aws), replace ChatOpenAI with ChatBedrock, update authentication to use AWS credentials instead of API keys. Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
 
-The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to manual search. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
+The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to ground truth from source documents. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
 
 ![Migration Path](@/assets/images/migration-path.png)
 
@@ -178,7 +178,7 @@ Scale by building multiple RAG systems for different domains. We run two: one fo
 
 Identify high-value document sets. Look for onboarding materials, compliance docs, or migration guides. Estimate ROI using queries per day, time saved per query, and hourly labor cost. If the math works, start with a free tier.
 
-Use OpenRouter or local models for validation. Run 20-30 test queries. Compare RAG answers to manual search. Measure accuracy, check for hallucinations, verify source citations. If quality is acceptable, invest in enterprise infrastructure.
+Use OpenRouter or local models for validation. Run 20-30 test queries. Compare RAG answers to ground truth from source documents. Measure accuracy, check for hallucinations, verify source citations. If quality is acceptable, invest in enterprise infrastructure.
 
 Amazon Bedrock and Azure OpenAI offer compliance, governance, and better models. Cost is $0.01-0.05 per query. For 100 queries per day, that's $1-5 daily or $30-150 monthly. Compare that to $9,000 in labor savings.
 
