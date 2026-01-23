@@ -6,14 +6,14 @@ draft: false
 tags:
   - rag
   - legacy-systems
-  - aws-bedrock
+  - amazon-bedrock
   - reranking
   - case-study
 ---
 
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
 
-This isn't a prototype. It's production RAG running on AWS Bedrock, serving a legacy system migration with real tribal knowledge at stake. The implementation handles two distinct workloads: technical documentation (14 PDFs, 94 MB) and meeting notes (94+ markdown files). Both use the same architecture. Both deliver sub-5-second responses.
+This isn't a prototype. It's production RAG running on Amazon Bedrock, serving a legacy system migration with real tribal knowledge at stake. The implementation handles two distinct workloads: technical documentation (14 PDFs, 94 MB) and meeting notes (94+ markdown files). Both use the same architecture. Both deliver sub-5-second responses.
 
 Here's what we learned building it, the numbers that matter, and when RAG beats fine-tuning for legacy systems.
 
@@ -43,7 +43,7 @@ Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 p
 
 We indexed 7,432 pages in 170 seconds. First-time setup includes PDF extraction (120s), chunking (20s), embedding (25s), and indexing (5s). Cached runs skip extraction and take 2.2 seconds. Query response time averages 3-5 seconds: retrieval (80ms), LLM generation (4s), overhead (200ms).
 
-Cost per query is $0.01-0.05 on AWS Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
+Cost per query is $0.01-0.05 on Amazon Bedrock. Input tokens (context from retrieved chunks) cost $0.25 per million. Output tokens (LLM answer) cost $1.25 per million. A typical query uses 2,000 input tokens and 500 output tokens, totaling $0.0011.
 
 *Table 1: Performance Metrics*
 
@@ -60,7 +60,7 @@ Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latenc
 
 ## Does Reranking Work Across Different Models?
 
-We tested reranking across four LLM families to validate portability. The question: does reranking overhead depend on the LLM, or is it model-agnostic? We ran 420 measurements across Anthropic (Claude Haiku 4.5), Mistral (Devstral 22B), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B).
+We tested reranking across four LLM families to validate portability. The question: does reranking overhead depend on the LLM, or is it model-agnostic? We ran 420 measurements across Anthropic (Claude Haiku 4.5), Mistral (Devstral-2512), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B).
 
 Result: reranking overhead is model-agnostic. Mean overhead across all models was 27.2ms with a standard deviation of 3.7ms. The variance is under 10ms. ANOVA p-value of 0.09 confirms no statistically significant difference between models.
 
@@ -68,12 +68,12 @@ Result: reranking overhead is model-agnostic. Mean overhead across all models wa
 
 | Model | Family | Size | Overhead | Provider |
 |-------|--------|------|----------|----------|
-| Claude Haiku 4.5 | Anthropic | ~8B | +31.3ms | AWS Bedrock |
-| Mistral Devstral | Mistral | 22B | +32.5ms | OpenRouter |
+| Claude Haiku 4.5 | Anthropic | ~8B | +31.3ms | Amazon Bedrock |
+| Mistral Devstral-2512 | Mistral | 22B | +32.5ms | OpenRouter |
 | Llama 3.3 Instruct | Meta | 70B | +24.1ms | OpenRouter |
 | Qwen 2.5 Coder | Alibaba | 32B | +25.1ms | OpenRouter |
 
-Cross-provider consistency held too. AWS Bedrock vs OpenRouter showed only 4.1ms difference. The overhead is dominated by the cross-encoder model (FlashRank), not the LLM. This means you can implement reranking once and switch LLM providers without re-tuning.
+Cross-provider consistency held too. Amazon Bedrock vs OpenRouter showed only 4.1ms difference. The overhead is dominated by the cross-encoder model (FlashRank), not the LLM. This means you can implement reranking once and switch LLM providers without re-tuning.
 
 The practical takeaway: reranking is infrastructure, not model-specific configuration. Build it into your retrieval pipeline and forget about it.
 
@@ -113,9 +113,9 @@ The key is transparency. Users see which documents were retrieved, can verify cl
 
 ## How Do You Migrate from Prototype to Production?
 
-We started on OpenRouter's free tier. Model: Devstral 2512. Cost: $0. Limits: rate-limited, no compliance guarantees. Good enough for testing with 20-30 queries to validate quality.
+We started on OpenRouter's free tier. Model: Devstral-2512. Cost: $0. Limits: rate-limited, no compliance guarantees. Good enough for testing with 20-30 queries to validate quality.
 
-Migration to AWS Bedrock took 2 hours. Code changes were minimal (swap API endpoint, update authentication). Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
+Migration to Amazon Bedrock took 2 hours. Code changes were minimal (swap API endpoint, update authentication). Benefits: no rate limits, SOC 2 compliance, governance controls, better answer quality from Claude Haiku 4.5.
 
 The migration path: start small with one document set and one use case. Validate quality with test queries comparing RAG answers to manual search. Measure adoption by tracking query volume and user feedback. Iterate by adding more docs, tuning chunking strategy, and improving retrieval.
 
@@ -129,7 +129,7 @@ Identify high-value document sets. Look for onboarding materials, compliance doc
 
 Use OpenRouter or local models for validation. Run 20-30 test queries. Compare RAG answers to manual search. Measure accuracy, check for hallucinations, verify source citations. If quality is acceptable, invest in enterprise infrastructure.
 
-AWS Bedrock and Azure OpenAI offer compliance, governance, and better models. Cost is $0.01-0.05 per query. For 100 queries per day, that's $1-5 daily or $30-150 monthly. Compare that to $9,000 in labor savings.
+Amazon Bedrock and Azure OpenAI offer compliance, governance, and better models. Cost is $0.01-0.05 per query. For 100 queries per day, that's $1-5 daily or $30-150 monthly. Compare that to $9,000 in labor savings.
 
 The decision framework: RAG wins when documentation is scattered but static, query volume is low but critical, and source citations matter. Fine-tuning wins when knowledge is stable, volume exceeds 10,000 queries daily, and you can afford retraining.
 
