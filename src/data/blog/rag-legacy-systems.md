@@ -149,7 +149,7 @@ Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) × 85% success rate = **$
 
 Setup cost: 170 seconds of compute time plus $0 for local embeddings. Query cost: $0.01-0.05 on Amazon Bedrock. Break-even happens in one day.
 
-The hidden benefit: onboarding time drops from weeks to days. New team members query the system instead of reading everything. They learn by asking questions. The knowledge graph builds itself through usage patterns.
+The hidden benefit: onboarding time drops from weeks to days. New team members query the system instead of reading everything. They learn by asking questions. Usage patterns reveal which documentation sections matter most.
 
 Expert dependency drops too. Before RAG, tribal knowledge lived in people's heads. Bus factor was high. After RAG, we measured 85-90% autonomous resolution in our technical documentation system. Experts focus on the edge cases that need human judgment.
 
@@ -163,7 +163,7 @@ Second: context overflow. Complex queries need more context than fits in the LLM
 
 Third: stale data. Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
 
-Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. That's acceptable. The alternative is searching 7,432 pages manually. As measured above, RAG handles the straightforward 85-90% autonomously, while experts focus on edge cases.
+Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. That's acceptable. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
 
 The key is transparency. Users see which documents were retrieved, can verify claims, and know when to escalate. Trust comes from citations, not blind faith in LLM outputs.
 
@@ -192,6 +192,10 @@ Amazon Bedrock and Azure OpenAI offer compliance, governance, and better models.
 The decision framework: RAG wins when documentation changes frequently, source citations matter for compliance, or you need operational agility. Fine-tuning wins when knowledge is stable, you need specialized behavior beyond retrieval, or query volume is extreme (thousands per day) with strict latency requirements.
 
 For legacy systems, RAG delivers ROI without modernization. No need to rewrite docs, migrate databases, or retrain staff. Layer RAG over existing PDFs and get 3-second answers to 20-year-old questions.
+
+---
+
+For broader integration patterns and ROI frameworks, see [AI Agents in Legacy Systems: ROI Without Modernization](/posts/ai-agents-legacy-roi).
 
 ---
 
