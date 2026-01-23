@@ -20,9 +20,9 @@ Here's the production architecture, the multi-model validation data, and why you
 
 ## Why RAG, Not Fine-Tuning?
 
-Fine-tuning trains a model on your docs for perfect answers. Fine-tuning bakes knowledge into model weights (making provenance verification difficult). It requires retraining for every update and costs $1.32-6.24 per run (2-8 hours on A100 at [$0.66-0.78/hour on GPU clouds like Thunder Compute](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025)). RAG setup costs $0 with local embeddings, updates instantly by re-indexing, and keeps knowledge external (making source verification straightforward). RAG costs $0.0011 per query on Amazon Bedrock.
+Fine-tuning trains a model on your docs. It bakes knowledge into weights (making provenance verification difficult), requires retraining for every update, and costs [$1.32-6.24 per run on A100 GPUs](https://www.thundercompute.com/blog/ai-gpu-rental-market-trends) (Thunder Compute, 2025). RAG costs $0 setup with local embeddings, $0.0011 per query on Bedrock, updates in 2 seconds, and keeps sources verifiable.
 
-For legacy systems, choose RAG for operational factors, not economics. Documentation is scattered across wikis and PDFs. It changes when reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance. We chose RAG for agility: 170s setup, 2s updates, under $20/year at our query volume.
+For legacy systems, choose RAG for operational factors, not economics. Documentation is scattered across wikis and PDFs. It evolves as reverse-engineering uncovers new system behaviors—fine-tuning would require retraining each time. Query volume is low (dozens per week). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance. We chose RAG for agility: 170s setup, 2s updates, under $20/year.
 
 ## How Does RAG Turn PDFs Into Answers?
 
@@ -82,6 +82,7 @@ Hybrid retrieval returns 16 candidate chunks. A cross-encoder model (FlashRank) 
 > **Solution:** Increase the data file cache size. After fixing, check for database corruption (Error Message Reference, p. 126).
 
 **Timing:** 3.4s total (retrieval: 80ms, reranking: 31ms, generation: 3.3s)
+
 **Retrieved from:** Error Message Reference v11.1.1 (ranked 3rd of 8 after reranking)
 
 The system retrieved error 1006030 from the Error Message Reference (ranked 3rd of 8 after reranking) and synthesized an actionable answer. Manual search would require opening the 1,200-page Error Message Reference PDF and using Ctrl+F.
