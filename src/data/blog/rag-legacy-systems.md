@@ -26,7 +26,7 @@ The decision isn't about cost anymore. In 2026, QLoRA fine-tuning on an A100 cos
 
 For legacy systems, RAG wins on operational factors, not economics. Documentation is scattered across wikis and PDFs. It's mostly static but evolves as reverse-engineering uncovers new system behaviors. Query volume is low (dozens per week, not thousands per day). The deciding factors: instant updates (2 seconds vs retraining), source citations for compliance, and simpler maintenance.
 
-We evaluated both approaches for this use case. Fine-tuning a 7B model with QLoRA would cost $3-6 and take 2-4 hours on an A100, then repeat that cycle every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), both approaches cost under $20/year. We chose RAG for agility, not savings.
+We evaluated both approaches for this use case. Fine-tuning would require retraining every time we discover new system behaviors. RAG setup took 170 seconds with local embeddings ($0 cost). Updates take 2 seconds when documentation changes. At our query volume (50-100/week), both approaches cost under $20/year. We chose RAG for agility, not savings.
 
 ## How Does RAG Turn PDFs Into Answers?
 
