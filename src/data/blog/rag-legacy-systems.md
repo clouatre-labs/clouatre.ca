@@ -73,7 +73,7 @@ The 2026 upgrade added reranking. Hybrid retrieval returns 16 candidate chunks. 
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
-The architecture is model-agnostic by design. We proved this with multi-model validation.
+The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We proved this with multi-model validation.
 
 ## Does Reranking Work Across Different Models?
 
