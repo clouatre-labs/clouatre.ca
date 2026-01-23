@@ -7,7 +7,7 @@ tags:
   - ai
   - rag
   - legacy-systems
-  - llm
+  - amazon-bedrock
   - reranking
 ---
 
