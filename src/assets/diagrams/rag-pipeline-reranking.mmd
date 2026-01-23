@@ -1,0 +1,25 @@
+graph TD
+    A[PDFs<br/>7,432 pages] --> B[PyMuPDF<br/>Extract Text]
+    B --> C[Text Splitter<br/>1000 chars, 200 overlap]
+    C --> D[Chunks<br/>20,679 total]
+    D --> E[Local Embeddings<br/>all-MiniLM-L6-v2]
+    E --> F[ChromaDB<br/>Vector Store]
+    G[User Query] --> H[Hybrid Retrieval<br/>BM25 + Vector + RRF]
+    F --> H
+    H --> I[16 Candidates]
+    I --> J[FlashRank Reranker<br/>Cross-Encoder]
+    J --> K[Top 8 Chunks]
+    K --> L[Amazon Bedrock<br/>Claude Haiku 4.5]
+    L --> M[Answer with Citations]
+
+    classDef primary fill:#075985,stroke:#282728,stroke-width:2px,color:#fff
+    classDef secondary fill:#e6e6e6,stroke:#ece9e9,stroke-width:2px,color:#282728
+    classDef accent fill:#38bdf8,stroke:#075985,stroke-width:2px,color:#fff
+    classDef muted fill:#fdfdfd,stroke:#ece9e9,stroke-width:1px,color:#282728
+
+    class A,D,F,I,K,M primary
+    class B,C,E secondary
+    class J accent
+    class G,H,L muted
+
+    linkStyle default stroke-width:3px
