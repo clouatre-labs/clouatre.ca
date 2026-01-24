@@ -74,7 +74,7 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 
 This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.
 
-We didn't need to specify where DNS was hosted (discovered Route53 automatically), how many DNS records existed (found 20+), which records were critical vs obsolete, how to configure Cloudflare Pages, or how to set up GitHub Actions for Cloudflare. The AI handled discovery and analysis.
+We didn't need to specify where DNS was hosted (discovered Route53 automatically), how many DNS records existed (found 20+), which records were critical vs obsolete, how to configure Cloudflare Pages, or how to set up GitHub Actions for Cloudflare. The AI handled discovery, analysis, and execution.
 
 - **Claude Sonnet 4.5 (reasoning):** Analyzes context, decides what to do, discovers infrastructure, validates approach
 - **Goose (execution layer):** Provides tool access (shell, git, AWS CLI, gh), manages conversation state, enforces approval gates
@@ -111,7 +111,7 @@ diff <(aws route53 list-resource-record-sets) <(curl cloudflare-api)  # [!code h
 
 **CI/CD Reconfiguration**
 
-GitHub Actions were updated to deploy to Cloudflare instead of GitHub Pages, with base URL fixes (GitHub's `/repo/` path to root `/`) and a preview deployment workflow with 7-day auto-cleanup. Result: 38-second deploys, down from 5-8 minutes.
+GitHub Actions were updated to deploy to Cloudflare Pages via wrangler (Cloudflare's CLI), with base URL fixes (GitHub's `/repo/` path to root `/`) and a preview deployment workflow with 7-day auto-cleanup. Result: 38-second deploys, down from 5-8 minutes.
 
 **The CI/CD transformation:**
 
