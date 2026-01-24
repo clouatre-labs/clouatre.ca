@@ -73,7 +73,7 @@ def check_package_age(name: str, commit_date: str) -> bool:
     return published < datetime.fromisoformat(commit_date)  # [!code highlight]
 ```
 
-*Code Snippet 1: Python script to detect slopsquatting by checking if a package existed before your commit date.*
+*Code Snippet 1: Detect slopsquatting by checking package age. Conceptual implementation only.*
 
 ## Why Does This Matter at Enterprise Scale?
 
