@@ -1,7 +1,7 @@
 ---
 title: "AI Agents in Legacy Systems: ROI Without Modernization"
 pubDatetime: 2026-01-20T06:27:00Z
-modDatetime: 2026-01-21T16:03:10Z
+modDatetime: 2026-01-24T16:16:56Z
 description: "Mid-market CTOs achieve 30-80% productivity gains by layering AI agents over legacy systems. No modernization required. Proven patterns and ROI."
 featured: true
 draft: false
@@ -57,15 +57,71 @@ But integration is where most projects fail. Agents need access to data and busi
 
 Build a facade that abstracts legacy complexity. Agents interact with clean, modern interfaces while the mediation layer handles authentication, data translation (EBCDIC to UTF-8, fixed-width to JSON), and error handling. When the legacy system changes, you update the facade, not the agents. You also get a single point for logging, monitoring, and compliance audits.
 
+```python file="mediation/legacy_facade.py"
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Customer(BaseModel):  # Modern JSON schema
+    id: str
+    name: str
+    balance: float
+
+@app.get("/customers/{customer_id}", response_model=Customer)
+async def get_customer(customer_id: str) -> Customer:
+    raw = legacy_client.call("CUSTINQ", customer_id.ljust(10))  # [!code highlight]
+    return Customer(
+        id=raw[0:10].strip(),
+        name=raw[10:40].encode("cp037").decode("utf-8"),  # EBCDIC to UTF-8  # [!code highlight]
+        balance=int(raw[40:52]) / 100,  # Packed decimal
+    )
+```
+
+*Code Snippet 1: FastAPI facade translates COBOL fixed-width records to validated JSON.*
+
 ### Event-Driven Architecture
 
 Legacy systems publish state changes through **Dapr**, which supports Kafka, Azure Event Hub, and others. Agents subscribe and react in near real-time. This pattern scales better than API mediation: the system pushes updates when they matter instead of agents polling constantly. **Dapr's abstraction avoids vendor lock-in.**
 
 The tradeoff: you need to instrument the legacy system to publish events, which isn't trivial if the system is old and undocumented.
 
+```python file="events/order_subscriber.py"
+from dapr.ext.grpc import App
+from cloudevents.sdk.event import v1
+import json
+
+app = App()
+
+@app.subscribe(pubsub_name="legacy-events", topic="orders")  # [!code highlight]
+def handle_order(event: v1.Event) -> None:
+    data = json.loads(event.Data())  # CloudEvents envelope  # [!code highlight]
+    # Agent processes order without polling legacy system
+    agent.process_order(data["order_id"], data["customer_id"])
+
+app.run(6002)
+```
+
+*Code Snippet 2: Dapr subscriber receives legacy system events via CloudEvents (swap Kafka/RabbitMQ/Azure without code changes).*
+
 ### Model Context Protocol (MCP)
 
 Anthropic's open standard for agent-to-data connections. You write one MCP server for your legacy system, and any agent can use it. No custom integration code for each agent. This matters when coordinating multiple agents, a problem I've written about in [orchestrating multiple AI agents with subagent architecture](/posts/orchestrating-ai-agents-subagent-architecture).
+
+```python file="mcp/legacy_server.py"
+from fastmcp import FastMCP  # FastMCP 3.0  # [!code highlight]
+
+mcp = FastMCP("Legacy ERP")
+
+@mcp.tool  # [!code highlight]
+def query_customer(customer_id: str) -> str:
+    """Query customer from mainframe. Any MCP-compatible agent can call this."""
+    result = mainframe_client.execute(f"SELECT * FROM CUSTMAST WHERE ID='{customer_id}'")
+    return json.dumps(result)
+
+if __name__ == "__main__":
+    mcp.run(transport="http", port=8000)  # Remote agents connect via HTTP
+```
+
+*Code Snippet 3: FastMCP 3.0 server exposes legacy data to any MCP-compatible agent (one server, many agents).*
 
 ### Which Pattern Should You Choose?
 
