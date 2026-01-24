@@ -58,6 +58,23 @@ The attack flow:
 
 Unlike typosquatting, attackers don't need to guess which names developers might mistype. The AI tells them exactly which fake packages to create. Names like "aws-helper-sdk" and "fastapi-middleware" appear in AI-generated code but never existed until attackers registered them.
 
+The defense is straightforward: verify that packages existed before your commit date. This simple check catches AI-hallucinated packages that attackers registered after your AI suggested them:
+
+```python file="scripts/validate_deps.py"
+import requests
+from datetime import datetime
+
+def check_package_age(name: str, commit_date: str) -> bool:
+    resp = requests.get(f"https://registry.npmjs.org/{name}")
+    if resp.status_code == 404:
+        return False  # Package doesn't exist
+    pkg = resp.json()
+    published = datetime.fromisoformat(pkg['time']['created'].replace('Z', '+00:00'))
+    return published < datetime.fromisoformat(commit_date)  # [!code highlight]
+```
+
+*Code Snippet 1: Detect slopsquatting by checking package age. Conceptual implementation only.*
+
 ## Why Does This Matter at Enterprise Scale?
 
 The numbers are stark.
@@ -149,14 +166,29 @@ For a quick CLI check:
 scorecard --repo=tailwindlabs/tailwindcss
 ```
 
-*Code Snippet 1: OpenSSF Scorecard CLI checks a repository's security health score (0-10).*
+*Code Snippet 2: OpenSSF Scorecard CLI checks a repository's security health score (0-10).*
+
+To enforce this in CI, integrate Scorecard into your GitHub Actions workflow. The workflow below fails the build if a dependency scores below 7 out of 10, preventing risky dependencies from entering production:
+
+```yaml file=".github/workflows/scorecard.yml"
+- name: Run OpenSSF Scorecard
+  uses: ossf/scorecard-action@v2
+  with:
+    results_file: scorecard.json
+
+- name: Block on low score  # [!code highlight]
+  run: |
+    jq -e '.score >= 7' scorecard.json || exit 1
+```
+
+*Code Snippet 3: GitHub Actions workflow to enforce minimum dependency health score of 7/10 in CI.*
 
 ### Validate AI-Generated Dependencies
 
 If your teams use AI coding assistants, add a validation step:
 
 1. Flag any new dependency added in AI-assisted commits
-2. Verify the package existed before your commit date
+2. Verify the package existed before your commit date (see Code Snippet 1 in Vector 3 section)
 3. Check download counts and maintainer history
 4. Consider allowlisting approved packages
 
