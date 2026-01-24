@@ -176,9 +176,9 @@ To enforce this in CI, integrate Scorecard into your GitHub Actions workflow. Th
   with:
     results_file: scorecard.json
 
-- name: Block on low score
+- name: Block on low score  # [!code highlight]
   run: |
-    jq -e '.score >= 7' scorecard.json || exit 1  # [!code highlight]
+    jq -e '.score >= 7' scorecard.json || exit 1
 ```
 
 *Code Snippet 3: GitHub Actions workflow to enforce minimum dependency health score of 7/10 in CI.*
