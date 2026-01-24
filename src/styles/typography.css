@@ -52,6 +52,8 @@
     }
 
     table {
+      @apply block max-w-full overflow-x-auto;
+
       th,
       td {
         @apply border border-border p-2;
