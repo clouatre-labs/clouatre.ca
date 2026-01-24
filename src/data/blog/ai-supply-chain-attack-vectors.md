@@ -142,36 +142,6 @@ Your existing tools catch CVEs. Add tools that catch maintainer health:
 
 Scorecard and Socket integrate directly into [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd/) via GitHub Actions, flagging risky dependencies before merge.
 
-```yaml
-file=".github/workflows/scorecard.yml"
-# Automate dependency health checks in CI
-name: Scorecard
-on: [push, pull_request]
-permissions: read-all
-jobs:
-  analysis:
-    runs-on: ubuntu-24.04
-    permissions:
-      security-events: write
-      id-token: write
-    steps:
-      - name: "Checkout code"
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          persist-credentials: false
-      - name: "Run Scorecard analysis"
-        uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # v2.4.3
-        with:
-          results_file: results.sarif
-          publish_results: true
-      - name: "Upload to code-scanning"
-        uses: github/codeql-action/upload-sarif@04800457060cff48cb952d0b0355a5ab4b264a36 # v4.31.11
-        with:
-          sarif_file: results.sarif
-```
-
-*Code Snippet 2: GitHub Actions workflow to automate OpenSSF Scorecard checks on every push and PR.*
-
 For a quick CLI check:
 
 ```bash
@@ -180,6 +150,21 @@ scorecard --repo=tailwindlabs/tailwindcss
 ```
 
 *Code Snippet 1: OpenSSF Scorecard CLI checks a repository's security health score (0-10).*
+
+```yaml file=".github/workflows/scorecard.yml"
+- name: Run OpenSSF Scorecard
+  uses: ossf/scorecard-action@v2
+  with:
+    results_file: scorecard.json
+
+- name: Block on low score
+  run: |
+    SCORE=$(jq '.score' scorecard.json)
+    # [!code highlight]
+    [[ $SCORE -lt 7 ]] && exit 1
+```
+
+*Code Snippet 2: GitHub Actions workflow to enforce minimum dependency health scores in CI.*
 
 ### Validate AI-Generated Dependencies
 
@@ -192,18 +177,14 @@ If your teams use AI coding assistants, add a validation step:
 
 For teams using AI agents extensively, consider [subagent architectures](/posts/orchestrating-ai-agents-subagent-architecture/) where a dedicated validation agent checks every dependency against registries and health signals before acceptance.
 
-```python
-file="scripts/validate_deps.py"
-# Check if AI-suggested packages existed before commit
+```python file="scripts/validate_deps.py"
 import requests
 from datetime import datetime
 
-def validate_package(name: str, commit_date: datetime) -> bool:
-    """Flag packages created after the commit that added them."""
-    response = requests.get(f"https://registry.npmjs.org/{name}", timeout=10)
-    pkg_data = response.json()
-    created = datetime.fromisoformat(pkg_data["time"]["created"].replace('Z', '+00:00'))
-    return created < commit_date  # True if package pre-existed # [!code highlight]
+def check_package_age(name: str, commit_date: str) -> bool:
+    pkg = requests.get(f"https://registry.npmjs.org/{name}").json()
+    published = datetime.fromisoformat(pkg['time']['created'])
+    return published < datetime.fromisoformat(commit_date)  # [!code highlight]
 ```
 
 *Code Snippet 3: Python script to detect slopsquatting by checking if a package existed before your commit date.*
