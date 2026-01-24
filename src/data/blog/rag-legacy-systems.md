@@ -115,12 +115,12 @@ The architecture is model-agnostic by design. We use Amazon Bedrock, but the sam
 
 We tested four LLM families across two providers (Amazon Bedrock, OpenRouter) to validate portability. Mean latency: 27.2ms ± 4.6ms across 480 measurements, with no statistically significant difference (ANOVA p=0.34). Cross-provider variance was only 4.1ms.
 
-| Model | Family | Specialization | Latency | Provider |
-|-------|--------|----------------|---------|----------|
-| Claude Haiku 4.5 | Anthropic | Coding | +31.3ms | Amazon Bedrock |
-| Mistral Devstral-2512 | Mistral | Coding | +32.5ms | OpenRouter |
-| Llama 3.3 Instruct | Meta | General | +24.1ms | OpenRouter |
-| Qwen 2.5 Coder | Alibaba | Coding | +25.1ms | OpenRouter |
+| Model | Family | Latency | Provider |
+|-------|--------|---------|----------|
+| Claude Haiku 4.5 | Anthropic | +31.3ms | Amazon Bedrock |
+| Mistral Devstral-2512 | Mistral | +32.5ms | OpenRouter |
+| Llama 3.3 Instruct | Meta | +24.1ms | OpenRouter |
+| Qwen 2.5 Coder | Alibaba | +25.1ms | OpenRouter |
 
 *Table 1: Latency is consistent across models and providers (480 measurements, ANOVA p=0.34)*
 
