@@ -87,17 +87,15 @@ We didn't need to specify where DNS was hosted (discovered Route53 automatically
 
 ## What Got Automated
 
-The migration workflow orchestrated five critical phases:
+The migration workflow orchestrated five critical phases.
 
-**Discovery & Cleanup**
+### Discovery and Cleanup
 
 Claude analyzed 20+ Route53 records and separated signal from noise: 15 critical records (email, Google Workspace, SSL validation) and 5 obsolete entries (old servers, expired validations). DNSSEC verification came back negative, confirming no migration blocker.
 
-**Pre-Migration Validation**
+### Pre-Migration Validation
 
 Records were exported from Route53 and imported to Cloudflare via APIs, then tested against Cloudflare nameservers before switching. This included verifying email servers (MX priorities), SPF, DKIM, DMARC (exact TXT values), CNAMEs (Google Workspace), and comparing TTL values between source and target. The validation report confirmed 100% match.
-
-**How validation worked in practice:**
 
 ```bash file="scripts/validate-cloudflare-dns.sh"
 # Verify records match before switching nameservers
@@ -109,11 +107,9 @@ diff <(aws route53 list-resource-record-sets) <(curl cloudflare-api)  # [!code h
 
 *Code Snippet 1: Pre-validation against Cloudflare nameservers before switching (zero output from diff = zero risk)*
 
-**CI/CD Reconfiguration**
+### CI/CD Reconfiguration
 
 GitHub Actions were updated to deploy to Cloudflare Pages via wrangler (Cloudflare's CLI), with base URL fixes (GitHub's `/repo/` path to root `/`) and a preview deployment workflow with 7-day auto-cleanup. Result: 38-second deploys, down from 5-8 minutes.
-
-**The CI/CD transformation:**
 
 ```yaml file=".github/workflows/deploy.yml"
 # Cloudflare Pages deployment (38-second deploys)
@@ -127,11 +123,11 @@ GitHub Actions were updated to deploy to Cloudflare Pages via wrangler (Cloudfla
 
 *Code Snippet 2: GitHub Actions deployment to Cloudflare Pages (replaced GitHub Pages action for 88% faster deploys)*
 
-**Governance Trail**
+### Governance Trail
 
 The assistant created PRs with migration context, rationale, and rollback procedures. Every change was reviewable before production, creating an audit trail for compliance.
 
-**Preview Infrastructure**
+### Preview Infrastructure
 
 Every branch gets a preview URL automatically. Stakeholders can review before merge, and the system handles auto-cleanup with zero maintenance.
 
@@ -210,8 +206,6 @@ AI-assisted migrations enable business hours execution (confidence through pre-v
 **The transformation:** From "plan exhaustively and execute carefully" to "validate programmatically and execute confidently."
 
 We knew every record worked before switching. No deployment anxiety, no weekend stress, no contingency planning. Just confidence through programmatic validation.
-
-**The proof:** This blog post was reviewed at a preview URL before going live. We used the same automation we're describing. The system documents itself.
 
 ## When Does This Approach Apply?
 
