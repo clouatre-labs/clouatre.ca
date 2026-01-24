@@ -50,7 +50,7 @@ Migrate everything to Cloudflare:
 
 **The traditional challenge:**
 
-DNS migrations CAN be done with zero downtime, but they require extensive planning and careful execution. One misconfigured MX record means email down for hours. Imagine missing customer orders, support tickets, or sales inquiries during your peak season.
+DNS migrations can be done with zero downtime, but they require extensive planning and careful execution. One misconfigured MX record means email down for hours. Imagine missing customer orders, support tickets, or sales inquiries during your peak season.
 
 **The difference with AI assistance:**
 
@@ -74,16 +74,8 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 
 This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.
 
-We didn't need to specify:
-- Where DNS was hosted (discovered Route53 automatically)
-- How many DNS records existed (found 20+)
-- Which records were critical vs obsolete
-- How to configure Cloudflare Pages
-- How to set up GitHub Actions for Cloudflare
+We didn't need to specify where DNS was hosted (discovered Route53 automatically), how many DNS records existed (found 20+), which records were critical vs obsolete, how to configure Cloudflare Pages, or how to set up GitHub Actions for Cloudflare. The AI handled discovery and analysis.
 
-**The AI handled discovery and analysis.**
-
-**What made this possible:**
 - **Claude Sonnet 4.5 (reasoning):** Analyzes context, decides what to do, discovers infrastructure, validates approach
 - **Goose (execution layer):** Provides tool access (shell, git, AWS CLI, gh), manages conversation state, enforces approval gates
 - **Human (governance):** Reviews proposals at gates, approves/rejects, maintains control
