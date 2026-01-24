@@ -65,8 +65,11 @@ import requests
 from datetime import datetime
 
 def check_package_age(name: str, commit_date: str) -> bool:
-    pkg = requests.get(f"https://registry.npmjs.org/{name}").json()
-    published = datetime.fromisoformat(pkg['time']['created'])
+    resp = requests.get(f"https://registry.npmjs.org/{name}")
+    if resp.status_code == 404:
+        return False  # Package doesn't exist
+    pkg = resp.json()
+    published = datetime.fromisoformat(pkg['time']['created'].replace('Z', '+00:00'))
     return published < datetime.fromisoformat(commit_date)  # [!code highlight]
 ```
 
@@ -178,7 +181,7 @@ To enforce this in CI, integrate Scorecard into your GitHub Actions workflow. Th
     jq -e '.score >= 7' scorecard.json || exit 1  # [!code highlight]
 ```
 
-*Code Snippet 3: GitHub Actions workflow to enforce minimum dependency health scores in CI.*
+*Code Snippet 3: GitHub Actions workflow to enforce minimum dependency health score of 7/10 in CI.*
 
 ### Validate AI-Generated Dependencies
 
