@@ -1,7 +1,7 @@
 ---
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
 pubDatetime: 2026-01-23T12:31:00Z
-modDatetime: 2026-01-24T04:12:00Z
+modDatetime: 2026-01-24T09:40:00Z
 description: "Production RAG for legacy systems: model-agnostic reranking validated across 4 LLM families. Real metrics, no vendor lock-in, 7,432 pages to 3s queries."
 featured: true
 draft: false
@@ -107,9 +107,9 @@ The system retrieved error 1006030 from the Error Message Reference (ranked 3rd 
 
 ### Local Embeddings and Model-Agnostic Design
 
-Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
+Why local embeddings? Cost, simplicity, and performance. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free, require no API keys, and embed 1,000 chunks in under 10 seconds on CPU. The all-MiniLM-L6-v2 model is 80 MB and runs without GPU acceleration.
 
-The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models. We validated this across 4 LLM families with 480 measurements.
+The architecture is model-agnostic by design. We use Amazon Bedrock, but the same pipeline works with Azure OpenAI, Google Vertex AI, or local models.
 
 ## Does Reranking Work Across Different Models?
 
