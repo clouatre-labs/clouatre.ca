@@ -28,9 +28,16 @@ For legacy systems, choose RAG for operational factors, not economics. Documenta
 
 ## How Does RAG Turn PDFs Into Answers?
 
-### The Six-Stage Pipeline
+### The Ingestion Pipeline
 
-The pipeline has six stages. Extract text from PDFs using PyMuPDF. Convert to Markdown with heading detection and cleanup. Load Markdown files. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
+The pipeline has six stages:
+
+1. **Extract** - Pull text from PDFs using PyMuPDF (44 pages/second)
+2. **Transform** - Convert to Markdown with heading detection
+3. **Chunk** - Split into 1,000-character segments with 200-character overlap
+4. **Embed** - Generate vectors with all-MiniLM-L6-v2 (local, free)
+5. **Index** - Store in ChromaDB vector database
+6. **Retrieve** - Hybrid search (BM25 + vector) with FlashRank reranking
 
 ```python file="src/ingest.py"
 import fitz  # pymupdf
@@ -105,9 +112,7 @@ The architecture is model-agnostic by design. We use Amazon Bedrock, but the sam
 
 ## Does Reranking Work Across Different Models?
 
-We tested across four LLM families to validate portability: Anthropic (Claude Haiku 4.5), Mistral (Devstral-2512), Meta (Llama 3.3 70B), and Alibaba (Qwen 2.5 Coder 32B). The question: does the LLM choice affect performance?
-
-No impact: mean latency was 27.2ms ± 4.6ms across 480 measurements. ANOVA p-value of 0.34 confirms no statistically significant difference. Cross-provider variance (Amazon Bedrock vs OpenRouter) was only 4.1ms.
+We tested four LLM families across two providers (Amazon Bedrock, OpenRouter) to validate portability. Mean latency: 27.2ms ± 4.6ms across 480 measurements, with no statistically significant difference (ANOVA p=0.34). Cross-provider variance was only 4.1ms.
 
 | Model | Family | Specialization | Latency | Provider |
 |-------|--------|----------------|---------|----------|
@@ -164,7 +169,7 @@ Reranking adds 31ms to retrieval time. That's a 65% increase in retrieval latenc
 
 Manual search through 7,432 pages takes 15-30 minutes (median: 25 min). You open PDFs, use Ctrl+F, read context, cross-reference sections. RAG reduces this to 3-5 seconds.
 
-The math is straightforward. Assume 10 queries per day during a 6-month migration project. Labor cost: $100/hour (mid-market technical consultant). Time saved: 25 minutes per query. Success rate: 85% (accounting for the 10-15% of queries that need human review).
+Assume 10 queries per day during a 6-month migration project. Labor cost: $100/hour (mid-market technical consultant). Time saved: 25 minutes per query. Success rate: 85% (accounting for the 10-15% of queries that need human review).
 
 Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) × 85% success rate = **$354/day**
 
@@ -189,6 +194,8 @@ Complex queries need more context than fits in the LLM's window. Mitigation: bre
 ### Stale Data
 
 Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
+
+### What is the Overall Failure Rate?
 
 Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
 
