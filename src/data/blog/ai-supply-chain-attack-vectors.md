@@ -151,6 +151,8 @@ scorecard --repo=tailwindlabs/tailwindcss
 
 *Code Snippet 1: OpenSSF Scorecard CLI checks a repository's security health score (0-10).*
 
+To enforce this in CI, integrate Scorecard into your GitHub Actions workflow. The workflow below fails the build if a dependency scores below 7 out of 10, preventing risky dependencies from entering production:
+
 ```yaml file=".github/workflows/scorecard.yml"
 - name: Run OpenSSF Scorecard
   uses: ossf/scorecard-action@v2
@@ -160,8 +162,7 @@ scorecard --repo=tailwindlabs/tailwindcss
 - name: Block on low score
   run: |
     SCORE=$(jq '.score' scorecard.json)
-    # [!code highlight]
-    [[ $SCORE -lt 7 ]] && exit 1
+    [[ $SCORE -lt 7 ]] && exit 1  # [!code highlight]
 ```
 
 *Code Snippet 2: GitHub Actions workflow to enforce minimum dependency health scores in CI.*
