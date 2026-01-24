@@ -1,7 +1,7 @@
 ---
 title: "Migrating to Cloudflare Pages: One Prompt, Zero Manual Work"
 pubDatetime: 2025-11-06T12:00:00Z
-modDatetime: 2026-01-21T20:21:00Z
+modDatetime: 2026-01-24T18:39:00Z
 description: "GitHub Pages to Cloudflare Pages in 2 hours with zero downtime. AI-assisted DNS, hosting, and CI/CD migration with validation and real metrics."
 tags:
   - automation
@@ -66,15 +66,13 @@ Infrastructure changes shift from high-stress, weekend events to business-hours 
 
 **What we told Goose ([open-source AI assistant](https://github.com/block/goose)):**
 
-```text file="Initial_Prompt"
-I want to migrate from GitHub Pages to Cloudflare Pages.
-The domain clouatre.ca is registered at Squarespace.
-I need zero downtime - email and Google Workspace cannot break.
-Check if DNSSEC is enabled and handle it appropriately.
-Use a risk-adverse approach.
-```
+> I want to migrate from GitHub Pages to Cloudflare Pages.
+> The domain clouatre.ca is registered at Squarespace.
+> I need zero downtime - email and Google Workspace cannot break.
+> Check if DNSSEC is enabled and handle it appropriately.
+> Use a risk-adverse approach.
 
-*This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.*
+This prompt started a [5-phase recipe workflow](/posts/ai-assisted-development-judgment-over-implementation/#the-recipe-model-codifying-judgment) with mandatory approval gates: I reviewed and approved each phase (Analyze → Research → Plan → Implement → Prepare). Not autonomous execution, AI-assisted with human governance at every decision point.
 
 We didn't need to specify:
 - Where DNS was hosted (Goose discovered Route53)
@@ -113,11 +111,37 @@ Goose handled five critical phases:
 - Compared TTL values between source and target
 - Generated validation report: 100% match confirmed
 
+**How validation worked in practice:**
+
+```bash file="scripts/validate-cloudflare-dns.sh"
+# Verify records match before switching nameservers
+dig @nameserver1.cloudflare.com clouatre.ca MX +short  # [!code highlight]
+# Output: 1 aspmx.l.google.com. (matches Route53)
+diff <(aws route53 list-resource-record-sets) <(curl cloudflare-api)  # [!code highlight]
+# Output: (empty = 100% match, zero risk)
+```
+
+*Code Snippet 1: Pre-validation against Cloudflare nameservers before switching (zero output from diff = zero risk)*
+
 **CI/CD Reconfiguration**
 - Updated GitHub Actions deployment target (GitHub Pages → Cloudflare)
 - Fixed base URL issues (GitHub's `/repo/` → root `/`)
 - Created preview deployment workflow with 7-day auto-cleanup
 - Result: 38-second deploys (was 5-8 minutes)
+
+**The CI/CD transformation:**
+
+```yaml file=".github/workflows/deploy.yml"
+# Cloudflare Pages deployment (38-second deploys)
+- name: Deploy to Cloudflare Pages
+  uses: cloudflare/wrangler-action@v3  # [!code highlight]
+  with:
+    apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    command: pages deploy dist --project-name=clouatre-ca  # [!code highlight]
+```
+
+*Code Snippet 2: GitHub Actions deployment to Cloudflare Pages (replaced GitHub Pages action for 88% faster deploys)*
 
 **Governance Trail**
 - Created PRs with migration context, rationale, rollback procedures
