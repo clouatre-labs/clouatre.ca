@@ -24,6 +24,7 @@ Reranking adds negligible latency while improving retrieval quality by 6-8%.
 | `results_summary.json` | Aggregate timing data |
 | `data/raw_timings.csv` | Anonymized raw timing data (480 measurements) |
 | `scripts/stats_analysis.py` | Statistical analysis script (ANOVA, 95% CI) |
+| `query-category-eval/` | Accuracy evaluation by query type (20 queries, 4 categories) |
 
 ## Quick Results
 

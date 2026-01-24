@@ -1,6 +1,7 @@
 ---
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
 pubDatetime: 2026-01-23T12:31:00Z
+modDatetime: 2026-01-24T04:12:00Z
 description: "Production RAG for legacy systems: model-agnostic reranking validated across 4 LLM families. Real metrics, no vendor lock-in, 7,432 pages to 3s queries."
 featured: true
 draft: false
@@ -195,9 +196,28 @@ Complex queries need more context than fits in the LLM's window. Mitigation: bre
 
 Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
 
+### Corpus Limitations
+
+Not all failures are system failures. The evaluation revealed three corpus-related issues:
+
+- **Corpus gap**: Knowledge doesn't exist (e.g., specific error codes not documented). The system correctly responds "I don't know."
+- **Scattered information**: Knowledge exists but spread across sections, making synthesis incomplete.
+- **Query formulation**: Symptom-based queries ("out of memory errors") outperform code-based queries ("error 1012001") when exact codes aren't indexed.
+
+These are honest limitations, not RAG failures. The mitigation is corpus expansion, not system tuning.
+
 ### What is the Overall Failure Rate?
 
-Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
+10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
+
+| Query Category | Success Rate | Common Failure Mode | Mitigation |
+|----------------|--------------|---------------------|------------|
+| Error lookup | 50-60% | Exact code not in corpus | Symptom-based queries; corpus expansion |
+| Conceptual | 90-100% | Rare; usually corpus gaps | Query expansion with domain terms |
+| Procedural | 100% | Rare; version differences | Query expansion with command names |
+| Multi-hop | 50-70% | Knowledge scattered or missing | Corpus expansion; honest "not found" |
+
+*Table 3: RAG success rates by query type, n=10 per category, 0% false positive rate on validation subset ([methodology](https://github.com/clouatre-labs/clouatre.ca/tree/main/research/rag-reranking-benchmarks/query-category-eval))*
 
 The key is transparency. Users see which documents were retrieved, can verify claims, and know when to escalate. Trust comes from citations, not blind faith in LLM outputs.
 
