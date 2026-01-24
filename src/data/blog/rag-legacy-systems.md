@@ -34,7 +34,7 @@ The pipeline has six stages:
 
 1. **Extract** - Pull text from PDFs using PyMuPDF (44 pages/second)
 2. **Transform** - Convert to Markdown with heading detection
-3. **Chunk** - Split into 1,000-character segments with 200-character overlap
+3. **Chunk** - Split at headings (1,000-char limit, 200-char overlap)
 4. **Embed** - Generate vectors with all-MiniLM-L6-v2 (local, free)
 5. **Index** - Store in ChromaDB vector database
 6. **Retrieve** - Hybrid search (BM25 + vector) with FlashRank reranking
