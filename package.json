@@ -42,7 +42,7 @@
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.16.6",
-    "astro-indexnow": "2.0.0",
+    "astro-indexnow": "2.1.0",
     "dayjs": "^1.11.13",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
