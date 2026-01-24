@@ -149,6 +149,8 @@ For a quick CLI check:
 scorecard --repo=tailwindlabs/tailwindcss
 ```
 
+*Code Snippet 1: OpenSSF Scorecard CLI checks a repository's security health score (0-10).*
+
 ### Validate AI-Generated Dependencies
 
 If your teams use AI coding assistants, add a validation step:
