@@ -82,12 +82,14 @@ Smaller models like Haiku excel with focused, explicit prompts. Complex multi-st
 
 Subagents communicate through JSON files in `$WORKTREE/.goose/handoff/`. Each session uses an isolated git worktree, so handoff files are scoped to that execution context. This creates an explicit contract between phases.
 
-```
+```text
 $WORKTREE/.goose/handoff/
 ├── 02-plan.json      # Orchestrator → Builder
 ├── 03-build.json     # Builder → Validator  
 └── 04-validation.json # Validator → Builder (on failure)
 ```
+
+*Code Snippet 1: Handoff directory structure showing the JSON files that pass context between phases.*
 
 The plan file contains everything the builder needs:
 
@@ -110,6 +112,8 @@ The plan file contains everything the builder needs:
 }
 ```
 
+*Code Snippet 2: Plan handoff file with structured task definition for the builder subagent.*
+
 The validator reads both `02-plan.json` and `03-build.json` to verify implementation matches requirements. It writes structured feedback to `04-validation.json`:
 
 ```json file=".goose/handoff/04-validation.json"
@@ -123,6 +127,8 @@ The validator reads both `02-plan.json` and `03-build.json` to verify implementa
   "next_steps": "Fix issue: Remove the three annotations, then re-validate"
 }
 ```
+
+*Code Snippet 3: Validation handoff file with actionable feedback for the builder to address.*
 
 The builder reads this feedback, fixes the specific issues, and triggers another CHECK cycle until validation passes.
 
