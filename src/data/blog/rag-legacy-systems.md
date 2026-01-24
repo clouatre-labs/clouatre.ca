@@ -28,6 +28,8 @@ For legacy systems, choose RAG for operational factors, not economics. Documenta
 
 ## How Does RAG Turn PDFs Into Answers?
 
+### The Six-Stage Pipeline
+
 The pipeline has six stages. Extract text from PDFs using PyMuPDF. Convert to Markdown with heading detection and cleanup. Load Markdown files. Split into 1,000-character chunks with 200-character overlap. Generate embeddings with a local model (all-MiniLM-L6-v2). Store in ChromaDB vector database. Query with hybrid retrieval combining keyword search (BM25) and semantic search (vector similarity).
 
 ```python file="src/ingest.py"
@@ -51,6 +53,8 @@ doc.close()
 *Code Snippet 1: PyMuPDF extracts text and converts to Markdown with heading detection, processing 44 pages/second.*
 
 The pipeline converts PDFs to Markdown before chunking. This preserves document structure (chapters, sections, headings) and enables Markdown-aware chunking that respects semantic boundaries. Chunks split at heading boundaries (`## `, `### `) instead of mid-paragraph, keeping related content together. The Markdown files are cached, so subsequent runs skip PDF extraction and complete in 2 seconds instead of 170 seconds.
+
+### Hybrid Retrieval: BM25 + Vector Search
 
 Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) [consistently outperforms either method alone](https://arxiv.org/abs/2401.04055) (Mandikal & Mooney, 2024).
 
@@ -92,6 +96,8 @@ The system retrieved error 1006030 from the Error Message Reference (ranked 3rd 
 ![RAG Pipeline with Reranking](@/assets/images/rag-pipeline-reranking.png)
 
 *Figure 1: RAG pipeline with hybrid retrieval and reranking (FlashRank adds 31ms overhead for [6-8% accuracy gain](https://arxiv.org/abs/2601.03258)) (George, 2025)*
+
+### Local Embeddings and Model-Agnostic Design
 
 Why local embeddings? Cost and privacy. Cloud embedding APIs charge $0.10-0.50 per million tokens. Local models are free and keep sensitive docs on-premises. The all-MiniLM-L6-v2 model is 80 MB, runs on CPU, and embeds 1,000 chunks in under 10 seconds.
 
@@ -172,11 +178,17 @@ Expert dependency drops too. Before RAG, tribal knowledge lived in people's head
 
 RAG fails on multi-step reasoning, ambiguous questions, and knowledge not in the docs. We've seen three failure modes in production.
 
-First: hallucination. The LLM invents answers not in the retrieved chunks. Mitigation: show source citations, add confidence scores, constrain responses to retrieved context only. We display the top 3 source documents with page numbers for every answer.
+### Hallucination
 
-Second: context overflow. Complex queries need more context than fits in the LLM's window. Mitigation: break queries into sub-questions, use query expansion for domain terms, implement multi-hop retrieval for connected concepts.
+The LLM invents answers not in the retrieved chunks. Mitigation: show source citations, add confidence scores, constrain responses to retrieved context only. We display the top 3 source documents with page numbers for every answer.
 
-Third: stale data. Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
+### Context Overflow
+
+Complex queries need more context than fits in the LLM's window. Mitigation: break queries into sub-questions, use query expansion for domain terms, implement multi-hop retrieval for connected concepts.
+
+### Stale Data
+
+Documentation changes but embeddings don't update. Mitigation: hash-based cache invalidation for PDFs, timestamp-based for markdown files, automated re-indexing on file changes.
 
 Failure rate in production: 10-15% of queries need human review for complex multi-step reasoning or ambiguous questions. The alternative is searching 7,432 pages manually. RAG handles the straightforward cases autonomously, while experts focus on edge cases.
 
