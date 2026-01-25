@@ -1,7 +1,7 @@
 ---
 title: "AI Supply Chain Attacks: New Vectors in Your Dependencies"
 pubDatetime: 2026-01-13T07:00:00Z
-modDatetime: 2026-01-17T11:31:25Z
+modDatetime: 2026-01-25T03:38:00Z
 description: "XZ Utils nearly backdoored Linux. Tailwind laid off 75% after AI killed revenue. Slopsquatting weaponizes hallucinations. A framework to assess exposure."
 tags:
   - ai
@@ -35,6 +35,10 @@ On January 6, 2026, Adam Wathan attributed Tailwind's layoffs directly to [AI's 
 The mechanism is simple: developers ask Copilot for a Tailwind grid layout. The AI generates it. No documentation visit. No discovery of Tailwind UI. No conversion. The developer gets value. The maintainer gets nothing.
 
 This isn't a failing product. It's a failing business model. And it's not unique to Tailwind. Any project monetizing through documentation traffic faces the same exposure.
+
+Meanwhile, curl maintainer Daniel Stenberg [scrapped the project's bug bounty program](https://arstechnica.com/security/2026/01/overrun-with-ai-slop-curl-scraps-bug-bounties-to-ensure-intact-mental-health/) on January 21, 2026, citing "intact mental health." Twenty AI-generated vulnerability reports flooded HackerOne in January alone—none identifying actual vulnerabilities. Researchers paste code into LLMs, submit the hallucinated analysis, then loop follow-up questions through the same models. The result: maintainers spend hours triaging garbage instead of shipping code.
+
+Different mechanism. Same outcome. AI extracts value from open source while accelerating the burnout that makes projects vulnerable.
 
 ### Vector 2: Social Engineering of Solo Maintainers
 
@@ -217,6 +221,7 @@ But start with one question: open your `package.json` or `requirements.txt`. How
 ## References
 
 - CrowdStrike, "CVE-2024-3094 and XZ Upstream Supply Chain Attack" (2024) — https://www.crowdstrike.com/en-us/blog/cve-2024-3094-xz-upstream-supply-chain-attack/
+- Goodin, Dan, "Overrun with AI slop, cURL scraps bug bounties" (Ars Technica, 2026) — https://arstechnica.com/security/2026/01/overrun-with-ai-slop-curl-scraps-bug-bounties-to-ensure-intact-mental-health/
 - Snyk, "Slopsquatting: New AI Hallucination Threats" (2025) — https://snyk.io/articles/slopsquatting-mitigation-strategies/
 - Sonatype, "10th Annual State of the Software Supply Chain" (2024) — https://www.sonatype.com/state-of-the-software-supply-chain/introduction
 - Spracklen, Joseph et al., "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs" (arXiv, 2025) — https://arxiv.org/abs/2406.10279
