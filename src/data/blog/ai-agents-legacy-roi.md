@@ -23,7 +23,7 @@ This post shows where AI agents make economic sense *on top of* legacy systems, 
 
 ## Why Legacy Systems Became the #1 AI Adoption Obstacle
 
-Legacy systems top the list of AI adoption obstacles, but the conventional fix is worse than the problem. Traditional modernization projects require multi-year timelines and eight-figure budgets before proving a single dollar of AI value. No wonder [40% of agentic AI projects will be canceled by 2027](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026) due to escalating costs and unclear business value.
+Legacy systems top the list of AI adoption obstacles, but the conventional fix is worse than the problem. Traditional modernization projects require multi-year timelines and eight-figure budgets before proving a single dollar of AI value. No wonder [40% of agentic AI projects will be canceled by 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) (Gartner, 2025) due to escalating costs and unclear business value.
 
 The real bottleneck isn't legacy systems. It's the false choice between "modernize everything" and "do nothing." You need integration patterns that work with what you have.
 
@@ -208,7 +208,7 @@ Projects fail when teams skip fundamentals.
 
 **Unclear Business Value.** [Gartner predicts over 40% of agentic AI projects will be canceled by 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) due to escalating costs, unclear value, and inadequate risk controls. Launching with vague goals like "improve productivity" makes it impossible to measure success. Define exact metrics before development: "Reduce invoice processing time from 8 days to 2 days while maintaining 99.5% accuracy" is measurable; "handle invoices better" is not.
 
-**Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html) (Deloitte Tech Trends, 2026). Treat agents as privileged service accounts with these controls:
+**Security Vulnerabilities.** [Prompt injection attacks are ranked #1 in OWASP 2025 Top 10 for LLMs](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) (OWASP, 2025). Treat agents as privileged service accounts with these controls:
 - Tool allowlisting (no arbitrary network/file access)
 - Schema validation on tool inputs/outputs
 - Output sanitization (no untrusted content forwarded)
@@ -252,8 +252,8 @@ Explore how [subagent architectures can orchestrate multiple AI agents without c
 - BCG, "Agentic AI Power Core Insurance AI Modernization" (2026) — https://www.bcg.com/publications/2026/agentic-ai-power-core-insurance-ai-modernization
 - Cochran, W.G., *Sampling Techniques*, 3rd ed. (1977) — https://en.wikipedia.org/wiki/Sample_size_determination
 - Cyber Snowden, "Difference Between End of Life and Legacy Cyber Security" (2026) — https://cybersnowden.com/difference-between-end-of-life-and-legacy-cyber-security/
-- Deloitte, "Tech Trends 2026: Agentic AI Strategy" (2026) — https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html
 - Gartner, "Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027" (2025) — https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027
 - OpenTelemetry, "Semantic Conventions for Generative AI" (2024) — https://opentelemetry.io/docs/specs/semconv/gen-ai/
+- OWASP, "LLM01:2025 Prompt Injection" (2025) — https://genai.owasp.org/llmrisk/llm01-prompt-injection/
 - Superhuman, "AI Agent Useful Case Studies" (2026) — https://blog.superhuman.com/ai-agent-useful-case-studies/
 - World Economic Forum, "AI Mid-Market Business Growth" (2026) — https://www.weforum.org/stories/2026/01/ai-mid-market-business-growth/
