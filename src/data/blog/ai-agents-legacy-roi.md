@@ -1,7 +1,7 @@
 ---
 title: "AI Agents in Legacy Systems: ROI Without Modernization"
 pubDatetime: 2026-01-20T06:27:00Z
-modDatetime: 2026-01-24T16:16:56Z
+modDatetime: 2026-01-25T01:46:00Z
 description: "Mid-market CTOs achieve 30-80% productivity gains by layering AI agents over legacy systems. No modernization required. Proven patterns and ROI."
 featured: true
 draft: false
@@ -133,17 +133,55 @@ if __name__ == "__main__":
 
 *Table 1: Integration pattern selection guide*
 
+![Three integration patterns: API Mediation Layer (facade pattern), Event-Driven Architecture (message bus), and Model Context Protocol (MCP servers)](@/assets/images/integration-patterns.png)
+
+*Figure 2: Three integration patterns for legacy systems*
+
 ## Why Observability Infrastructure Is Non-Negotiable
 
 Whatever integration pattern you choose, log everything. Every integration call. Every agent decision. Every error. This isn't optional.
 
-Compliance audits require audit trails. When regulators ask "why did your agent approve this transaction?", you need logs that show the decision path. Debugging requires visibility. When an agent fails, you need to know which integration call failed, what data it received, and why it made the wrong decision. Continuous improvement requires metrics. You can't optimize what you don't measure.
+### Why Log Everything?
 
-Integrate with Prometheus, ELK, Splunk, or Datadog for production monitoring. Track three categories of metrics: **integration health** (API latency, error rates, timeout frequency), **agent performance** (task completion rate, decision accuracy, user satisfaction), and **business impact** (response time reduction, throughput increase, cost savings). These metrics prove ROI and guide your next investments. For deeper coverage of observability infrastructure in AI workflows, see [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd).
+- **Compliance**: Auditors ask "why did your agent approve this transaction?" You need logs showing the decision path.
+- **Debugging**: When an agent fails, trace which integration call failed, what data it received, and why it made the wrong decision.
+- **Improvement**: You can't optimize what you don't measure.
 
-![Three integration patterns: API Mediation Layer (facade pattern), Event-Driven Architecture (message bus), and Model Context Protocol (MCP servers)](@/assets/images/integration-patterns.png)
+Integrate with Prometheus, ELK, Splunk, or Datadog for production monitoring. Track three categories of metrics.
 
-*Figure 2: Three integration patterns for legacy systems*
+### Integration Health Metrics
+
+Monitor these in real-time dashboards: API latency (p50, p95, p99), error rates by type, and timeout frequency. These align with [OpenTelemetry semantic conventions for GenAI](https://opentelemetry.io/docs/specs/semconv/gen-ai/), which define standard metrics like `gen_ai.client.operation.duration` and `gen_ai.client.token.usage`.
+
+### Agent Performance Metrics
+
+These require deliberate instrumentation design. **Task completion rate** needs a definition of "complete" per task type (e.g., "ticket resolved without escalation"). **User satisfaction** comes from thumbs up/down on responses, escalation rate, and support ticket correlation. **Decision accuracy** is the hardest to measure, see below.
+
+### How Do You Measure Decision Accuracy?
+
+Ground truth is often available. The question is where to find it.
+
+For **RAG systems**, use [categorized query benchmarks with validation subsets](/posts/rag-legacy-systems/#what-is-the-overall-failure-rate). Test accuracy by query type (conceptual, procedural, error lookup, multi-hop) since each fails differently.
+
+For **approval workflows**, compare agent decisions against eventual outcomes. Was the approved invoice paid? Was the flagged transaction actually fraudulent? The business process itself provides ground truth.
+
+When **ground truth is unavailable**, sample decisions for human or AI-assisted review. The question is: how many?
+
+**Sample 300-400 decisions monthly.** This achieves +/-5% margin of error at 95% confidence [regardless of total volume](https://en.wikipedia.org/wiki/Sample_size_determination#Estimation_of_a_proportion) (Cochran, 1977). The math: `n = (1.96² x 0.5 x 0.5) / 0.05² = 385`. For systems under 500 decisions/month, review all or accept wider uncertainty.
+
+### Business Impact Metrics
+
+Calculate these monthly against pre-deployment baselines. These are not real-time dashboard metrics:
+
+| Metric | Formula |
+|--------|---------|
+| Response time reduction | Agent-handled avg vs. pre-deployment baseline |
+| Throughput increase | Tickets/hour after vs. before deployment |
+| Cost savings | (Hours saved x labor cost) - (API costs + infrastructure) |
+
+*Table 2: Business impact calculation formulas*
+
+These metrics prove ROI and guide your next investments. For deeper coverage of observability infrastructure in AI workflows, see [AI-augmented CI/CD pipelines](/posts/ai-augmented-cicd).
 
 ## What ROI Can Mid-Market Companies Actually Expect?
 
@@ -162,7 +200,7 @@ Atera's 60% improvement in sales response times translates to faster deal closur
 | Bank of America | API Mediation | IT Service Desk Calls | 50% reduction |
 | Insurance Industry | Event-Driven | Claims Processing Time | 67% reduction (9.6 -> 3.2 days) |
 
-*Table 2: ROI examples across integration patterns (note: API Mediation dominates early wins due to faster implementation)*
+*Table 3: ROI examples across integration patterns (note: API Mediation dominates early wins due to faster implementation)*
 
 ## Why Do 40% of AI Agent Projects Still Fail?
 
@@ -217,3 +255,5 @@ Explore how [subagent architectures can orchestrate multiple AI agents without c
 - Superhuman, "AI Agent Useful Case Studies" (2026) — https://blog.superhuman.com/ai-agent-useful-case-studies/
 - BCG, "Agentic AI Power Core Insurance AI Modernization" (2026) — https://www.bcg.com/publications/2026/agentic-ai-power-core-insurance-ai-modernization
 - Cyber Snowden, "Difference Between End of Life and Legacy Cyber Security" (2026) — https://cybersnowden.com/difference-between-end-of-life-and-legacy-cyber-security/
+- Cochran, W.G., *Sampling Techniques*, 3rd ed. (1977) — https://en.wikipedia.org/wiki/Sample_size_determination
+- OpenTelemetry, "Semantic Conventions for Generative AI" (2024) — https://opentelemetry.io/docs/specs/semconv/gen-ai/
