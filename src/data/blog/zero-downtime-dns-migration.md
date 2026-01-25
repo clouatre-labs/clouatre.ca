@@ -227,10 +227,10 @@ Platform economics favor Cloudflare. The free tier (500 builds/month, unlimited 
 
 ## References
 
+- BlueCat Networks, "What causes a DNS outage? Humans, mostly" (2024) — https://bluecatnetworks.com/blog/what-causes-a-dns-outage-humans-mostly/
+- Cloudflare, "Change your nameservers (Full setup)" — https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
+- DNSPerf, "DNS Performance Benchmarks" — https://www.dnsperf.com/
+- DORA, "Accelerate State of DevOps Report" (2024) — https://dora.dev/research/2024/dora-report/
+- McKinsey, "Unleashing Developer Productivity with Generative AI" (2023) — https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai
 - Splunk and Oxford Economics, "Downtime Costs Global 2000 Companies $400B Annually" (2024) — https://www.splunk.com/en_us/newsroom/press-releases/2024/conf24-splunk-report-shows-downtime-costs-global-2000-companies-400-billion-annually.html
 - Uptime Institute, "Annual Outage Analysis Report 2025" (2025) — https://uptimeinstitute.com/about-ui/press-releases/uptime-announces-annual-outage-analysis-report-2025
-- McKinsey, "Unleashing Developer Productivity with Generative AI" (2023) — https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai
-- DORA, "Accelerate State of DevOps Report" (2024) — https://dora.dev/research/2024/dora-report/
-- BlueCat Networks, "What causes a DNS outage? Humans, mostly" (2024) — https://bluecatnetworks.com/blog/what-causes-a-dns-outage-humans-mostly/
-- DNSPerf, "DNS Performance Benchmarks" — https://www.dnsperf.com/
-- Cloudflare, "Change your nameservers (Full setup)" — https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
