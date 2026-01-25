@@ -1,7 +1,7 @@
 ---
 title: "RAG for Legacy Systems: 7,432 Pages to 3s Answers"
 pubDatetime: 2026-01-23T12:31:00Z
-modDatetime: 2026-01-24T09:50:00Z
+modDatetime: 2026-01-25T04:30:44Z
 description: "Production RAG for legacy systems: model-agnostic reranking validated across four LLM families. Real metrics, no vendor lock-in, 7,432 pages to 3s queries."
 featured: true
 draft: false
@@ -16,6 +16,8 @@ tags:
 Your legacy system documentation is 20 years old, 7,432 pages, and locked in PDFs. Manual search takes 15-30 minutes per query. We made it queryable in 170 seconds. Query response time: 3-5 seconds. ROI break-even: one day.
 
 This isn't a prototype. It's Retrieval-Augmented Generation (RAG) on Amazon Bedrock, a system that retrieves relevant documentation and uses an LLM to generate answers without retraining models. Validated across four LLM families with 480 measurements. The implementation indexes 20,679 chunks and delivers sub-5-second responses with model-agnostic reranking. Overhead: 27.2ms ± 4.6ms regardless of which LLM you use.
+
+Yes, 7,432 pages fit in any search index. But ranked results aren't answers.
 
 Here's the production architecture, the multi-model validation data, and why you can switch providers without re-tuning.
 
@@ -64,7 +66,7 @@ The pipeline converts PDFs to Markdown before chunking. This preserves document 
 
 ### Hybrid Retrieval: BM25 + Vector Search
 
-Hybrid retrieval matters. Pure vector search misses exact terms like "port 5432" or "module_id 2847". Pure keyword search misses semantic queries like "how do I configure authentication?" Combining both with Reciprocal Rank Fusion (RRF) [consistently outperforms either method alone](https://arxiv.org/abs/2401.04055) (Mandikal & Mooney, 2024).
+Why not just Elasticsearch or Ctrl+F? Pure keyword search fails when you search "memory error" but the 2005 docs say "data file cache exhaustion." Pure vector search misses exact terms like "port 5432." Hybrid retrieval solves ranking. The LLM solves synthesis: combining fragments from multiple documents into an actionable answer. RRF [consistently outperforms single-method search](https://arxiv.org/abs/2401.04055) (Mandikal & Mooney, 2024).
 
 ```python file="src/rag.py"
 # Reciprocal Rank Fusion (RRF) combines BM25 + vector scores
