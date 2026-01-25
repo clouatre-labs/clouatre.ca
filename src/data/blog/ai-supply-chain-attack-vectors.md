@@ -36,7 +36,7 @@ The mechanism is simple: developers ask Copilot for a Tailwind grid layout. The 
 
 This isn't a failing product. It's a failing business model. And it's not unique to Tailwind. Any project monetizing through documentation traffic faces the same exposure.
 
-Meanwhile, curl maintainer Daniel Stenberg [scrapped the project's bug bounty program](https://arstechnica.com/security/2026/01/overrun-with-ai-slop-curl-scraps-bug-bounties-to-ensure-intact-mental-health/) on January 21, 2026, citing "intact mental health." Twenty AI-generated vulnerability reports flooded HackerOne in January alone—none identifying actual vulnerabilities. Researchers paste code into LLMs, submit the hallucinated analysis, then loop follow-up questions through the same models. The result: maintainers spend hours triaging garbage instead of shipping code.
+Meanwhile, curl maintainer Daniel Stenberg [scrapped the project's bug bounty program](https://arstechnica.com/security/2026/01/overrun-with-ai-slop-curl-scraps-bug-bounties-to-ensure-intact-mental-health/) on January 21, 2026, citing "intact mental health." Twenty AI-generated vulnerability reports flooded HackerOne in January alone. None identified actual vulnerabilities. Researchers paste code into LLMs, submit the hallucinated analysis, then loop follow-up questions through the same models. The result: maintainers spend hours triaging garbage instead of shipping code.
 
 Different mechanism. Same outcome. AI extracts value from open source while accelerating the burnout that makes projects vulnerable.
 
