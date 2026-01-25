@@ -72,6 +72,6 @@
     "simple-git-hooks": "2.13.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.1",
-    "wrangler": "4.59.3"
+    "wrangler": "4.60.0"
   }
 }
