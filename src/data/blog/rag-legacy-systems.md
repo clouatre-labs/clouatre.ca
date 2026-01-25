@@ -255,13 +255,13 @@ For broader integration patterns and ROI frameworks, see [AI Agents in Legacy Sy
 
 ## References
 
-- Clouatre, H., "RAG Reranking Benchmarks: Supplementary Materials" (2026) — https://github.com/clouatre-labs/clouatre.ca/tree/main/research/rag-reranking-benchmarks
-- George, Sherine, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval: FlashRank Reranking and Query Expansion" (2025) — https://arxiv.org/abs/2601.03258
-- Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
-- Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
-- de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
-- Mandikal & Mooney, "Sparse Meets Dense: A Hybrid Approach to Enhance Scientific Document Retrieval" (2024) — https://arxiv.org/abs/2401.04055
-- Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023) — https://arxiv.org/abs/2305.14314
-- Thunder Compute, "AI GPU Rental Market Trends December 2025: Complete Industry Analysis" (2025) — https://www.thundercompute.com/blog/ai-gpu-rental-market-trends
 - Braintrust, "RAG Evaluation Metrics: How to Evaluate Your RAG Pipeline" (2025) — https://www.braintrust.dev/articles/rag-evaluation-metrics
+- Clouatre, H., "RAG Reranking Benchmarks: Supplementary Materials" (2026) — https://github.com/clouatre-labs/clouatre.ca/tree/main/research/rag-reranking-benchmarks
+- de Luis Balaguer et al., "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture" (2024) — https://arxiv.org/abs/2401.08406
+- Dettmers et al., "QLoRA: Efficient Finetuning of Quantized LLMs" (2023) — https://arxiv.org/abs/2305.14314
+- Gan et al., "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey" (2025) — https://arxiv.org/abs/2504.14891
+- George, Sherine, "Enhancing Retrieval-Augmented Generation with Two-Stage Retrieval: FlashRank Reranking and Query Expansion" (2025) — https://arxiv.org/abs/2601.03258
 - LangChain Documentation, "Contextual Compression and Reranking" (2025) — https://python.langchain.com/docs/how_to/contextual_compression/
+- Mandikal & Mooney, "Sparse Meets Dense: A Hybrid Approach to Enhance Scientific Document Retrieval" (2024) — https://arxiv.org/abs/2401.04055
+- Oche et al., "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems: Progress, Gaps, and Future Directions" (2025) — https://arxiv.org/abs/2507.18910
+- Thunder Compute, "AI GPU Rental Market Trends December 2025: Complete Industry Analysis" (2025) — https://www.thundercompute.com/blog/ai-gpu-rental-market-trends

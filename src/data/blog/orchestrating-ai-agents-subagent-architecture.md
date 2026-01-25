@@ -219,7 +219,7 @@ For technical leaders: Multi-agent orchestration is the next step after single-a
 
 ## References
 
-- Bain & Company, "From Pilots to Payoff: Generative AI in Software Development" (2025) — https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/
 - Anthropic Engineering, "How we built our multi-agent research system" (2025) — https://www.anthropic.com/engineering/multi-agent-research-system
+- Bain & Company, "From Pilots to Payoff: Generative AI in Software Development" (2025) — https://www.bain.com/insights/from-pilots-to-payoff-generative-ai-in-software-development-technology-report-2025/
 - Gandhi et al., "BudgetMLAgent: A Cost-Effective LLM Multi-Agent System" (2025) — https://arxiv.org/abs/2411.07464
 - Raghavan & Mallick, "MOSAIC: Multi-agent Orchestration for Task-Intelligent Scientific Coding" (2025) — https://arxiv.org/abs/2510.08804

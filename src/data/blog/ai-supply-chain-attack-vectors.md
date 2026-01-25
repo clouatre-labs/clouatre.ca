@@ -216,10 +216,10 @@ But start with one question: open your `package.json` or `requirements.txt`. How
 
 ## References
 
-- Wathan, Adam, "GitHub comment on Tailwind layoffs" (2026) — https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957
-- Sumner, Jarred, "Bun is joining Anthropic" (2025) — https://bun.sh/blog/bun-joins-anthropic
 - CrowdStrike, "CVE-2024-3094 and XZ Upstream Supply Chain Attack" (2024) — https://www.crowdstrike.com/en-us/blog/cve-2024-3094-xz-upstream-supply-chain-attack/
-- Sonatype, "10th Annual State of the Software Supply Chain" (2024) — https://www.sonatype.com/state-of-the-software-supply-chain/introduction
 - Snyk, "Slopsquatting: New AI Hallucination Threats" (2025) — https://snyk.io/articles/slopsquatting-mitigation-strategies/
+- Sonatype, "10th Annual State of the Software Supply Chain" (2024) — https://www.sonatype.com/state-of-the-software-supply-chain/introduction
 - Spracklen, Joseph et al., "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs" (arXiv, 2025) — https://arxiv.org/abs/2406.10279
+- Sumner, Jarred, "Bun is joining Anthropic" (2025) — https://bun.sh/blog/bun-joins-anthropic
 - Verizon, "2025 Data Breach Investigations Report" — https://www.verizon.com/business/resources/reports/dbir/
+- Wathan, Adam, "GitHub comment on Tailwind layoffs" (2026) — https://github.com/tailwindlabs/tailwindcss.com/pull/2388#issuecomment-3717222957
