@@ -11,7 +11,13 @@ import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { SITE } from "./src/config";
 import remarkFaqSchema from "./src/utils/remark-faq-schema";
+import { buildLastmodMap } from "./src/utils/sitemap-lastmod";
 import { transformerFileName } from "./src/utils/transformers/fileName";
+
+// Build lastmod map from blog frontmatter at config load time
+// Only blog posts get lastmod (from modDatetime or pubDatetime)
+// Static pages omit lastmod per Google best practices
+const postLastmodMap = buildLastmodMap(SITE.website);
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +25,16 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
+      serialize: (item) => {
+        // Only add lastmod for blog posts with actual modification dates
+        // Google ignores inaccurate lastmod values, so we only include
+        // dates we can verify from frontmatter
+        const lastmod = postLastmodMap[item.url];
+        if (lastmod) {
+          item.lastmod = lastmod.toISOString();
+        }
+        return item;
+      },
     }),
     indexnow({
       key: process.env.INDEXNOW_KEY,
