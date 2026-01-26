@@ -19,6 +19,11 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
+      serialize: (item) => {
+        // Add lastmod for all pages to help Google detect freshness
+        item.lastmod = new Date().toISOString();
+        return item;
+      },
     }),
     indexnow({
       key: process.env.INDEXNOW_KEY,
