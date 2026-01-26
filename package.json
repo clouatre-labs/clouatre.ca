@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
-    "@biomejs/biome": "2.3.11",
+    "@biomejs/biome": "2.3.12",
     "@pagefind/default-ui": "1.4.0",
     "@shikijs/transformers": "3.21.0",
     "@tailwindcss/typography": "0.5.19",
