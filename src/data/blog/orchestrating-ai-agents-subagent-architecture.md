@@ -1,7 +1,7 @@
 ---
 title: "Orchestrating AI Agents: A Subagent Architecture for Code"
 pubDatetime: 2025-12-24T12:00:00Z
-modDatetime: 2026-01-20T12:02:58Z
+modDatetime: 2026-01-26T01:15:00Z
 description: "Cut AI coding costs 50% with multi-agent architecture. Assign planning, building, and validation to specialized models for better output at lower spend."
 tags:
   - ai
@@ -24,15 +24,21 @@ This post documents a production workflow using [Goose](https://github.com/block
 
 ## Why Do Single-Agent AI Coding Workflows Hit a Ceiling?
 
-A single AI model handling an entire coding task accumulates context with every interaction. By implementation time, the model carries baggage from analysis, research, and planning phases. This creates three problems.
+A single AI model handling an entire coding task accumulates context with every interaction. By implementation time, the model carries baggage from analysis, research, and planning phases.
 
-**Context bloat.** Long conversations consume token budgets. The model forgets early instructions or weighs recent context too heavily. Critical requirements get lost.
+The business impact is measurable: longer sessions correlate with more rework. Complex refactors that should take hours stretch into days of back-and-forth correction. This stems from three core problems.
 
-**Role confusion.** A model asked to analyze, plan, implement, and validate lacks clear boundaries. It starts implementing during planning. It skips validation steps. Outputs blur together.
+### Context Bloat
 
-**Accumulated errors.** Mistakes in early phases propagate. A misunderstanding in analysis leads to a flawed plan. A flawed plan leads to incorrect implementation. Fixing requires starting over.
+Long conversations consume token budgets. The model forgets early instructions or weighs recent context too heavily. Critical requirements get lost.
 
-The business impact is measurable. Longer sessions correlate with more rework. Complex refactors that should take hours stretch into days of back-and-forth correction.
+### Role Confusion
+
+A model asked to analyze, plan, implement, and validate lacks clear boundaries. It starts implementing during planning. It skips validation steps. Outputs blur together.
+
+### Accumulated Errors
+
+Mistakes in early phases propagate. A misunderstanding in analysis leads to a flawed plan. A flawed plan leads to incorrect implementation. Fixing requires starting over.
 
 ## How Does Subagent Architecture Solve Context Problems?
 
