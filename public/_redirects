@@ -7,3 +7,6 @@
 #
 # Note: Cloudflare Pages _redirects file does NOT support domain-level redirects.
 # Only path-based redirects work here (e.g., /old-path → /new-path)
+
+# Legacy certification PDFs (from old site, never existed here)
+/certifications/* /about/ 301
