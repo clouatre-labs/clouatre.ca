@@ -4,36 +4,37 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import matter from "gray-matter";
+import { BLOG_PATH } from "../paths";
 
 interface LastmodMap {
   [url: string]: Date;
 }
 
 /**
- * Parse frontmatter from a markdown file
+ * Parse frontmatter from a markdown file using gray-matter
  * Returns modDatetime if present, otherwise pubDatetime
  */
 function parseFrontmatterDate(content: string): Date | null {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) return null;
+  try {
+    const { data } = matter(content);
 
-  const frontmatter = frontmatterMatch[1];
+    // Check for modDatetime first (preferred for lastmod)
+    if (data.modDatetime) {
+      const date = new Date(data.modDatetime);
+      if (!Number.isNaN(date.getTime())) return date;
+    }
 
-  // Check for modDatetime first (preferred for lastmod)
-  const modMatch = frontmatter.match(/modDatetime:\s*(.+)/);
-  if (modMatch) {
-    const date = new Date(modMatch[1].trim());
-    if (!Number.isNaN(date.getTime())) return date;
+    // Fall back to pubDatetime
+    if (data.pubDatetime) {
+      const date = new Date(data.pubDatetime);
+      if (!Number.isNaN(date.getTime())) return date;
+    }
+
+    return null;
+  } catch {
+    return null;
   }
-
-  // Fall back to pubDatetime
-  const pubMatch = frontmatter.match(/pubDatetime:\s*(.+)/);
-  if (pubMatch) {
-    const date = new Date(pubMatch[1].trim());
-    if (!Number.isNaN(date.getTime())) return date;
-  }
-
-  return null;
 }
 
 /**
@@ -49,7 +50,7 @@ function getSlugFromFilename(filename: string): string {
  * Reads directly from filesystem at config load time
  */
 export function buildLastmodMap(siteUrl: string): LastmodMap {
-  const blogDir = join(process.cwd(), "src/data/blog");
+  const blogDir = join(process.cwd(), BLOG_PATH);
   const map: LastmodMap = {};
 
   try {

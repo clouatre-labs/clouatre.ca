@@ -1,8 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 import { SITE } from "@/config";
-
-export const BLOG_PATH = "src/data/blog";
+import { BLOG_PATH } from "@/paths";
 
 export const faqPageSchema = z.object({
   "@context": z.literal("https://schema.org"),
