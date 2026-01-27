@@ -1,6 +1,3 @@
-// SPDX-License-Identifier: Apache-2.0
-// Copyright (c) 2025 Hugues Clouatre
-
 import type { Root } from "mdast";
 import { visit } from "unist-util-visit";
 import type { FAQPageSchema } from "@/content.config";

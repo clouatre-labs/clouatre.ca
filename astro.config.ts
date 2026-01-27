@@ -10,6 +10,7 @@ import indexnow from "astro-indexnow";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { SITE } from "./src/config";
+import rehypeImagePriority from "./src/utils/rehype-image-priority";
 import remarkFaqSchema from "./src/utils/remark-faq-schema";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 
@@ -31,6 +32,7 @@ export default defineConfig({
       remarkFaqSchema,
       [remarkCollapse, { test: "Table of contents", summary: "Contents" }],
     ],
+    rehypePlugins: [rehypeImagePriority],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
