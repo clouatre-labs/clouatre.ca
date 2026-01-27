@@ -200,6 +200,9 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
 </Layout>
 
 <script is:inline data-astro-rerun>
+  // Scroll listener controller for cleanup during View Transitions
+  let scrollController = new AbortController();
+
   /** Create a progress indicator
    *  at the top */
   function createProgressBar() {
@@ -220,6 +223,13 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
     document.body.appendChild(progressContainer);
   }
   createProgressBar();
+
+  /** Setup cleanup for scroll listener before DOM swap */
+  function setupScrollCleanup() {
+    document.addEventListener("astro:before-swap", () => {
+      scrollController.abort();
+    }, { once: true });
+  }
 
   /** Update the progress bar
    *  when user scrolls */
@@ -242,8 +252,9 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
         });
         ticking = true;
       }
-    }, { passive: true });
+    }, { passive: true, signal: scrollController.signal });
   }
+  setupScrollCleanup();
   updateScrollProgress();
 
   /** Attaches links to headings in the document,
