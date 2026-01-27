@@ -273,19 +273,21 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
     const copyButtonLabel = "Copy";
     const codeBlocks = Array.from(document.querySelectorAll("pre"));
 
-    for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-
-      // Check if --file-name-offset custom property exists
+    // Read phase: batch all getComputedStyle calls
+    const styleData = codeBlocks.map((codeBlock) => {
       const computedStyle = getComputedStyle(codeBlock);
       const hasFileNameOffset =
         computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+      return {
+        codeBlock,
+        topClass: hasFileNameOffset ? "top-(--file-name-offset)" : "-top-3",
+      };
+    });
 
-      // Determine the top positioning class
-      const topClass = hasFileNameOffset
-        ? "top-(--file-name-offset)"
-        : "-top-3";
+    // Write phase: perform all DOM mutations
+    for (const { codeBlock, topClass } of styleData) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
 
       const copyButton = document.createElement("button");
       copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
