@@ -242,7 +242,7 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
         });
         ticking = true;
       }
-    });
+    }, { passive: true });
   }
   updateScrollProgress();
 
