@@ -224,18 +224,23 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
   /** Update the progress bar
    *  when user scrolls */
   function updateScrollProgress() {
+    let ticking = false;
     document.addEventListener("scroll", () => {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (document) {
-        const myBar = document.getElementById("myBar");
-        if (myBar) {
-          myBar.style.width = scrolled + "%";
-        }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+          const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          const myBar = document.getElementById("myBar");
+          if (myBar) {
+            myBar.style.width = scrolled + "%";
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     });
   }
@@ -261,7 +266,6 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
       heading.appendChild(link);
     }
   }
-  addHeadingLinks();
 
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */
@@ -312,7 +316,13 @@ const relatedPosts = getRelatedPosts(post, posts, 3);
       }, 700);
     }
   }
-  attachCopyButtons();
+
+  /** Defer non-critical DOM manipulation to idle time */
+  const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+  onIdle(() => {
+    addHeadingLinks();
+    attachCopyButtons();
+  });
 
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
