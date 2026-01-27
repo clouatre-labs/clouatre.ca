@@ -178,10 +178,6 @@ Daily savings: 10 queries × 25 min × ($100/hr ÷ 60) × 85% success rate = **$
 
 Setup cost: 170 seconds of compute time plus $0 for local embeddings. Query cost: $0.01-0.05 on Amazon Bedrock. Break-even happens in one day.
 
-The hidden benefit: onboarding time drops from weeks to days. New team members query the system instead of reading everything. They learn by asking questions. Usage patterns reveal which documentation sections matter most.
-
-Expert dependency drops too. Before RAG, tribal knowledge lived in people's heads. After RAG, we measured 85-90% autonomous resolution (queries where users accepted the answer without escalation) in our technical documentation system. Experts focus on the edge cases that need human judgment.
-
 ## When Does RAG Fail?
 
 RAG fails on multi-step reasoning, ambiguous questions, and knowledge not in the docs. We've seen three failure modes in production.
