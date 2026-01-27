@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
 """Statistical analysis of RAG reranking benchmark data.
 
 Reads raw_timings.csv and calculates:
